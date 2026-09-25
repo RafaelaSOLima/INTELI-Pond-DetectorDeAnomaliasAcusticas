@@ -2,7 +2,7 @@
 //
 // Este sketch NÃO é o produto final (o produto é firmware/kws_rtos, com
 // FreeRTOS e 3+ tasks). Ele existe para:
-//   1) testar cada componente isoladamente (LEDs e microfone);
+//   1) testar cada componente isoladamente (LED e microfone);
 //   2) gravar o dataset com o PRÓPRIO INMP441, usando exatamente a mesma
 //      conversão de áudio (audio_io) que o firmware final usa.
 //
@@ -12,8 +12,8 @@
 //   CHAN          -> 1 s em estéreo: mostra o nível do canal esquerdo e direito
 //   REC <ms>      -> grava <ms> ms (máx 2000). Responde "DATA <n>\n",
 //                    depois n amostras int16 little-endian, depois "\nEND\n".
-//                    O LED verde fica aceso durante a gravação ("fale agora").
-//   LEDS          -> pisca verde/vermelho (teste dos LEDs)
+//                    O LED fica aceso durante a gravação ("fale agora").
+//   LEDS          -> mostra os dois padrões do LED: acerto (1 longa) e erro (3 curtas)
 
 #include <Arduino.h>
 #include <math.h>
@@ -25,14 +25,21 @@ static int16_t s_rec[kMaxRecSamples];                           // 64 KB em RAM
 static int16_t s_block[AUDIO_BLOCK_SAMPLES];
 static bool s_audio_ok = false;
 
-// ---------------------------------------------------------------- LEDs
-static void led_test() {
-  for (int i = 0; i < 2; i++) {
-    digitalWrite(PIN_LED_GREEN, HIGH); delay(250);
-    digitalWrite(PIN_LED_GREEN, LOW);
-    digitalWrite(PIN_LED_RED, HIGH);   delay(250);
-    digitalWrite(PIN_LED_RED, LOW);
+// ---------------------------------------------------------------- LED
+static void led_ok() {  // acerto: 1 piscada longa
+  digitalWrite(PIN_LED, HIGH); delay(LED_OK_MS);
+  digitalWrite(PIN_LED, LOW);
+}
+static void led_fail() {  // erro: 3 piscadas curtas
+  for (int i = 0; i < 3; i++) {
+    digitalWrite(PIN_LED, HIGH); delay(LED_FAIL_ON_MS);
+    digitalWrite(PIN_LED, LOW);  delay(LED_FAIL_OFF_MS);
   }
+}
+static void led_test() {
+  led_ok();
+  delay(500);
+  led_fail();
 }
 
 // ---------------------------------------------------------------- microfone
@@ -109,7 +116,7 @@ static void cmd_rec(uint32_t ms) {
   audio_flush();  // joga fora áudio antigo acumulado no DMA
   // descarta ~32 ms para o filtro DC estabilizar após a pausa
   for (int i = 0; i < 2; i++) audio_read_block(s_block, AUDIO_BLOCK_SAMPLES);
-  digitalWrite(PIN_LED_GREEN, HIGH);  // "fale agora"
+  digitalWrite(PIN_LED, HIGH);  // "fale agora"
   uint32_t got = 0;
   while (got < n) {
     size_t want = min((uint32_t)AUDIO_BLOCK_SAMPLES, n - got);
@@ -117,7 +124,7 @@ static void cmd_rec(uint32_t ms) {
     if (r == 0) break;
     got += r;
   }
-  digitalWrite(PIN_LED_GREEN, LOW);
+  digitalWrite(PIN_LED, LOW);
   Serial.printf("DATA %lu\n", (unsigned long)got);
   Serial.write((const uint8_t *)s_rec, got * sizeof(int16_t));
   Serial.print("\nEND\n");
@@ -127,14 +134,13 @@ static void cmd_rec(uint32_t ms) {
 void setup() {
   Serial.setTxBufferSize(4096);
   Serial.begin(921600);
-  pinMode(PIN_LED_GREEN, OUTPUT);
-  pinMode(PIN_LED_RED, OUTPUT);
+  pinMode(PIN_LED, OUTPUT);
   delay(300);
   led_test();
   s_audio_ok = audio_begin();
   Serial.printf("\nrecorder pronto. audio=%s  sr=%d  shift=%d\n",
                 s_audio_ok ? "OK" : "FALHOU", AUDIO_SAMPLE_RATE, AUDIO_SHIFT_24_TO_16);
-  if (!s_audio_ok) digitalWrite(PIN_LED_RED, HIGH);
+  if (!s_audio_ok) digitalWrite(PIN_LED, HIGH);  // aceso fixo = erro no microfone
 }
 
 void loop() {

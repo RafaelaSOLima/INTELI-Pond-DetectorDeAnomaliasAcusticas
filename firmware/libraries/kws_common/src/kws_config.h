@@ -14,8 +14,13 @@
 #define PIN_I2S_SD    33   // INMP441 SD   (dados seriais, saída do microfone)
 // INMP441 L/R -> GND  => microfone responde no canal ESQUERDO (WS = 0)
 
-#define PIN_LED_GREEN 18   // GPIO -> resistor -> LED verde (anodo) -> GND
-#define PIN_LED_RED   19   // GPIO -> resistor -> LED vermelho (anodo) -> GND
+// Um único LED de alerta (o LED verde queimou na montagem).
+//   acerto          -> 1 piscada longa  (LED_OK_MS aceso)
+//   erro / unknown  -> 3 piscadas curtas (LED_FAIL_ON_MS aceso, LED_FAIL_OFF_MS apagado)
+#define PIN_LED       19   // GPIO -> resistor -> LED (anodo) -> GND
+#define LED_OK_MS        1000
+#define LED_FAIL_ON_MS    120
+#define LED_FAIL_OFF_MS   120
 
 // ---------------------------------------------------------------------------
 // Áudio

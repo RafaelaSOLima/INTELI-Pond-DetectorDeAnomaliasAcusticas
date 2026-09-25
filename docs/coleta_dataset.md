@@ -103,7 +103,7 @@ Esse método é preferido porque o modelo vai ouvir **por este microfone** no us
    ```bash
    python3 tools/record_session.py --speaker s01 --port /dev/ttyUSB0 --env sala
    ```
-3. O **LED verde acende enquanto grava**. A pessoa fala a palavra da tela **depois de o LED acender** e antes de ele apagar (1,5 s).
+3. O **LED acende enquanto grava**. A pessoa fala a palavra da tela **depois de o LED acender** e antes de ele apagar (1,5 s).
 4. Se aparecer um aviso (`NÃO detectei fala`, `CORTADA`, `SATURADO`), tecle `r` para regravar.
 5. Pode parar com `q` e continuar depois com o mesmo `--speaker`. Nada é sobrescrito.
 6. Ruído de fundo, sem ninguém falando, em 3–4 cômodos:
