@@ -35,7 +35,7 @@
 | **SCK** | **GPIO 26** | *Bit clock*: o ESP32 gera 1 pulso por bit (16 kHz × 64 bits = 1,024 MHz) |
 | **WS** | **GPIO 25** | *Word select*: indica se o slot atual é o canal esquerdo ou o direito (troca a 16 kHz) |
 | **SD** | **GPIO 33** | *Serial data*: os bits do áudio saem do microfone para o ESP32 |
-| **L/R** | **GND** | Escolhe o canal: GND = microfone responde no slot **esquerdo** |
+| **L/R** | **GND** | Escolhe o canal: GND = microfone responde no slot **esquerdo**. **Nunca deixe solto**: o nível fica indefinido e o canal pode trocar sozinho. |
 
 ### LEDs
 
@@ -102,6 +102,14 @@ Depois abra o console (`python3 tools/serial_console.py --port /dev/ttyUSB0`) e 
 | 4 | **Gravação**: `python3 tools/record_session.py --speaker teste --reps 1 --unknown 1 --noise 1` | Três WAVs em `dataset/raw/` que soam bem com `aplay` | Voz saturada: aumente `AUDIO_SHIFT_24_TO_16` para 6. Voz baixa demais: diminua para 4. **Decida isso ANTES de gravar o dataset.** |
 
 Cole a saída dos testes 2 e 3 na conversa para validarmos juntos.
+
+## Nota: canal do I2S invertido no driver
+
+No primeiro teste real, o microfone só funcionou com o L/R **solto**. Motivo:
+no driver I2S legado do ESP32 (core 2.0.x) com amostras de 32 bits, a opção
+`I2S_CHANNEL_FMT_ONLY_LEFT` lê, na prática, o slot usado quando L/R está em
+nível alto. Pino solto não é confiável, então fixamos **L/R no GND** e usamos
+`I2S_CHANNEL_FMT_ONLY_RIGHT` em `kws_config.h`. O comando `CHAN` confirma.
 
 ## Por que não usamos o botão
 

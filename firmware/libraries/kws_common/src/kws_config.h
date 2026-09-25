@@ -39,9 +39,13 @@
 //   y[n] = x[n] - x[n-1] + R * y[n-1]
 #define AUDIO_DC_BLOCK_R    0.995f
 
-// Canal do microfone (L/R ligado ao GND = esquerdo). Se o teste "CHAN" do
-// gravador mostrar sinal só no outro canal, troque para I2S_CHANNEL_FMT_ONLY_RIGHT.
-#define AUDIO_CHANNEL_FMT   I2S_CHANNEL_FMT_ONLY_LEFT
+// Canal do microfone. Com L/R no GND o INMP441 transmite no slot esquerdo do
+// padrão I2S (WS = 0). Porém, no driver I2S "legado" do ESP32 (core 2.0.x) com
+// amostras de 32 bits, os nomes ONLY_LEFT/ONLY_RIGHT ficam invertidos em
+// relação ao slot lido. Verificado no hardware: com ONLY_LEFT o sinal só
+// aparecia com L/R solto (nível alto). Por isso: L/R -> GND + ONLY_RIGHT.
+// Confirme sempre com o comando CHAN do gravador.
+#define AUDIO_CHANNEL_FMT   I2S_CHANNEL_FMT_ONLY_RIGHT
 
 // Duração do clipe gravado para o dataset (o treino recorta 1 s dentro dele).
 #define REC_CLIP_MS         1500
