@@ -1,0 +1,7 @@
+# Coleta do dataset e comunicação com o ESP32
+numpy
+pyserial
+# Treino e exportação do modelo (só necessário para treinar localmente)
+# torch
+# onnx
+# onnxruntime

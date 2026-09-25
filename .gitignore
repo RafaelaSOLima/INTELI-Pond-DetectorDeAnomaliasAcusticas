@@ -1,0 +1,17 @@
+# Áudios do dataset (dados pessoais — não versionar)
+dataset/raw/**/*.wav
+dataset/**/*.wav
+*.m4a
+*.ogg
+*.opus
+*.mp3
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Build
+build/
+firmware/**/build/
+tests/build/
