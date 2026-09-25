@@ -37,9 +37,11 @@
 // O INMP441 entrega 24 bits úteis dentro de palavras de 32 bits.
 // Convertemos para int16 com ganho digital fixo:
 //   24 bits -> 16 bits "sem ganho" seria >> 8. Usamos >> AUDIO_SHIFT_24_TO_16.
-//   AUDIO_SHIFT_24_TO_16 = 5  =>  ganho de 2^(8-5) = 8x  (~ +18 dB)
-// Calibrado para fala a 10–80 cm. NÃO mude depois de gravar o dataset.
-#define AUDIO_SHIFT_24_TO_16 5
+//   AUDIO_SHIFT_24_TO_16 = 7  =>  ganho de 2^(8-7) = 2x  (~ +6 dB)
+// Calibração medida no hardware (comando LEVEL): com SHIFT=5 (+18 dB) a fala
+// próxima saturava (pico 0,0 dBFS). SHIFT=7 dá ~12 dB de folga.
+// NÃO mude depois de gravar o dataset.
+#define AUDIO_SHIFT_24_TO_16 7
 
 // Filtro "DC blocker": remove o nível contínuo (offset) do microfone.
 //   y[n] = x[n] - x[n-1] + R * y[n-1]
