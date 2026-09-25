@@ -15,6 +15,7 @@
 //                    O LED fica aceso durante a gravação ("fale agora").
 //   LEDS          -> mostra os dois padrões do LED: acerto (1 longa) e erro (3 curtas)
 //   WIRE          -> teste elétrico: procura curtos entre SCK/WS/SD, GND e 3V3
+//   SCAN          -> testa as 6 combinações de SCK/WS/SD e mostra qual dá áudio
 //   VOLT          -> mede tensão (ADC) em GPIO34 e GPIO35 (ligue ali VDD e GND do mic)
 
 #include <Arduino.h>
@@ -167,6 +168,60 @@ static void cmd_volt() {
   }
 }
 
+// ---------------------------------------------------------------- varredura de pinos
+// Testa as 6 formas de atribuir SCK/WS/SD aos GPIOs 26/25/33 e mede cada slot.
+// Áudio plausível do INMP441: variação entre ~-90 e ~-20 dBFS24 (nem zero,
+// nem saturado). Para limitar a corrente caso uma saída do ESP32 "brigue" com a
+// saída SD do microfone, a força dos pinos é reduzida ao mínimo durante o teste.
+static float slot_sd_db(const int32_t *raw, size_t frames, int slot) {
+  double sum = 0, sq = 0;
+  for (size_t i = 0; i < frames; i++) {
+    double v = (double)(raw[2 * i + slot] >> 8);
+    sum += v; sq += v * v;
+  }
+  double mean = sum / frames, sd = sqrt(fmax(sq / frames - mean * mean, 0.0));
+  return sd > 0 ? 20.0f * log10f((float)(sd / 8388608.0)) : -120.0f;
+}
+
+static void cmd_scan() {
+  const int g[3] = {PIN_I2S_SCK, PIN_I2S_WS, PIN_I2S_SD};
+  const int perm[6][3] = {{0,1,2},{0,2,1},{1,0,2},{1,2,0},{2,0,1},{2,1,0}};
+  static int32_t raw[2 * 256];
+  Serial.println("SCAN: fale continuamente perto do microfone durante o teste (~5 s)");
+  audio_end();
+  for (int p = 0; p < 6; p++) {
+    int sck = g[perm[p][0]], ws = g[perm[p][1]], sd = g[perm[p][2]];
+    if (!audio_begin_pins(sck, ws, sd)) { Serial.println("SCAN falha ao iniciar I2S"); continue; }
+    gpio_set_drive_capability((gpio_num_t)sck, GPIO_DRIVE_CAP_0);
+    gpio_set_drive_capability((gpio_num_t)ws, GPIO_DRIVE_CAP_0);
+    delay(100);
+    audio_flush();
+    float best[2] = {-120, -120}, worst[2] = {0, 0};
+    for (int k = 0; k < 24; k++) {  // ~0,4 s
+      size_t n = audio_read_raw(raw, 256, pdMS_TO_TICKS(200));
+      if (n == 0) break;
+      for (int c = 0; c < 2; c++) {
+        float db = slot_sd_db(raw, n, c);
+        if (db > best[c]) best[c] = db;
+        if (db < worst[c]) worst[c] = db;
+      }
+    }
+    audio_end();
+    for (int c = 0; c < 2; c++) {
+      const char *verdict = best[c] <= -119 ? "zero"
+                          : worst[c] > -15 ? "SATURADO/lixo"
+                          : best[c] < -95 ? "quase zero"
+                          : "PLAUSIVEL";
+      Serial.printf("SCAN SCK=%d WS=%d SD=%d slot%d: %6.1f..%6.1f dBFS24  %s%s\n", sck, ws, sd, c,
+                    worst[c], best[c], verdict,
+                    (sck == PIN_I2S_SCK && ws == PIN_I2S_WS && sd == PIN_I2S_SD) ? "  (ligacao esperada)" : "");
+    }
+  }
+  for (int i = 0; i < 3; i++) gpio_set_drive_capability((gpio_num_t)g[i], GPIO_DRIVE_CAP_2);
+  s_audio_ok = audio_begin();
+  Serial.println("SCAN fim");
+}
+
 static void cmd_rec(uint32_t ms) {
   if (ms == 0 || ms > 2000) ms = REC_CLIP_MS;
   uint32_t n = (uint32_t)((uint64_t)ms * AUDIO_SAMPLE_RATE / 1000);
@@ -209,6 +264,7 @@ void loop() {
   else if (line == "CHAN") cmd_chan();
   else if (line == "WIRE") cmd_wire();
   else if (line == "VOLT") cmd_volt();
+  else if (line == "SCAN") cmd_scan();
   else if (line == "LEDS") { led_test(); Serial.println("LEDS ok"); }
   else if (line.startsWith("REC")) cmd_rec((uint32_t)line.substring(3).toInt());
   else if (line.length()) Serial.printf("ERR comando desconhecido: %s\n", line.c_str());

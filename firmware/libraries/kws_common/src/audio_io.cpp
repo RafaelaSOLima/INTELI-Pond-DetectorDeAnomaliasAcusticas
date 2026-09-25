@@ -6,7 +6,9 @@ static const i2s_port_t kPort = I2S_NUM_0;
 static float s_dc_x1 = 0.0f;
 static float s_dc_y1 = 0.0f;
 
-bool audio_begin() {
+bool audio_begin() { return audio_begin_pins(PIN_I2S_SCK, PIN_I2S_WS, PIN_I2S_SD); }
+
+bool audio_begin_pins(int sck, int ws, int sd) {
 
   i2s_config_t cfg = {};
   cfg.mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_RX);  // ESP32 gera os clocks e recebe
@@ -25,10 +27,10 @@ bool audio_begin() {
 
   i2s_pin_config_t pins = {};
   pins.mck_io_num = I2S_PIN_NO_CHANGE;
-  pins.bck_io_num = PIN_I2S_SCK;
-  pins.ws_io_num = PIN_I2S_WS;
+  pins.bck_io_num = sck;
+  pins.ws_io_num = ws;
   pins.data_out_num = I2S_PIN_NO_CHANGE;
-  pins.data_in_num = PIN_I2S_SD;
+  pins.data_in_num = sd;
   if (i2s_set_pin(kPort, &pins) != ESP_OK) return false;
 
   i2s_zero_dma_buffer(kPort);

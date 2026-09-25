@@ -12,6 +12,8 @@
 
 // Instala o driver I2S (modo mestre, recepção estéreo). Retorna false se falhar.
 bool audio_begin();
+// Mesmo que audio_begin(), mas com pinos escolhidos (usado no diagnóstico SCAN).
+bool audio_begin_pins(int sck, int ws, int sd);
 void audio_end();
 
 // Lê exatamente n amostras (n <= AUDIO_BLOCK_SAMPLES) já convertidas para int16.
