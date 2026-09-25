@@ -114,10 +114,10 @@ Cole a saída dos testes 2 e 3 na conversa para validarmos juntos.
 No primeiro teste real, os modos mono do driver I2S legado do ESP32 (core 2.0.x,
 amostras de 32 bits), `ONLY_LEFT` e `ONLY_RIGHT`, **não entregaram** o slot do
 microfone com o L/R no GND. O sinal só aparecia com o L/R solto, o que não é
-confiável. O comando `CHAN`, lendo em estéreo, mostrou o sinal no **slot1**.
+confiável. O comando `SCAN`, lendo em estéreo com o L/R no GND e a ligação esperada, mostrou o áudio no **slot0** (−57 a −37 dBFS24 falando) e o slot1 zerado.
 
 Solução: o I2S lê **sempre os dois slots** e o código escolhe
-`AUDIO_MIC_SLOT = 1` (`kws_config.h`). Isso não depende de nenhuma convenção de
+`AUDIO_MIC_SLOT = 0` (`kws_config.h`). Isso não depende de nenhuma convenção de
 nomes do driver. O custo é o dobro de dados no barramento, que é irrelevante.
 
 ## Por que não usamos o botão

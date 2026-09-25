@@ -49,10 +49,11 @@
 // Lemos SEMPRE em estéreo (os dois slots) e escolhemos o slot do microfone.
 // Motivo: no driver I2S legado do ESP32 (core 2.0.x) com 32 bits, os modos
 // mono ONLY_LEFT/ONLY_RIGHT não entregaram o slot correto com L/R no GND
-// (medido no hardware). Com L/R -> GND, o comando CHAN mostrou:
-//   slot0: sem sinal   |   slot1: sinal do microfone
-// Se o CHAN algum dia indicar o outro slot, troque este valor.
-#define AUDIO_MIC_SLOT      1
+// (medido no hardware). Com L/R -> GND, o comando SCAN mostrou, com a ligação
+// esperada (SCK=26, WS=25, SD=33):
+//   slot0: -57..-37 dBFS24 falando (áudio real)   |   slot1: zero
+// (Com L/R SOLTO o chip responde de forma instável no outro slot — nunca deixe solto.)
+#define AUDIO_MIC_SLOT      0
 
 // Duração do clipe gravado para o dataset (o treino recorta 1 s dentro dele).
 #define REC_CLIP_MS         1500
