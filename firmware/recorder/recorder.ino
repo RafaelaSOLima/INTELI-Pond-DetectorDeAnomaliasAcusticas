@@ -15,6 +15,7 @@
 //                    O LED fica aceso durante a gravação ("fale agora").
 //   LEDS          -> mostra os dois padrões do LED: acerto (1 longa) e erro (3 curtas)
 //   WIRE          -> teste elétrico: procura curtos entre SCK/WS/SD, GND e 3V3
+//   VOLT          -> mede tensão (ADC) em GPIO34 e GPIO35 (ligue ali VDD e GND do mic)
 
 #include <Arduino.h>
 #include <math.h>
@@ -152,6 +153,20 @@ static void cmd_wire() {
   s_audio_ok = audio_begin();
 }
 
+// ---------------------------------------------------------------- voltímetro
+// Usa o ADC do ESP32 como voltímetro simples. Ligue um jumper da fileira do
+// VDD do INMP441 até o GPIO34 e outro da fileira do GND do INMP441 até o GPIO35.
+// Esperado: GPIO34 ~3000–3300 mV (o ADC satura perto de 3,1 V) e GPIO35 ~0 mV.
+static void cmd_volt() {
+  const int pins[2] = {34, 35};
+  const char *what[2] = {"GPIO34 (VDD do mic)", "GPIO35 (GND do mic)"};
+  for (int i = 0; i < 2; i++) {
+    uint32_t acc = 0;
+    for (int k = 0; k < 32; k++) acc += analogReadMilliVolts(pins[i]);
+    Serial.printf("VOLT %s: %lu mV\n", what[i], (unsigned long)(acc / 32));
+  }
+}
+
 static void cmd_rec(uint32_t ms) {
   if (ms == 0 || ms > 2000) ms = REC_CLIP_MS;
   uint32_t n = (uint32_t)((uint64_t)ms * AUDIO_SAMPLE_RATE / 1000);
@@ -193,6 +208,7 @@ void loop() {
   else if (line == "LEVEL") cmd_level();
   else if (line == "CHAN") cmd_chan();
   else if (line == "WIRE") cmd_wire();
+  else if (line == "VOLT") cmd_volt();
   else if (line == "LEDS") { led_test(); Serial.println("LEDS ok"); }
   else if (line.startsWith("REC")) cmd_rec((uint32_t)line.substring(3).toInt());
   else if (line.length()) Serial.printf("ERR comando desconhecido: %s\n", line.c_str());
