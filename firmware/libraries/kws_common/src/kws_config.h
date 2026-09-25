@@ -28,7 +28,8 @@
 #define AUDIO_SAMPLE_RATE   16000  // Hz — fala útil vai até ~8 kHz (Nyquist)
 #define AUDIO_BLOCK_SAMPLES 256    // amostras por bloco = 16 ms (= hop das features)
 
-// DMA do I2S: 8 buffers x 256 amostras x 4 bytes = 8 KB = 128 ms de folga.
+// DMA do I2S: 8 buffers x 256 quadros (frames) = 128 ms de folga.
+// Cada quadro estéreo tem 2 palavras de 32 bits (slot esquerdo + direito) => 16 KB.
 // Se a task de captura atrasar menos que isso, nenhuma amostra se perde.
 #define I2S_DMA_BUF_COUNT   8
 #define I2S_DMA_BUF_LEN     256
@@ -44,13 +45,14 @@
 //   y[n] = x[n] - x[n-1] + R * y[n-1]
 #define AUDIO_DC_BLOCK_R    0.995f
 
-// Canal do microfone. Com L/R no GND o INMP441 transmite no slot esquerdo do
-// padrão I2S (WS = 0). Porém, no driver I2S "legado" do ESP32 (core 2.0.x) com
-// amostras de 32 bits, os nomes ONLY_LEFT/ONLY_RIGHT ficam invertidos em
-// relação ao slot lido. Verificado no hardware: com ONLY_LEFT o sinal só
-// aparecia com L/R solto (nível alto). Por isso: L/R -> GND + ONLY_RIGHT.
-// Confirme sempre com o comando CHAN do gravador.
-#define AUDIO_CHANNEL_FMT   I2S_CHANNEL_FMT_ONLY_RIGHT
+// Slot do microfone dentro do quadro estéreo.
+// Lemos SEMPRE em estéreo (os dois slots) e escolhemos o slot do microfone.
+// Motivo: no driver I2S legado do ESP32 (core 2.0.x) com 32 bits, os modos
+// mono ONLY_LEFT/ONLY_RIGHT não entregaram o slot correto com L/R no GND
+// (medido no hardware). Com L/R -> GND, o comando CHAN mostrou:
+//   slot0: sem sinal   |   slot1: sinal do microfone
+// Se o CHAN algum dia indicar o outro slot, troque este valor.
+#define AUDIO_MIC_SLOT      1
 
 // Duração do clipe gravado para o dataset (o treino recorta 1 s dentro dele).
 #define REC_CLIP_MS         1500

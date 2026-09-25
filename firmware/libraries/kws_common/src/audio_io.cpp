@@ -1,20 +1,18 @@
 #include "audio_io.h"
 
 static const i2s_port_t kPort = I2S_NUM_0;
-static bool s_stereo = false;
 
 // Estado do filtro DC blocker (persistente entre blocos).
 static float s_dc_x1 = 0.0f;
 static float s_dc_y1 = 0.0f;
 
-bool audio_begin(i2s_channel_fmt_t fmt) {
-  s_stereo = (fmt == I2S_CHANNEL_FMT_RIGHT_LEFT);
+bool audio_begin() {
 
   i2s_config_t cfg = {};
   cfg.mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_RX);  // ESP32 gera os clocks e recebe
   cfg.sample_rate = AUDIO_SAMPLE_RATE;
   cfg.bits_per_sample = I2S_BITS_PER_SAMPLE_32BIT;         // INMP441: 24 bits em slots de 32
-  cfg.channel_format = fmt;
+  cfg.channel_format = I2S_CHANNEL_FMT_RIGHT_LEFT;       // estéreo: lemos os 2 slots
   cfg.communication_format = I2S_COMM_FORMAT_STAND_I2S;    // padrão Philips I2S
   cfg.intr_alloc_flags = ESP_INTR_FLAG_LEVEL1;
   cfg.dma_buf_count = I2S_DMA_BUF_COUNT;
@@ -41,7 +39,7 @@ bool audio_begin(i2s_channel_fmt_t fmt) {
 void audio_end() { i2s_driver_uninstall(kPort); }
 
 size_t audio_read_raw(int32_t *raw, size_t n, TickType_t timeout) {
-  size_t got_bytes = 0, want = n * sizeof(int32_t);
+  size_t got_bytes = 0, want = n * 2 * sizeof(int32_t);  // 2 palavras por quadro
   while (got_bytes < want) {
     size_t br = 0;
     // i2s_read bloqueia até o DMA ter dados (a interrupção do I2S libera a task).
@@ -49,13 +47,13 @@ size_t audio_read_raw(int32_t *raw, size_t n, TickType_t timeout) {
     if (br == 0) break;  // timeout
     got_bytes += br;
   }
-  return got_bytes / sizeof(int32_t);
+  return got_bytes / (2 * sizeof(int32_t));
 }
 
 void audio_convert(const int32_t *raw, int16_t *out, size_t n) {
   for (size_t i = 0; i < n; i++) {
     // Os 24 bits úteis estão alinhados à esquerda: >> 8 recupera o valor com sinal.
-    float x = (float)(raw[i] >> 8);
+    float x = (float)(raw[2 * i + AUDIO_MIC_SLOT] >> 8);
     // DC blocker (passa-altas de 1ª ordem, corte ~13 Hz a 16 kHz).
     float y = x - s_dc_x1 + AUDIO_DC_BLOCK_R * s_dc_y1;
     s_dc_x1 = x;
@@ -70,7 +68,7 @@ void audio_convert(const int32_t *raw, int16_t *out, size_t n) {
 }
 
 size_t audio_read_block(int16_t *out, size_t n, TickType_t timeout) {
-  static int32_t raw[AUDIO_BLOCK_SAMPLES];
+  static int32_t raw[2 * AUDIO_BLOCK_SAMPLES];
   if (n > AUDIO_BLOCK_SAMPLES) n = AUDIO_BLOCK_SAMPLES;
   size_t got = audio_read_raw(raw, n, timeout);
   audio_convert(raw, out, got);
@@ -78,7 +76,7 @@ size_t audio_read_block(int16_t *out, size_t n, TickType_t timeout) {
 }
 
 void audio_flush() {
-  static int32_t trash[I2S_DMA_BUF_LEN];
+  static int32_t trash[2 * I2S_DMA_BUF_LEN];
   size_t br = 0;
   do {
     br = 0;

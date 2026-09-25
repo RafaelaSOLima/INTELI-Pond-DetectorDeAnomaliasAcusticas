@@ -75,29 +75,31 @@ static void cmd_level() {
 }
 
 static void cmd_chan() {
-  // Reinstala o driver em estéreo por 1 s para ver em qual canal o mic responde.
-  audio_end();
-  audio_begin(I2S_CHANNEL_FMT_RIGHT_LEFT);
+  // Lê 1 s de quadros estéreos crus e mede a variação (desvio padrão) de cada
+  // slot. O desvio padrão ignora o offset DC e mede só o "áudio" de fato.
   static int32_t raw[2 * 256];
-  double s[2] = {0, 0}; long nz[2] = {0, 0}; size_t frames = 0;
+  double sum[2] = {0, 0}, sq[2] = {0, 0};
+  size_t frames = 0;
+  audio_flush();
   while (frames < AUDIO_SAMPLE_RATE) {
-    size_t n = audio_read_raw(raw, 2 * 256);
-    for (size_t i = 0; i + 1 < n; i += 2) {
+    size_t n = audio_read_raw(raw, 256);
+    if (n == 0) break;
+    for (size_t i = 0; i < n; i++)
       for (int c = 0; c < 2; c++) {
-        double v = (double)(raw[i + c] >> 8);
-        s[c] += v * v;
-        if (raw[i + c] != 0) nz[c]++;
+        double v = (double)(raw[2 * i + c] >> 8);
+        sum[c] += v;
+        sq[c] += v * v;
       }
-      frames++;
-    }
+    frames += n;
   }
-  // Na ordem do driver ESP32, o índice 0 é o slot "right" e o 1 o slot "left"
-  // em alguns casos — por isso mostramos os dois e decidimos pelo resultado.
-  Serial.printf("CHAN slot0: rms24=%.0f nonzero=%ld | slot1: rms24=%.0f nonzero=%ld\n",
-                sqrt(s[0] / frames), nz[0], sqrt(s[1] / frames), nz[1]);
-  audio_end();
-  s_audio_ok = audio_begin(AUDIO_CHANNEL_FMT);
-  // Teste adicional no modo configurado (o que o firmware final usa):
+  for (int c = 0; c < 2; c++) {
+    double mean = sum[c] / frames;
+    double sd = sqrt(fmax(sq[c] / frames - mean * mean, 0.0));
+    Serial.printf("CHAN slot%d: media=%.0f  variacao(sd)=%.0f (%.1f dBFS24)%s\n", c, mean, sd,
+                  sd > 0 ? 20.0 * log10(sd / 8388608.0) : -120.0,
+                  c == AUDIO_MIC_SLOT ? "  <- slot configurado" : "");
+  }
+  // Teste no caminho completo (conversão + DC blocker + ganho), o que o firmware final usa:
   double sumsq = 0; int peak = 0; size_t total = 0;
   audio_flush();
   while (total < AUDIO_SAMPLE_RATE / 2) {
@@ -107,7 +109,7 @@ static void cmd_chan() {
   }
   Serial.printf("CHAN modo configurado: rms %.1f dBFS peak %.1f dBFS (%s)\n",
                 to_dbfs(sqrt(sumsq / total)), to_dbfs(peak),
-                peak > 0 ? "OK, ha sinal" : "SEM SINAL - troque o canal em kws_config.h");
+                peak > 0 ? "OK, ha sinal" : "SEM SINAL - troque AUDIO_MIC_SLOT em kws_config.h");
 }
 
 static void cmd_rec(uint32_t ms) {
