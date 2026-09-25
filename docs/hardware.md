@@ -8,7 +8,6 @@
 | **INMP441** | Microfone MEMS digital com saída I2S |
 | LED verde + resistor | Resultado correto |
 | LED vermelho + resistor | Resultado incorreto / `unknown` |
-| Push button de 4 pinos | Inicia uma rodada de reconhecimento |
 | Cabo USB (de **dados**) | Alimentação, gravação do firmware e Serial com o computador |
 
 > **Sobre os números de GPIO.** A numeração é do **chip** ESP32, então vale para
@@ -22,7 +21,7 @@
 |---|---|
 | 6–11 | Ligados à memória flash interna. Usá-los trava a placa. |
 | 0, 2, 5, 12, 15 | *Strapping pins*: o nível deles no boot define o modo de inicialização. O GPIO 12 em nível alto, por exemplo, pode impedir o boot. |
-| 34–39 | Só entrada e sem pull-up interno (inadequados para LED e botão). |
+| 34–39 | Só entrada (não servem para acionar LED). |
 | 1, 3 | TX/RX da Serial USB. |
 
 ## Tabela de ligações
@@ -50,23 +49,11 @@ GPIO 19 ──[ resistor ]──▶|── GND        (LED vermelho)
 - **Por que o resistor:** o LED quase não limita a própria corrente. Sem resistor, a corrente sobe até estragar o LED ou o pino. Com 3,3 V e um LED vermelho (~2,0 V), um resistor de 220 Ω dá (3,3 − 2,0)/220 ≈ 6 mA. Isso é seguro: o pino do ESP32 tolera ~20 mA com folga.
 - **Controle:** `digitalWrite(18, HIGH)` põe 3,3 V no pino, a corrente circula e o LED acende. `LOW` o apaga.
 
-### Botão de 4 pinos
-
-O botão tátil tem 4 pernas ligadas **duas a duas** internamente. A regra segura
-é usar **duas pernas em diagonal**, que sempre ficam em lados opostos da chave.
-
-```
-GPIO 21 ──┤ botão ├── GND        (pernas em diagonal)
-```
-
-- No código: `pinMode(21, INPUT_PULLUP)`. O resistor de pull-up **interno** mantém o pino em HIGH com o botão solto. Pressionado, o botão liga o pino ao GND e a leitura vai para LOW. **Não precisa de resistor externo.**
-- **Debounce:** ao pressionar, o contato metálico "quica" várias vezes em ~1–10 ms. Sem tratamento, um único aperto vira vários. Por isso a leitura só é aceita depois de ficar estável por 30 ms.
-
 ## Cuidados elétricos
 
 1. Monte **com o USB desconectado**. Confira tudo antes de ligar.
 2. INMP441 **só em 3V3**.
-3. **GND comum**: microfone, LEDs e botão vão ao mesmo GND do ESP32.
+3. **GND comum**: microfone e LEDs vão ao mesmo GND do ESP32.
 4. Fios de I2S **curtos** (idealmente < 15 cm). O SCK a 1 MHz em jumpers longos gera ruído e dados corrompidos.
 5. Nenhum LED sem resistor.
 6. Use um cabo USB **de dados**. Muitos cabos só carregam, e aí a placa não aparece no computador.
@@ -110,9 +97,15 @@ Depois abra o console (`python3 tools/serial_console.py --port /dev/ttyUSB0`) e 
 | # | Teste | Resultado esperado | Se falhar |
 |---|---|---|---|
 | 1 | **LEDs**: no boot, ou pelo comando `LEDS` | Verde e vermelho piscam alternados 2× | Polaridade invertida? Resistor na fileira certa da protoboard? |
-| 2 | **Botão**: aperte algumas vezes | Uma linha `BTN` por aperto | Nada aparece: pernas do mesmo lado (use a diagonal). Várias linhas por aperto: debounce (avise). |
-| 3 | **Microfone**: `LEVEL` | Barras `####` crescem ao falar. Silêncio ~ −60 a −50 dBFS, fala perto ~ −30 a −15 dBFS. | Mensagem `audio=FALHOU` no boot, ou nível parado em −120: confira VDD, GND, SCK, WS, SD |
-| 4 | **Canal**: `CHAN` | `modo configurado: ... OK, ha sinal` | `SEM SINAL`: confira o L/R no GND. Se o sinal aparecer só no outro slot, troque `AUDIO_CHANNEL_FMT` em `kws_config.h` |
-| 5 | **Gravação**: `python3 tools/record_session.py --speaker teste --reps 1 --unknown 1 --noise 1` | Três WAVs em `dataset/raw/` que soam bem com `aplay` | Voz saturada: aumente `AUDIO_SHIFT_24_TO_16` para 6. Voz baixa demais: diminua para 4. **Decida isso ANTES de gravar o dataset.** |
+| 2 | **Microfone**: `LEVEL` | Barras `####` crescem ao falar. Silêncio ~ −60 a −50 dBFS, fala perto ~ −30 a −15 dBFS. | Mensagem `audio=FALHOU` no boot, ou nível parado em −120: confira VDD, GND, SCK, WS, SD |
+| 3 | **Canal**: `CHAN` | `modo configurado: ... OK, ha sinal` | `SEM SINAL`: confira o L/R no GND. Se o sinal aparecer só no outro slot, troque `AUDIO_CHANNEL_FMT` em `kws_config.h` |
+| 4 | **Gravação**: `python3 tools/record_session.py --speaker teste --reps 1 --unknown 1 --noise 1` | Três WAVs em `dataset/raw/` que soam bem com `aplay` | Voz saturada: aumente `AUDIO_SHIFT_24_TO_16` para 6. Voz baixa demais: diminua para 4. **Decida isso ANTES de gravar o dataset.** |
 
-Cole a saída dos testes 3 e 4 na conversa para validarmos juntos.
+Cole a saída dos testes 2 e 3 na conversa para validarmos juntos.
+
+## Por que não usamos o botão
+
+A rodada é iniciada pela interface no computador, que envia a palavra-alvo ao
+ESP32. O ESP32 escuta continuamente e dispara a classificação quando o RMS indica
+início de fala. Assim a criança só precisa falar, sem apertar nada. Disparos por
+barulho são filtrados pela classe `noise` e pelo limiar de confiança.

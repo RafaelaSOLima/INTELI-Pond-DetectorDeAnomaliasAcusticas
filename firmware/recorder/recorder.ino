@@ -2,7 +2,7 @@
 //
 // Este sketch NÃO é o produto final (o produto é firmware/kws_rtos, com
 // FreeRTOS e 3+ tasks). Ele existe para:
-//   1) testar cada componente isoladamente (LEDs, botão, microfone);
+//   1) testar cada componente isoladamente (LEDs e microfone);
 //   2) gravar o dataset com o PRÓPRIO INMP441, usando exatamente a mesma
 //      conversão de áudio (audio_io) que o firmware final usa.
 //
@@ -14,7 +14,6 @@
 //                    depois n amostras int16 little-endian, depois "\nEND\n".
 //                    O LED verde fica aceso durante a gravação ("fale agora").
 //   LEDS          -> pisca verde/vermelho (teste dos LEDs)
-// Botão: cada pressionamento imprime "BTN" (teste do botão + debounce).
 
 #include <Arduino.h>
 #include <math.h>
@@ -33,20 +32,6 @@ static void led_test() {
     digitalWrite(PIN_LED_GREEN, LOW);
     digitalWrite(PIN_LED_RED, HIGH);   delay(250);
     digitalWrite(PIN_LED_RED, LOW);
-  }
-}
-
-// ---------------------------------------------------------------- botão
-// Debounce por tempo: a leitura só é aceita se ficar estável por 30 ms.
-// (Contatos mecânicos "quicam" várias vezes em poucos ms ao serem pressionados.)
-static void poll_button() {
-  static int stable = HIGH, last_raw = HIGH;
-  static uint32_t t_change = 0;
-  int raw = digitalRead(PIN_BUTTON);  // pull-up: solto = HIGH, pressionado = LOW
-  if (raw != last_raw) { last_raw = raw; t_change = millis(); }
-  if (millis() - t_change > 30 && raw != stable) {
-    stable = raw;
-    if (stable == LOW) Serial.println("BTN");
   }
 }
 
@@ -78,7 +63,6 @@ static void cmd_level() {
     Serial.printf("rms %6.1f dBFS  peak %6.1f dBFS  |", rms_db, to_dbfs(peak));
     for (int i = 0; i < bars; i++) Serial.print('#');
     Serial.println();
-    poll_button();
   }
   while (Serial.available()) Serial.read();
 }
@@ -145,7 +129,6 @@ void setup() {
   Serial.begin(921600);
   pinMode(PIN_LED_GREEN, OUTPUT);
   pinMode(PIN_LED_RED, OUTPUT);
-  pinMode(PIN_BUTTON, INPUT_PULLUP);
   delay(300);
   led_test();
   s_audio_ok = audio_begin();
@@ -155,7 +138,6 @@ void setup() {
 }
 
 void loop() {
-  poll_button();
   if (!Serial.available()) { delay(2); return; }
   String line = Serial.readStringUntil('\n');
   line.trim();

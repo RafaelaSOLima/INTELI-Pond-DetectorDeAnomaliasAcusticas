@@ -98,7 +98,7 @@ Varie **de propósito**:
 
 Esse método é preferido porque o modelo vai ouvir **por este microfone** no uso real.
 
-1. Faça os testes 1–5 de [`hardware.md`](hardware.md).
+1. Faça os testes 1–4 de [`hardware.md`](hardware.md).
 2. Para cada pessoa:
    ```bash
    python3 tools/record_session.py --speaker s01 --port /dev/ttyUSB0 --env sala

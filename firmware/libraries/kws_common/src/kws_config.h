@@ -16,7 +16,6 @@
 
 #define PIN_LED_GREEN 18   // GPIO -> resistor -> LED verde (anodo) -> GND
 #define PIN_LED_RED   19   // GPIO -> resistor -> LED vermelho (anodo) -> GND
-#define PIN_BUTTON    21   // botão entre GPIO21 e GND, pull-up interno
 
 // ---------------------------------------------------------------------------
 // Áudio
