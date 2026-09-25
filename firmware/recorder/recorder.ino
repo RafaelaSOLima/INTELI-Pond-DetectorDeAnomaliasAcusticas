@@ -14,6 +14,7 @@
 //                    depois n amostras int16 little-endian, depois "\nEND\n".
 //                    O LED fica aceso durante a gravação ("fale agora").
 //   LEDS          -> mostra os dois padrões do LED: acerto (1 longa) e erro (3 curtas)
+//   WIRE          -> teste elétrico: procura curtos entre SCK/WS/SD, GND e 3V3
 
 #include <Arduino.h>
 #include <math.h>
@@ -112,6 +113,45 @@ static void cmd_chan() {
                 peak > 0 ? "OK, ha sinal" : "SEM SINAL - troque AUDIO_MIC_SLOT em kws_config.h");
 }
 
+// ---------------------------------------------------------------- teste de fiação
+// Desliga o I2S e usa os 3 pinos do microfone como GPIO comuns:
+//  - cada pino, sozinho com pull-up interno, deve ler 1 (se ler 0: preso no GND);
+//  - com pull-down interno, deve ler 0 (se ler 1: preso no 3V3);
+//  - um pino é forçado a 0/1 e os outros não podem "seguir" (se seguirem: curto).
+// Com o I2S parado o INMP441 fica em repouso e não interfere (SD em alta impedância).
+static void cmd_wire() {
+  const int pins[3] = {PIN_I2S_SCK, PIN_I2S_WS, PIN_I2S_SD};
+  const char *names[3] = {"SCK(26)", "WS(25)", "SD(33)"};
+  int problems = 0;
+  audio_end();
+  for (int i = 0; i < 3; i++) {
+    pinMode(pins[i], INPUT_PULLUP);   delay(5);
+    int up = digitalRead(pins[i]);
+    pinMode(pins[i], INPUT_PULLDOWN); delay(5);
+    int down = digitalRead(pins[i]);
+    if (up == LOW)  { Serial.printf("WIRE %s preso no GND (curto com GND?)\n", names[i]); problems++; }
+    if (down == HIGH) { Serial.printf("WIRE %s preso no 3V3 (curto com 3V3?)\n", names[i]); problems++; }
+  }
+  for (int d = 0; d < 3; d++) {
+    for (int lvl = 0; lvl < 2; lvl++) {
+      pinMode(pins[d], OUTPUT);
+      digitalWrite(pins[d], lvl);
+      for (int o = 0; o < 3; o++) {
+        if (o == d) continue;
+        pinMode(pins[o], lvl ? INPUT_PULLDOWN : INPUT_PULLUP);  // puxa para o nível oposto
+        delay(5);
+        if (digitalRead(pins[o]) == lvl && o > d) {
+          Serial.printf("WIRE curto entre %s e %s\n", names[d], names[o]);
+          problems++;
+        }
+      }
+    }
+    pinMode(pins[d], INPUT);
+  }
+  Serial.printf("WIRE fim: %s\n", problems ? "PROBLEMA(S) ACIMA" : "nenhum curto detectado nos pinos do microfone");
+  s_audio_ok = audio_begin();
+}
+
 static void cmd_rec(uint32_t ms) {
   if (ms == 0 || ms > 2000) ms = REC_CLIP_MS;
   uint32_t n = (uint32_t)((uint64_t)ms * AUDIO_SAMPLE_RATE / 1000);
@@ -152,6 +192,7 @@ void loop() {
   if (line == "PING") Serial.println("PONG recorder");
   else if (line == "LEVEL") cmd_level();
   else if (line == "CHAN") cmd_chan();
+  else if (line == "WIRE") cmd_wire();
   else if (line == "LEDS") { led_test(); Serial.println("LEDS ok"); }
   else if (line.startsWith("REC")) cmd_rec((uint32_t)line.substring(3).toInt());
   else if (line.length()) Serial.printf("ERR comando desconhecido: %s\n", line.c_str());
