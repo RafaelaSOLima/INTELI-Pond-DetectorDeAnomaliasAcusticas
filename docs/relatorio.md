@@ -43,7 +43,7 @@ conflitos de concorrência.
 
 | ESP32 (edge) | Computador |
 |---|---|
-| Captura I2S, buffer circular | Interface visual (`interface/index.html`) |
+| Captura I2S, buffer circular | Interface visual (`interface/index.html`) + ponte USB→navegador (`interface/server.py`, só repassa texto) |
 | Features (RMS, centroid, 13 MFCC) | Escolha da palavra-alvo |
 | Detector de fala (VAD) e alinhamento da janela | Treino do modelo (offline, uma única vez) |
 | **Inferência da CNN** | Scripts de teste de performance |
@@ -312,8 +312,19 @@ Matriz de confusão da decisão final (validação por pessoa):
 Esses números medem que o firmware reproduz o modelo no chip. **Não** medem
 generalização.
 
-### 13.3 Uso real (microfone ao vivo, crianças)
-Acurácia com crianças falando ao vivo: **A SER MEDIDO**.
+### 13.3 Uso real (microfone ao vivo)
+- Teste qualitativo (26/09/2026, adulto, ambiente ruidoso): o ciclo completo
+  funcionou (fala → ESP32 → LED → interface com CORRECT/TRY AGAIN e placar).
+- Acurácia ao vivo, com contagem de acertos por palavra: **A SER MEDIDO**.
+- Acurácia com crianças: **A SER MEDIDO**.
+
+### 13.4 Comunicação com a interface
+A primeira versão usava a Web Serial API direto no navegador. No navegador
+embutido do editor, a leitura caía após a primeira mensagem: o buffer padrão
+de 255 bytes transbordava com os heartbeats (~500 B) e o erro não fatal era
+tratado como fatal. A versão final usa uma **ponte em Python**
+(`interface/server.py`): pyserial lê a USB e repassa cada linha JSON por
+Server-Sent Events; comandos vão por HTTP POST. Nenhum áudio passa pelo PC.
 
 ## 14. Limitações
 
