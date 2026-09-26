@@ -57,3 +57,4 @@ python3 training/export_c.py
 - [Coleta do dataset](docs/coleta_dataset.md)
 - [Relatório técnico](docs/relatorio.md)
 - [Aula: o FreeRTOS deste projeto](docs/aula_freertos.md)
+- [Aula: o código, arquivo por arquivo](docs/aula_codigo.md)
