@@ -99,6 +99,7 @@ typedef struct {
   volatile uint32_t windows;      // T2: janelas enviadas à T3
   volatile uint32_t win_drops;    // T2: janelas descartadas (fila da T3 cheia)
   volatile uint32_t results;      // T3: classificações feitas
+  volatile uint32_t ignored;      // T3: janelas classificadas como ruído (sem LED)
   volatile uint32_t last_tx_us;   // T3: tempo para escrever o último resultado na USB
   volatile uint32_t inf_us_max;   // T3: pior tempo de inferência
 } Stats;

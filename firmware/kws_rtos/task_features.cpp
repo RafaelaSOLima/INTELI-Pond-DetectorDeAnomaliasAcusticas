@@ -5,9 +5,10 @@
 //      (frames sobrepostos em 50%, como no treino);
 //   2) calcula 15 features (13 MFCC, log RMS, centroid) -> histórico circular;
 //   3) atualiza o detector de fala (VAD) com o log RMS;
-//   4) se o sistema está ouvindo (bit EVT_LISTENING) e a fala começou, espera
-//      completar 61 frames a partir de 8 frames ANTES do início e envia uma
-//      CÓPIA da janela para a T3 pela fila qWindows.
+//   4) se o sistema está ouvindo (bit EVT_LISTENING) e a fala começou, procura o
+//      frame de maior energia (núcleo da palavra) nos próximos 45 frames, posiciona
+//      a janela com esse pico no frame 15 (igual ao treino) e, quando os 61 frames
+//      existirem, envia uma CÓPIA da janela para a T3 pela fila qWindows.
 #include <string.h>
 
 #include "app.h"
@@ -25,8 +26,10 @@ void task_features(void *arg) {
   bool have_prev = false;
   uint32_t expected_seq = 0;
   uint32_t frame_idx = 0;         // índice absoluto do próximo frame
-  bool pending = false;           // há uma janela sendo completada?
-  uint32_t win_start = 0;         // frame inicial da janela pendente
+  bool pending = false;           // há uma palavra sendo localizada/completada?
+  uint32_t search_end = 0;        // último frame da busca pelo pico de energia
+  uint32_t peak_idx = 0;          // frame de maior energia encontrado até agora
+  float peak_val = -1e9f;
   int64_t t_onset = 0;
   uint32_t win_seq = 0;
 
@@ -67,11 +70,22 @@ void task_features(void *arg) {
     if (onset) g_stats.onsets++;
     if (onset && listening && !pending) {
       pending = true;
-      win_start = (frame_idx >= KWS_PRE_ROLL_FRAMES) ? frame_idx - KWS_PRE_ROLL_FRAMES : 0;
+      search_end = frame_idx + KWS_PEAK_SEARCH_FRAMES;
       t_onset = t0;
+      // começa a busca PRE_ROLL frames antes do disparo (frames já no histórico)
+      uint32_t first = (frame_idx >= KWS_PRE_ROLL_FRAMES) ? frame_idx - KWS_PRE_ROLL_FRAMES : 0;
+      peak_val = -1e9f;
+      for (uint32_t k = first; k <= frame_idx; k++)
+        if (s_hist[k % HIST_FRAMES][13] > peak_val) { peak_val = s_hist[k % HIST_FRAMES][13]; peak_idx = k; }
+    } else if (pending && frame_idx <= search_end && f[13] > peak_val) {
+      peak_val = f[13];
+      peak_idx = frame_idx;
     }
 
-    if (pending && frame_idx == win_start + KWS_WIN_FRAMES - 1) {
+    // A janela fica pronta quando a busca terminou E já existem os 61 frames.
+    uint32_t win_start = (peak_idx >= KWS_PEAK_POS) ? peak_idx - KWS_PEAK_POS : 0;
+    uint32_t win_last = win_start + KWS_WIN_FRAMES - 1;
+    if (pending && frame_idx >= search_end && frame_idx >= win_last) {
       // Janela completa: copia os 61 frames do histórico circular, em ordem.
       for (uint32_t k = 0; k < KWS_WIN_FRAMES; k++)
         memcpy(&s_win.feats[k * KWS_N_FEAT], s_hist[(win_start + k) % HIST_FRAMES], sizeof(float) * KWS_N_FEAT);

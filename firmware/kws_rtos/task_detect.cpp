@@ -2,8 +2,8 @@
 //
 //   1) espera uma janela na fila qWindows (bloqueada, sem gastar CPU);
 //   2) roda a CNN (kws_model_run) -> 5 probabilidades;
-//   3) decide: palavra-alvo só se for ball/cat/dog COM confiança >= threshold,
-//      senão "unknown" (inclui a classe noise);
+//   3) decide: classe noise -> ignora (sem LED); ball/cat/dog só com confiança
+//      >= threshold; senão "unknown";
 //   4) compara com a palavra-alvo (lida com o mutex g_mtxGame);
 //   5) acende o LED (única task que mexe no LED -> sem conflito);
 //   6) envia o resultado em JSON (com o mutex g_mtxSerial);
@@ -55,6 +55,21 @@ void task_detect(void *arg) {
     for (int k = 1; k < KWS_MODEL_N_CLASSES; k++)
       if (probs[k] > probs[best]) best = k;
     const char *word = (is_target(best) && probs[best] >= KWS_MODEL_THRESHOLD) ? KWS_MODEL_CLASSES[best] : "unknown";
+
+    // Classe "noise" venceu: ninguém falou (palma, porta, sussurro do ambiente…).
+    // Não é uma tentativa da criança, então NÃO acende o LED de erro: só registra
+    // e volta a ouvir. Sem isso, o ruído da sala faria o LED piscar "erro" sem parar.
+    if (strcmp(KWS_MODEL_CLASSES[best], "noise") == 0) {
+      snprintf(line, sizeof(line),
+               "{\"t\":\"ignored\",\"seq\":%lu,\"reason\":\"noise\",\"conf\":%.3f,"
+               "\"lat_us\":{\"inference\":%lu,\"end_to_decision\":%lu}}",
+               (unsigned long)s_win.seq, (double)probs[best], (unsigned long)inf_us,
+               (unsigned long)(esp_timer_get_time() - s_win.t_last_block_us));
+      serial_line(line);
+      g_stats.ignored++;
+      xEventGroupSetBits(g_events, EVT_LISTENING);
+      continue;
+    }
 
     char target[sizeof(g_target)];
     uint32_t round;

@@ -43,6 +43,8 @@ VAD_FLOOR_UP = _D["KWS_VAD_FLOOR_UP"]
 VAD_FLOOR_DOWN = _D["KWS_VAD_FLOOR_DOWN"]
 VAD_MAX_FRAMES = int(_D["KWS_VAD_MAX_FRAMES"])
 PRE_ROLL = int(_D["KWS_PRE_ROLL_FRAMES"])
+PEAK_SEARCH = int(_D["KWS_PEAK_SEARCH_FRAMES"])
+PEAK_POS = int(_D["KWS_PEAK_POS"])
 
 FEATURE_NAMES = [f"mfcc{i}" for i in range(N_MFCC)] + ["log_rms", "centroid"]
 

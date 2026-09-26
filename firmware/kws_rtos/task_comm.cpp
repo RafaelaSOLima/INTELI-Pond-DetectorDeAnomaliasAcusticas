@@ -14,16 +14,16 @@ static void send_stats(char *buf, size_t n) {
   snprintf(buf, n,
            "{\"t\":\"hb\",\"ms\":%lu,\"listening\":%d,\"target\":\"%s\",\"blocks\":%lu,\"frames\":%lu,"
            "\"ring_drops\":%lu,\"dma_gaps\":%lu,\"read_errors\":%lu,\"inject_blocks\":%lu,\"seq_gaps\":%lu,\"onsets\":%lu,"
-           "\"windows\":%lu,\"win_drops\":%lu,\"results\":%lu,\"feat_us_avg\":%lu,\"feat_us_max\":%lu,"
+           "\"windows\":%lu,\"win_drops\":%lu,\"results\":%lu,\"ignored\":%lu,\"feat_us_avg\":%lu,\"feat_us_max\":%lu,"
            "\"inf_us_max\":%lu,\"last_tx_us\":%lu,\"heap\":%u,"
            "\"stack_free\":{\"capture\":%u,\"features\":%u,\"detect\":%u,\"comm\":%u}}",
            (unsigned long)(esp_timer_get_time() / 1000), (xEventGroupGetBits(g_events) & EVT_LISTENING) ? 1 : 0,
            g_target, (unsigned long)g_stats.blocks, (unsigned long)g_stats.frames, (unsigned long)g_stats.ring_drops,
            (unsigned long)g_stats.dma_gaps, (unsigned long)g_stats.read_errors, (unsigned long)g_stats.inject_blocks, (unsigned long)g_stats.seq_gaps,
            (unsigned long)g_stats.onsets, (unsigned long)g_stats.windows, (unsigned long)g_stats.win_drops,
-           (unsigned long)g_stats.results, (unsigned long)g_stats.feat_us_avg, (unsigned long)g_stats.feat_us_max,
+           (unsigned long)g_stats.results, (unsigned long)g_stats.ignored, (unsigned long)g_stats.feat_us_avg, (unsigned long)g_stats.feat_us_max,
            (unsigned long)g_stats.inf_us_max, (unsigned long)g_stats.last_tx_us, (unsigned)ESP.getFreeHeap(),
-           // "high water mark" = menor espaço livre que a stack já teve (em palavras de 4 bytes)
+           // "high water mark" = menor espaço livre que a stack já teve (no ESP-IDF, em BYTES)
            (unsigned)uxTaskGetStackHighWaterMark(g_tCapture), (unsigned)uxTaskGetStackHighWaterMark(g_tFeatures),
            (unsigned)uxTaskGetStackHighWaterMark(g_tDetect), (unsigned)uxTaskGetStackHighWaterMark(NULL));
 }

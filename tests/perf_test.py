@@ -33,25 +33,15 @@ import numpy as np
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 sys.path.insert(0, os.path.join(ROOT, "training"))
 import features as F  # noqa: E402
-from dataset import load_manifest, read_wav  # noqa: E402
+from dataset import load_manifest, pad_clip, read_wav  # noqa: E402
 
 SRC = os.path.join(ROOT, "firmware", "libraries", "kws_common", "src")
 DECISIONS = ["ball", "cat", "dog", "unknown"]
+CLICK_SAMPLES = 1536  # 96 ms
 
 
 def truth(label):
     return label if label in ("ball", "cat", "dog") else "unknown"
-
-
-def make_stream(x):
-    """[1,0 s de fundo] + clipe + [0,8 s de fundo]. O fundo é o começo/fim do próprio
-    clipe repetido, para o VAD calibrar o piso de ruído como no uso real."""
-    head, tail = x[:3200], x[-3200:]
-    pre = np.tile(head, 5)[:16000]
-    post = np.tile(tail, 4)[:12800]
-    s = np.concatenate([pre, x, post]).astype(np.int16)
-    pad = (-len(s)) % F.HOP
-    return np.concatenate([s, np.zeros(pad, np.int16)])
 
 
 # ============================================================================ offline (C no PC)
@@ -73,7 +63,7 @@ class OfflineDevice:
         """Espelho da lógica da T2 + T3 (task_features.cpp / task_detect.cpp)."""
         vad = F.Vad()
         hist = {}
-        pending, win_start = False, 0
+        pending, search_end, peak_idx, peak_val = False, 0, 0, -1e9
         frame = np.zeros(F.FRAME, np.int16)
         nblocks = len(stream) // F.HOP
         for b in range(nblocks):
@@ -89,8 +79,14 @@ class OfflineDevice:
                                         f.ctypes.data_as(ctypes.POINTER(ctypes.c_float)))
             hist[idx] = f
             if vad.update(f[13]) and not pending:
-                pending, win_start = True, max(0, idx - F.PRE_ROLL)
-            if pending and idx == win_start + F.WIN_FRAMES - 1:
+                pending, search_end = True, idx + F.PEAK_SEARCH
+                first = max(0, idx - F.PRE_ROLL)
+                peak_idx = max(range(first, idx + 1), key=lambda k: hist[k][13])
+                peak_val = hist[peak_idx][13]
+            elif pending and idx <= search_end and f[13] > peak_val:
+                peak_idx, peak_val = idx, f[13]
+            win_start = max(0, peak_idx - F.PEAK_POS)
+            if pending and idx >= search_end and idx >= win_start + F.WIN_FRAMES - 1:
                 win = np.ascontiguousarray(np.stack([hist[win_start + k] for k in range(F.WIN_FRAMES)]))
                 probs = np.zeros(len(self.classes), np.float32)
                 t1 = time.perf_counter()
@@ -99,7 +95,8 @@ class OfflineDevice:
                 inf_us = (time.perf_counter() - t1) * 1e6
                 k = int(probs.argmax())
                 word = self.classes[k] if k <= 2 and probs[k] >= self.threshold else "unknown"
-                return {"word": word, "conf": float(probs[k]), "lat_us": {"inference": inf_us}}
+                return {"word": word, "conf": float(probs[k]), "ignored": self.classes[k] == "noise",
+                        "lat_us": {"inference": inf_us}}
         return None  # o VAD não disparou: nenhuma janela foi classificada
 
 
@@ -175,8 +172,16 @@ class Esp32Device:
             ahead = (i + chunk) / rate - (time.time() - t0)
             if ahead > 0.15:
                 time.sleep(ahead - 0.15)
-        res = self._wait("result", 3.0, since=t0)
-        return res
+        # o firmware responde "result" (fala classificada) ou "ignored" (classe noise: sem LED)
+        end = time.time() + 3.0
+        while time.time() < end:
+            for kind in ("result", "ignored"):
+                m = self._wait(kind, 0.05, since=t0)
+                if m:
+                    if kind == "ignored":
+                        m["word"], m["ignored"] = "unknown", True
+                    return m
+        return None
 
 
 # ============================================================================ relatório
@@ -186,6 +191,7 @@ def summarize(rows, rtts, mode, out_dir):
         cm[DECISIONS.index(r["truth"]), DECISIONS.index(r["pred"])] += 1
     acc = np.trace(cm) / max(cm.sum(), 1)
     no_det = sum(r["no_detection"] for r in rows)
+    ignored = sum(bool(r.get("ignored")) for r in rows)
     lat = collections.defaultdict(list)
     for r in rows:
         for k, v in (r.get("lat_us") or {}).items():
@@ -194,7 +200,8 @@ def summarize(rows, rtts, mode, out_dir):
         lat["usb_round_trip"] = rtts
     L = [f"# Teste de performance ({mode}) — {dt.datetime.now().isoformat(timespec='seconds')}\n",
          f"- Eventos simulados: {len(rows)} | acurácia (ball/cat/dog/unknown): **{acc:.3f}**",
-         f"- Eventos sem detecção de fala (VAD não disparou, contados como unknown): {no_det}\n",
+         f"- Eventos sem detecção de fala (VAD não disparou, contados como unknown): {no_det}",
+         f"- Eventos classificados como ruído e ignorados (sem LED, contados como unknown): {ignored}\n",
          "| real \\ previsto | " + " | ".join(DECISIONS) + " |", "|---|---|---|---|---|"]
     for i, d in enumerate(DECISIONS):
         L.append(f"| **{d}** | " + " | ".join(str(v) for v in cm[i]) + " |")
@@ -246,10 +253,13 @@ def main():
     rtts = [] if args.offline else dev.ping_rtt()
     rows = []
     for i, c in enumerate(clips):
-        res = dev.run(make_stream(read_wav(c["path"])))
+        # Os primeiros ~96 ms das gravações contêm o clique da tecla Enter usada na
+        # coleta (não existe no uso real); são descartados antes de simular o stream.
+        res = dev.run(pad_clip(read_wav(c["path"])[CLICK_SAMPLES:]))
         pred = res["word"] if res else "unknown"
         rows.append({"file": c["file"], "label": c["label"], "truth": truth(c["label"]), "pred": pred,
                      "conf": res.get("conf") if res else None, "no_detection": res is None,
+                     "ignored": bool(res.get("ignored")) if res else False,
                      "lat_us": res.get("lat_us") if res else None})
         mark = "OK " if pred == truth(c["label"]) else "ERR"
         print(f"[{i + 1}/{len(clips)}] {mark} {c['file']:40s} -> {pred}" + (f" ({res['conf']:.2f})" if res else " (sem detecção)"))

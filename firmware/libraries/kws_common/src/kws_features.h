@@ -39,7 +39,13 @@ extern "C" {
 #define KWS_VAD_FLOOR_UP     0.005f  // piso sobe devagar (~3 s)...
 #define KWS_VAD_FLOOR_DOWN   0.2f    // ...e desce rápido
 #define KWS_VAD_MAX_FRAMES   125     // após 2 s seguidos de "fala", o piso volta a subir (ruído permanente)
-#define KWS_PRE_ROLL_FRAMES  8       // a janela começa 8 frames (128 ms) antes do início detectado
+#define KWS_PRE_ROLL_FRAMES  8       // o pico é procurado a partir de 8 frames antes do início detectado
+// Alinhamento da janela (igual no treino e no ESP32): depois que o VAD dispara,
+// procura o frame de MAIOR ENERGIA (núcleo da palavra) nos próximos
+// KWS_PEAK_SEARCH_FRAMES frames e posiciona a janela com esse pico no frame
+// KWS_PEAK_POS. Assim um disparo precoce (ruído logo antes da fala) não desalinha.
+#define KWS_PEAK_SEARCH_FRAMES 45    // 720 ms de busca após o disparo
+#define KWS_PEAK_POS           15    // posição do pico dentro da janela de 61 frames
 
 // Prepara tabelas (janela de Hann, FFT, banco mel, DCT). Chamar uma vez.
 void kws_features_init(void);

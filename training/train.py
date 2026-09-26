@@ -23,7 +23,7 @@ import torch.nn as nn
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import features as F  # noqa: E402
-from dataset import augmented_windows, eval_window, load_manifest, read_wav  # noqa: E402
+from dataset import augmented_windows, eval_window, load_manifest, pad_clip, read_wav  # noqa: E402
 from model import CLASSES, TARGETS, KwsCNN, count_macs, count_params  # noqa: E402
 
 DECISIONS = TARGETS + ["unknown"]  # saída final do sistema (noise vira unknown)
@@ -37,7 +37,7 @@ def build_windows(clips, n_aug, seed):
     no_vad = 0
     t0 = time.time()
     for i, c in enumerate(clips):
-        x = read_wav(c["path"])
+        x = pad_clip(read_wav(c["path"]))
         feats = F.clip_features(x)
         w, fired = eval_window(feats, c["label"])
         if c["label"] != "noise" and not fired:
@@ -47,7 +47,7 @@ def build_windows(clips, n_aug, seed):
                      "y": CLASSES.index(c["label"]), "vad": fired})
         if (i + 1) % 200 == 0:
             print(f"  features: {i + 1}/{len(clips)} clipes ({time.time() - t0:.0f} s)")
-    print(f"  fala sem disparo do VAD (usado fallback): {no_vad} clipes")
+    print(f"  clipes de fala em que o VAD não dispararia: {no_vad}")
     return data
 
 
@@ -159,20 +159,27 @@ def md_table(cm, labels):
 
 
 # --------------------------------------------------------------------------- validação cruzada
-def cross_validate(data, n_feat, epochs, seed):
-    speakers = sorted({d["clip"]["speaker"] for d in data if d["clip"]["speaker"] != "bg"})
+def group_of(clip, by):
+    """Grupo de validação: a PESSOA (speaker) ou a SESSÃO de gravação (env)."""
+    if clip["speaker"] == "bg":
+        return "bg"
+    return clip["speaker"] if by == "speaker" else clip["env"]
+
+
+def cross_validate(data, n_feat, epochs, seed, by="speaker"):
+    speakers = sorted({group_of(d["clip"], by) for d in data} - {"bg"})
     bg = [d for d in data if d["clip"]["speaker"] == "bg"]
     oof_p, oof_y, per_speaker = [], [], {}
     for s in speakers:
-        tr = [d for d in data if d["clip"]["speaker"] not in (s, "bg")] + bg
-        te = [d for d in data if d["clip"]["speaker"] == s]
+        tr = [d for d in data if group_of(d["clip"], by) not in (s, "bg")] + bg
+        te = [d for d in data if group_of(d["clip"], by) == s]
         Xtr, ytr = stack(tr, use_aug=True)
         Xte, yte = stack(te, use_aug=False)
         model = train_model(Xtr, ytr, n_feat, epochs, seed)
         p = predict(model, Xte, n_feat)
         acc5 = float((p.argmax(1) == yte).mean())
         per_speaker[s] = {"n_test": int(len(yte)), "acc5": acc5}
-        print(f"  pessoa {s}: treino={len(ytr)} janelas, teste={len(yte)} clipes, acurácia 5 classes={acc5:.3f}")
+        print(f"  grupo {s}: treino={len(ytr)} janelas, teste={len(yte)} clipes, acurácia 5 classes={acc5:.3f}")
         oof_p.append(p)
         oof_y.append(yte)
     return np.concatenate(oof_p), np.concatenate(oof_y), per_speaker
@@ -202,10 +209,12 @@ def main():
     ap.add_argument("--aug", type=int, default=6, help="versões aumentadas por clipe")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--ablation", action="store_true", help="compara só-MFCC vs MFCC+RMS+centroid")
+    ap.add_argument("--also-sessions", action="store_true",
+                    help="também valida por sessão de gravação (otimista: mesma voz em treino e teste)")
     args = ap.parse_args()
     os.makedirs(args.out, exist_ok=True)
 
-    clips = load_manifest(args.root)
+    clips = [c for c in load_manifest(args.root) if c["speaker"] != "teste"]
     speakers = sorted({c["speaker"] for c in clips if c["speaker"] != "bg"})
     counts = {l: sum(c["label"] == l for c in clips) for l in CLASSES}
     print(f"{len(clips)} clipes, {len(speakers)} pessoas {speakers}, por classe {counts}")
@@ -216,12 +225,16 @@ def main():
     data = build_windows(clips, args.aug, args.seed)
 
     results = {}
-    feat_sets = [("all", F.N_FEAT)] + ([("mfcc", F.N_MFCC)] if args.ablation else [])
-    for name, n_feat in feat_sets:
-        print(f"\n[2] validação cruzada por pessoa — features={name} ({n_feat})")
-        p, y, per_spk = cross_validate(data, n_feat, args.epochs, args.seed)
+    runs = [("all", F.N_FEAT, "speaker")]
+    if args.ablation:
+        runs.append(("mfcc", F.N_MFCC, "speaker"))
+    if args.also_sessions:
+        runs.append(("all_por_sessao", F.N_FEAT, "session"))
+    for name, n_feat, by in runs:
+        print(f"\n[2] validação cruzada por {'pessoa' if by == 'speaker' else 'sessão'} — features={name} ({n_feat})")
+        p, y, per_spk = cross_validate(data, n_feat, args.epochs, args.seed, by)
         tau, _, m4 = choose_tau(p, y)
-        results[name] = {"n_feat": n_feat, "acc5": float((p.argmax(1) == y).mean()), "per_speaker": per_spk,
+        results[name] = {"n_feat": n_feat, "group_by": by, "acc5": float((p.argmax(1) == y).mean()), "per_speaker": per_spk,
                          "tau": tau, "decision_metrics": m4, "confusion5": confusion5(y, p).tolist()}
         print(f"  => acurácia 5 classes {results[name]['acc5']:.3f} | threshold {tau} | "
               f"decisão 4 vias: acc {m4['accuracy']:.3f}, macro-F1 {m4['macro_f1']:.3f}, "
@@ -258,7 +271,8 @@ def main():
               f"- Threshold escolhido: **{res['tau']}**",
               f"- Decisão final (ball/cat/dog/unknown): acurácia **{m['accuracy']:.3f}**, macro-F1 {m['macro_f1']:.3f}, "
               f"falso aceite {m['false_accept_rate']:.3f}, recall das palavras {m['target_recall']:.3f}\n",
-              "Por pessoa:\n", "| pessoa | clipes de teste | acurácia 5 classes |", "|---|---|---|"]
+              f"Validação agrupada por: **{'pessoa real' if res['group_by'] == 'speaker' else 'sessão de gravação (otimista)'}**\n",
+              "| grupo de teste | clipes de teste | acurácia 5 classes |", "|---|---|---|"]
         r += [f"| {s} | {v['n_test']} | {v['acc5']:.3f} |" for s, v in res["per_speaker"].items()]
         r += ["\nMatriz de confusão (5 classes, argmax):\n", md_table(np.array(res["confusion5"]), CLASSES),
               "Matriz de confusão da decisão final (com threshold):\n", md_table(np.array(m["confusion"]), DECISIONS)]
