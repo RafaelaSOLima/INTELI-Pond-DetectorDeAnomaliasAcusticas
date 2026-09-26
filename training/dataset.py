@@ -10,7 +10,7 @@ import wave
 import numpy as np
 
 import features as F
-from model import CLASSES
+from labels import CLASSES
 
 
 def read_wav(path):

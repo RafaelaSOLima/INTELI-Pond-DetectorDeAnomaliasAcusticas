@@ -7,8 +7,7 @@ Se mudar algo aqui, o export_c.py recusa o grafo até o C ser atualizado.
 import torch
 import torch.nn as nn
 
-CLASSES = ["ball", "cat", "dog", "unknown", "noise"]
-TARGETS = ["ball", "cat", "dog"]
+from labels import CLASSES, TARGETS  # noqa: F401  (re-exportados)
 
 
 class KwsCNN(nn.Module):
