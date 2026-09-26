@@ -56,3 +56,4 @@ python3 training/export_c.py
 - [Hardware: pinagem, cuidados e testes](docs/hardware.md)
 - [Coleta do dataset](docs/coleta_dataset.md)
 - [Relatório técnico](docs/relatorio.md)
+- [Aula: o FreeRTOS deste projeto](docs/aula_freertos.md)
