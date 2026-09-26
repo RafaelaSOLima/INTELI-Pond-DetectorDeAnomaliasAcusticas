@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="820" viewBox="0 0 1240 820" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
+    </marker>
+    <marker id="ad" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a5a00"/>
+    </marker>
+    <style>
+      .t { font-size: 14px; fill: #1b1b1b; }
+      .s { font-size: 12px; fill: #444; }
+      .h { font-size: 16px; font-weight: bold; fill: #1b1b1b; }
+      .task { fill: #e8f1ff; stroke: #2f6fdb; stroke-width: 2; }
+      .queue { fill: #eaf8ee; stroke: #1f9d55; stroke-width: 2; }
+      .mutex { fill: #fff1e0; stroke: #d97b00; stroke-width: 2; }
+      .evt { fill: #f3e8ff; stroke: #7c3aed; stroke-width: 2; }
+      .hw { fill: #f2f2f2; stroke: #777; stroke-width: 1.5; }
+      .edge { stroke: #333; stroke-width: 1.8; fill: none; marker-end: url(#a); }
+      .dash { stroke: #8a5a00; stroke-width: 1.5; fill: none; stroke-dasharray: 6 4; marker-end: url(#ad); }
+      .pc { fill: #fffbe6; stroke: #b59b00; stroke-width: 2; }
+    </style>
+  </defs>
+
+  <rect width="1240" height="820" fill="#ffffff"/>
+  <text x="20" y="32" class="h" font-size="20">Arquitetura FreeRTOS — reconhecimento de "ball / cat / dog" no ESP32 (todas as tasks no núcleo 1)</text>
+  <text x="20" y="54" class="s">Seta cheia = dados (fila/buffer) · seta tracejada = sincronização (mutex / event group) · prioridade maior = mais urgente (preempção)</text>
+
+  <!-- ===================== fronteira ESP32 ===================== -->
+  <rect x="10" y="70" width="930" height="740" rx="14" fill="none" stroke="#999" stroke-dasharray="10 6"/>
+  <text x="24" y="92" class="h" fill="#555">ESP32 (edge: aquisição, features, inferência, decisão, LED)</text>
+
+  <!-- Hardware -->
+  <rect x="30" y="110" width="150" height="70" rx="8" class="hw"/>
+  <text x="105" y="138" class="t" text-anchor="middle">INMP441</text>
+  <text x="105" y="158" class="s" text-anchor="middle">SCK 26 · WS 25 · SD 33</text>
+  <rect x="30" y="220" width="150" height="80" rx="8" class="hw"/>
+  <text x="105" y="245" class="t" text-anchor="middle">I2S + DMA</text>
+  <text x="105" y="264" class="s" text-anchor="middle">8 buffers × 256 quadros</text>
+  <text x="105" y="282" class="s" text-anchor="middle">= 128 ms de folga</text>
+  <path d="M105,180 L105,218" class="edge"/>
+  <text x="112" y="203" class="s">16 kHz, 24 bits</text>
+  <path d="M180,260 L258,260" class="edge"/>
+  <text x="186" y="252" class="s">interrupção</text>
+  <text x="186" y="276" class="s">"DMA cheio"</text>
+
+  <!-- T1 -->
+  <rect x="260" y="215" width="200" height="95" rx="10" class="task"/>
+  <text x="360" y="240" class="h" text-anchor="middle">T1 Captura</text>
+  <text x="360" y="260" class="s" text-anchor="middle">prioridade 5 (alta)</text>
+  <text x="360" y="278" class="s" text-anchor="middle">i2s_read (bloqueia) → int16</text>
+  <text x="360" y="296" class="s" text-anchor="middle">+ DC blocker</text>
+
+  <!-- Ring buffer -->
+  <rect x="520" y="110" width="400" height="70" rx="8" class="queue"/>
+  <text x="720" y="135" class="h" text-anchor="middle">Buffer circular g_ring</text>
+  <text x="720" y="155" class="s" text-anchor="middle">19 blocos × 256 amostras (304 ms) · T1 escreve, T2 lê</text>
+  <g stroke="#1f9d55" stroke-width="1">
+    <rect x="540" y="162" width="360" height="12" fill="#ffffff"/>
+    <line x1="559" y1="162" x2="559" y2="174"/><line x1="578" y1="162" x2="578" y2="174"/><line x1="597" y1="162" x2="597" y2="174"/>
+    <line x1="616" y1="162" x2="616" y2="174"/><line x1="635" y1="162" x2="635" y2="174"/><line x1="654" y1="162" x2="654" y2="174"/>
+  </g>
+  <path d="M400,215 L520,172" class="edge"/>
+  <text x="420" y="186" class="s">escreve bloco (16 ms)</text>
+
+  <!-- qBlocks -->
+  <rect x="520" y="235" width="200" height="60" rx="8" class="queue"/>
+  <text x="620" y="258" class="t" text-anchor="middle">Queue qBlocks</text>
+  <text x="620" y="277" class="s" text-anchor="middle">16 × {slot, seq, tempo}</text>
+  <path d="M460,265 L518,265" class="edge"/>
+  <text x="466" y="300" class="s">xQueueSend(…, 0)</text>
+  <text x="466" y="315" class="s">cheia → descarta e conta</text>
+
+  <!-- T2 -->
+  <rect x="520" y="360" width="200" height="110" rx="10" class="task"/>
+  <text x="620" y="385" class="h" text-anchor="middle">T2 Features</text>
+  <text x="620" y="405" class="s" text-anchor="middle">prioridade 4 (média)</text>
+  <text x="620" y="423" class="s" text-anchor="middle">frame 512 (50% sobreposto)</text>
+  <text x="620" y="441" class="s" text-anchor="middle">13 MFCC + log RMS + centroid</text>
+  <text x="620" y="459" class="s" text-anchor="middle">VAD (RMS) → janela 61×15</text>
+  <path d="M620,295 L620,358" class="edge"/>
+  <text x="628" y="325" class="s">xQueueReceive (bloqueia)</text>
+  <path d="M760,180 C780,260 740,330 722,380" class="edge"/>
+  <text x="768" y="275" class="s">copia bloco</text>
+
+  <!-- Event group -->
+  <rect x="760" y="380" width="165" height="70" rx="8" class="evt"/>
+  <text x="842" y="405" class="t" text-anchor="middle">Event Group</text>
+  <text x="842" y="424" class="s" text-anchor="middle">bit EVT_LISTENING</text>
+  <text x="842" y="441" class="s" text-anchor="middle">aceita nova palavra?</text>
+  <path d="M760,415 L722,415" class="dash"/>
+  <text x="726" y="408" class="s" fill="#8a5a00">lê / limpa</text>
+
+  <!-- qWindows -->
+  <rect x="520" y="520" width="200" height="60" rx="8" class="queue"/>
+  <text x="620" y="543" class="t" text-anchor="middle">Queue qWindows</text>
+  <text x="620" y="562" class="s" text-anchor="middle">2 × janela copiada (3,7 KB)</text>
+  <path d="M620,470 L620,518" class="edge"/>
+  <text x="628" y="500" class="s">xQueueSend (cópia)</text>
+
+  <!-- T3 -->
+  <rect x="520" y="630" width="200" height="110" rx="10" class="task"/>
+  <text x="620" y="655" class="h" text-anchor="middle">T3 Detecção</text>
+  <text x="620" y="675" class="s" text-anchor="middle">prioridade 3 (baixa)</text>
+  <text x="620" y="693" class="s" text-anchor="middle">CNN (pesos do kws.onnx)</text>
+  <text x="620" y="711" class="s" text-anchor="middle">softmax → threshold → decisão</text>
+  <text x="620" y="729" class="s" text-anchor="middle">única dona do LED</text>
+  <path d="M620,580 L620,628" class="edge"/>
+  <text x="628" y="610" class="s">xQueueReceive (bloqueia)</text>
+  <path d="M722,690 C800,640 850,520 845,452" class="dash"/>
+  <text x="790" y="610" class="s" fill="#8a5a00">liga após cooldown</text>
+
+  <!-- LED -->
+  <rect x="275" y="655" width="200" height="60" rx="8" class="hw"/>
+  <text x="375" y="680" class="t" text-anchor="middle">LED (GPIO 19)</text>
+  <text x="375" y="699" class="s" text-anchor="middle">1 longa = OK · 3 curtas = erro</text>
+  <path d="M520,685 L477,685" class="edge"/>
+
+  <!-- Mutexes -->
+  <rect x="770" y="540" width="155" height="55" rx="8" class="mutex"/>
+  <text x="847" y="563" class="t" text-anchor="middle">Mutex mtxGame</text>
+  <text x="847" y="581" class="s" text-anchor="middle">palavra-alvo</text>
+  <rect x="770" y="740" width="155" height="55" rx="8" class="mutex"/>
+  <text x="847" y="763" class="t" text-anchor="middle">Mutex mtxSerial</text>
+  <text x="847" y="781" class="s" text-anchor="middle">uma linha por vez na USB</text>
+  <path d="M770,575 C745,600 735,640 722,655" class="dash"/>
+  <path d="M722,730 C745,750 755,765 768,767" class="dash"/>
+
+  <!-- T4 -->
+  <rect x="260" y="470" width="200" height="110" rx="10" class="task"/>
+  <text x="360" y="495" class="h" text-anchor="middle">T4 Comunicação</text>
+  <text x="360" y="515" class="s" text-anchor="middle">prioridade 2 (mais baixa)</text>
+  <text x="360" y="533" class="s" text-anchor="middle">TARGET · PING · STATS · INJ</text>
+  <text x="360" y="551" class="s" text-anchor="middle">heartbeat a cada 1 s</text>
+  <text x="360" y="569" class="s" text-anchor="middle">(latências, perdas, stacks)</text>
+  <path d="M460,500 C600,480 720,470 760,430" class="dash"/>
+  <text x="470" y="486" class="s" fill="#8a5a00">TARGET liga o bit</text>
+  <path d="M460,560 C560,600 700,560 768,566" class="dash"/>
+  <path d="M400,580 C430,700 700,790 768,775" class="dash"/>
+
+  <!-- Stream buffer (teste) -->
+  <rect x="260" y="360" width="200" height="70" rx="8" class="queue"/>
+  <text x="360" y="383" class="t" text-anchor="middle">Stream Buffer (teste)</text>
+  <text x="360" y="401" class="s" text-anchor="middle">áudio injetado pelo PC</text>
+  <text x="360" y="418" class="s" text-anchor="middle">T4 escreve · T1 lê</text>
+  <path d="M360,470 L360,432" class="edge"/>
+  <path d="M360,360 L360,312" class="edge"/>
+
+  <!-- ===================== PC ===================== -->
+  <rect x="960" y="70" width="270" height="740" rx="14" class="pc"/>
+  <text x="1095" y="100" class="h" text-anchor="middle">Computador</text>
+  <text x="1095" y="122" class="s" text-anchor="middle">(sem processamento de áudio)</text>
+  <rect x="985" y="150" width="220" height="120" rx="8" fill="#fff" stroke="#b59b00"/>
+  <text x="1095" y="175" class="t" text-anchor="middle">Interface (Web Serial)</text>
+  <text x="1095" y="197" class="s" text-anchor="middle">🐱 CAT  ⚽ BALL  🐶 DOG</text>
+  <text x="1095" y="217" class="s" text-anchor="middle">escolhe o alvo, mostra</text>
+  <text x="1095" y="235" class="s" text-anchor="middle">CORRECT / TRY AGAIN</text>
+  <text x="1095" y="253" class="s" text-anchor="middle">heartbeat &gt; 3 s → desconectado</text>
+  <rect x="985" y="300" width="220" height="95" rx="8" fill="#fff" stroke="#b59b00"/>
+  <text x="1095" y="325" class="t" text-anchor="middle">tests/perf_test.py</text>
+  <text x="1095" y="347" class="s" text-anchor="middle">injeta clipes de teste (INJ)</text>
+  <text x="1095" y="365" class="s" text-anchor="middle">mede acurácia e latência</text>
+  <text x="1095" y="383" class="s" text-anchor="middle">PING → ida e volta da USB</text>
+  <rect x="985" y="425" width="220" height="80" rx="8" fill="#fff" stroke="#b59b00"/>
+  <text x="1095" y="450" class="t" text-anchor="middle">Treino (offline)</text>
+  <text x="1095" y="470" class="s" text-anchor="middle">PyTorch → kws.onnx</text>
+  <text x="1095" y="488" class="s" text-anchor="middle">→ pesos em C (export_c.py)</text>
+
+  <!-- USB link -->
+  <path d="M925,767 L1215,767 L1215,210 L1207,210" class="edge"/>
+  <text x="935" y="760" class="s">USB → PC: JSON por linha (921600 baud)</text>
+  <path d="M1040,272 L1040,610 L470,610 L462,583" class="edge"/>
+  <text x="760" y="626" class="s">PC → USB: TARGET / PING / INJ</text>
+</svg>
