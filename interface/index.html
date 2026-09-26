@@ -99,7 +99,9 @@ if (!("serial" in navigator)) {
 async function connect() {
   try {
     port = await navigator.serial.requestPort();
-    await port.open({ baudRate: 921600 });
+    // bufferSize: o padrão da Web Serial é só 255 bytes; um heartbeat tem ~500
+    // bytes e, a 921600 baud, o buffer transbordaria (BufferOverrunError).
+    await port.open({ baudRate: 921600, bufferSize: 65536 });
     writer = port.writable.getWriter();
     readLoop();
     lastHb = Date.now();
@@ -119,27 +121,34 @@ async function send(line) {
 async function readLoop() {
   const decoder = new TextDecoder();
   let buf = "";
-  const reader = port.readable.getReader();
-  try {
-    for (;;) {
-      const { value, done } = await reader.read();
-      if (done) break;
-      buf += decoder.decode(value, { stream: true });
-      let i;
-      while ((i = buf.indexOf("\n")) >= 0) {
-        const line = buf.slice(0, i).trim();
-        buf = buf.slice(i + 1);
-        if (line.startsWith("{")) {
-          try { handle(JSON.parse(line)); } catch (e) { /* linha incompleta ou lixo do boot */ }
+  let closed = false;
+  // Erros de leitura como BufferOverrunError/FramingError NÃO são fatais na Web
+  // Serial: port.readable continua existindo e basta pegar um novo leitor.
+  // Só quando port.readable vira null (cabo removido, porta fechada) a conexão acabou.
+  while (port && port.readable && !closed) {
+    const reader = port.readable.getReader();
+    try {
+      for (;;) {
+        const { value, done } = await reader.read();
+        if (done) { closed = true; break; }
+        buf += decoder.decode(value, { stream: true });
+        let i;
+        while ((i = buf.indexOf("\n")) >= 0) {
+          const line = buf.slice(0, i).trim();
+          buf = buf.slice(i + 1);
+          if (line.startsWith("{")) {
+            try { handle(JSON.parse(line)); } catch (e) { /* linha incompleta ou lixo do boot */ }
+          }
         }
       }
+    } catch (e) {
+      log("erro de leitura (recuperável, continuando): " + e);
+      buf = "";
+    } finally {
+      reader.releaseLock();
     }
-  } catch (e) {
-    log("conexão perdida: " + e);
-  } finally {
-    reader.releaseLock();
-    setConn(false);
   }
+  setConn(false);
 }
 
 function handle(msg) {
