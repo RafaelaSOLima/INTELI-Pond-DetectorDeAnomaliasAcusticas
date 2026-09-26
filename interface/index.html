@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Say the Word!</title>
+<style>
+  :root {
+    --bg: #fff8ec; --ink: #2b2118; --muted: #7a6a5a; --card: #ffffff;
+    --ok: #1f9d55; --bad: #d64545; --accent: #ff9f1c; --ring: #ffd79a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Comic Sans MS", "Trebuchet MS", system-ui, sans-serif;
+         background: var(--bg); color: var(--ink); min-height: 100vh; display: flex; flex-direction: column; }
+  header { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; gap: 12px; flex-wrap: wrap; }
+  h1 { margin: 0; font-size: clamp(22px, 4vw, 34px); }
+  .status { display: flex; align-items: center; gap: 10px; font-family: system-ui, sans-serif; font-size: 14px; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--bad); }
+  .dot.on { background: var(--ok); }
+  button { font: inherit; border: 0; border-radius: 12px; padding: 10px 18px; cursor: pointer;
+           background: var(--accent); color: #fff; font-weight: bold; }
+  button.secondary { background: #e9dccb; color: var(--ink); }
+  main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; padding: 16px; }
+  #prompt { font-size: clamp(28px, 6vw, 56px); text-align: center; min-height: 1.3em; }
+  #prompt b { color: var(--accent); }
+  .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 220px)); gap: 20px; width: 100%; justify-content: center; }
+  .card { background: var(--card); border-radius: 24px; padding: 18px 10px; text-align: center; cursor: pointer;
+          box-shadow: 0 6px 0 #e7d6bf; border: 6px solid transparent; transition: transform .15s, border-color .15s; user-select: none; }
+  .card:hover { transform: translateY(-3px); }
+  .card .emoji { font-size: clamp(60px, 12vw, 120px); line-height: 1.1; }
+  .card .word { font-size: clamp(22px, 4vw, 36px); font-weight: bold; letter-spacing: 2px; }
+  .card.target { border-color: var(--ring); }
+  .card.hit { border-color: var(--ok); transform: scale(1.06); }
+  .card.miss { border-color: var(--bad); }
+  #result { font-size: clamp(34px, 8vw, 72px); font-weight: bold; min-height: 1.2em; text-align: center; }
+  #result.ok { color: var(--ok); } #result.bad { color: var(--bad); }
+  #heard { font-family: system-ui, sans-serif; color: var(--muted); min-height: 1.2em; }
+  .score { font-size: 22px; }
+  details { width: min(900px, 100%); font-family: system-ui, sans-serif; font-size: 13px; color: var(--muted); padding: 0 16px 16px; margin: 0 auto; }
+  table { border-collapse: collapse; width: 100%; }
+  td, th { text-align: left; padding: 3px 8px; border-bottom: 1px solid #eadfcf; }
+  pre { white-space: pre-wrap; word-break: break-all; max-height: 180px; overflow: auto; background: #fff; padding: 8px; border-radius: 8px; }
+  #warn { color: var(--bad); font-family: system-ui, sans-serif; text-align: center; }
+  @media (max-width: 560px) { .cards { grid-template-columns: repeat(3, 1fr); gap: 8px; } .card { padding: 10px 4px; border-width: 4px; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>🗣️ Say the Word!</h1>
+  <div class="status">
+    <span class="dot" id="dot"></span><span id="conn">desconectado</span>
+    <button id="btnConnect">Conectar ESP32</button>
+  </div>
+</header>
+
+<main>
+  <div id="warn"></div>
+  <div id="prompt">Conecte o ESP32 para começar</div>
+  <div class="cards">
+    <div class="card" data-word="cat"><div class="emoji">🐱</div><div class="word">CAT</div></div>
+    <div class="card" data-word="ball"><div class="emoji">⚽</div><div class="word">BALL</div></div>
+    <div class="card" data-word="dog"><div class="emoji">🐶</div><div class="word">DOG</div></div>
+  </div>
+  <div id="result"></div>
+  <div id="heard"></div>
+  <div class="score">⭐ <span id="score">0</span> / <span id="total">0</span></div>
+  <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center">
+    <button id="btnNext">Próxima palavra 🎲</button>
+    <button class="secondary" id="btnFree">Modo livre</button>
+  </div>
+</main>
+
+<details>
+  <summary>Painel técnico (latências e estado do ESP32)</summary>
+  <table id="lat"></table>
+  <p id="hb"></p>
+  <pre id="log"></pre>
+</details>
+
+<script>
+// ---------------------------------------------------------------------------
+// Esta página NÃO processa áudio. Ela só:
+//   1) envia a palavra-alvo ao ESP32 ("TARGET cat\n");
+//   2) recebe o resultado já decidido pelo ESP32 (JSON por linha) e mostra.
+// Comunicação: Web Serial API (Chrome/Edge), 921600 baud, uma linha por mensagem.
+// ---------------------------------------------------------------------------
+const WORDS = ["cat", "ball", "dog"];
+const HB_TIMEOUT_MS = 3000;
+let port = null, writer = null, target = "", lastHb = 0, score = 0, total = 0;
+
+const $ = (id) => document.getElementById(id);
+const log = (s) => { const el = $("log"); el.textContent = (s + "\n" + el.textContent).slice(0, 6000); };
+
+if (!("serial" in navigator)) {
+  $("warn").textContent = "Este navegador não tem Web Serial. Use o Google Chrome ou o Microsoft Edge.";
+  $("btnConnect").disabled = true;
+}
+
+async function connect() {
+  try {
+    port = await navigator.serial.requestPort();
+    await port.open({ baudRate: 921600 });
+    writer = port.writable.getWriter();
+    readLoop();
+    lastHb = Date.now();
+    setConn(true);
+    pickTarget();
+  } catch (e) {
+    log("erro ao conectar: " + e);
+  }
+}
+
+async function send(line) {
+  if (!writer) return;
+  await writer.write(new TextEncoder().encode(line + "\n"));
+  log("> " + line);
+}
+
+async function readLoop() {
+  const decoder = new TextDecoder();
+  let buf = "";
+  const reader = port.readable.getReader();
+  try {
+    for (;;) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buf += decoder.decode(value, { stream: true });
+      let i;
+      while ((i = buf.indexOf("\n")) >= 0) {
+        const line = buf.slice(0, i).trim();
+        buf = buf.slice(i + 1);
+        if (line.startsWith("{")) {
+          try { handle(JSON.parse(line)); } catch (e) { /* linha incompleta ou lixo do boot */ }
+        }
+      }
+    }
+  } catch (e) {
+    log("conexão perdida: " + e);
+  } finally {
+    reader.releaseLock();
+    setConn(false);
+  }
+}
+
+function handle(msg) {
+  if (msg.t === "hb") {
+    lastHb = Date.now();
+    $("hb").textContent = `ESP32: ${msg.ms} ms ligado · ouvindo=${msg.listening} · blocos=${msg.blocks} · ` +
+      `perdas: ring=${msg.ring_drops} dma=${msg.dma_gaps} janelas=${msg.win_drops} · ` +
+      `features média ${msg.feat_us_avg} µs (máx ${msg.feat_us_max}) · inferência máx ${msg.inf_us_max} µs · heap ${msg.heap}`;
+  } else if (msg.t === "boot") {
+    log("boot: " + JSON.stringify(msg));
+    if (msg.placeholder) $("warn").textContent = "Atenção: o ESP32 está com um modelo de TESTE (sintético).";
+    if (target) send("TARGET " + target);  // o ESP32 reiniciou: reenvia o alvo
+  } else if (msg.t === "result") {
+    showResult(msg);
+  } else {
+    log(JSON.stringify(msg));
+  }
+}
+
+function showResult(r) {
+  total++;
+  if (r.ok) score++;
+  $("score").textContent = score; $("total").textContent = total;
+  document.querySelectorAll(".card").forEach((c) => c.classList.remove("hit", "miss"));
+  const card = document.querySelector(`.card[data-word="${r.word}"]`);
+  if (r.ok) {
+    $("result").textContent = "🎉 CORRECT!"; $("result").className = "ok";
+    if (card) card.classList.add("hit");
+  } else {
+    $("result").textContent = "❌ TRY AGAIN!"; $("result").className = "bad";
+    if (card) card.classList.add("miss");
+  }
+  $("heard").textContent = r.word === "unknown"
+    ? "Não entendi… tente de novo!"
+    : `Ouvi: ${r.word.toUpperCase()} (${Math.round(r.conf * 100)}%)`;
+  const L = r.lat_us || {};
+  $("lat").innerHTML = "<tr><th>etapa (último resultado)</th><th>µs</th></tr>" +
+    Object.entries(L).map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join("");
+  log("resultado: " + JSON.stringify(r));
+  if (r.ok) setTimeout(pickTarget, 2200);  // acertou: próxima palavra
+}
+
+function setTarget(w) {
+  target = w;
+  document.querySelectorAll(".card").forEach((c) => c.classList.toggle("target", c.dataset.word === w));
+  $("prompt").innerHTML = w ? `Say <b>${w.toUpperCase()}</b>!` : "Modo livre: fale <b>cat</b>, <b>ball</b> ou <b>dog</b>";
+  $("result").textContent = ""; $("heard").textContent = "";
+  document.querySelectorAll(".card").forEach((c) => c.classList.remove("hit", "miss"));
+  send("TARGET " + (w || "none"));
+}
+
+function pickTarget() {
+  const options = WORDS.filter((w) => w !== target);
+  setTarget(options[Math.floor(Math.random() * options.length)]);
+}
+
+function setConn(on) {
+  $("dot").classList.toggle("on", on);
+  $("conn").textContent = on ? "conectado" : "desconectado";
+  $("btnConnect").style.display = on ? "none" : "";
+  if (!on) { writer = null; $("prompt").textContent = "Conexão perdida — clique em Conectar ESP32"; }
+}
+
+// Perda de comunicação: sem heartbeat por 3 s = ESP32 travado/desligado.
+setInterval(() => {
+  if (writer && Date.now() - lastHb > HB_TIMEOUT_MS) {
+    $("conn").textContent = "sem resposta do ESP32…";
+    $("dot").classList.remove("on");
+  } else if (writer) {
+    $("conn").textContent = "conectado"; $("dot").classList.add("on");
+  }
+}, 500);
+
+navigator.serial?.addEventListener("disconnect", () => setConn(false));
+$("btnConnect").onclick = connect;
+$("btnNext").onclick = pickTarget;
+$("btnFree").onclick = () => setTarget("");
+document.querySelectorAll(".card").forEach((c) => (c.onclick = () => setTarget(c.dataset.word)));
+</script>
+</body>
+</html>
