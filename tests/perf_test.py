@@ -178,11 +178,14 @@ class Esp32Device:
             ahead = (i + chunk) / rate - (time.time() - t0)
             if ahead > 0.15:
                 time.sleep(ahead - 0.15)
-        # o firmware responde "result" (fala classificada) ou "ignored" (classe noise: sem LED)
-        end = time.time() + 3.0
+        # O firmware responde "result" (fala classificada) ou "ignored" (classe noise: sem LED).
+        # O clipe só começa após 1,0 s de preenchimento: qualquer resposta antes de
+        # ~1,2 s veio de um som da SALA captado pelo microfone, não do clipe -> descarta.
+        t_valid = t0 + 1.2
+        end = time.time() + 3.5
         while time.time() < end:
             for kind in ("result", "ignored"):
-                m = self._wait(kind, 0.05, since=t0)
+                m = self._wait(kind, 0.05, since=t_valid)
                 if m:
                     if kind == "ignored":
                         m["word"], m["ignored"] = "unknown", True
