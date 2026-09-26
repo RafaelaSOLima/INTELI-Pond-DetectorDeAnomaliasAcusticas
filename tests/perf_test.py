@@ -154,12 +154,18 @@ class Esp32Device:
         return rtts
 
     def run(self, stream):
-        # espera o sistema voltar a ouvir (fim do LED + cooldown da rodada anterior)
-        t_end = time.time() + 3
+        # Espera o sistema voltar a ouvir (fim do LED + cooldown da rodada anterior).
+        # Só vale um heartbeat NOVO: um "listening=1" antigo ainda na fila faria o
+        # clipe ser enviado durante o cooldown, com o ESP32 propositalmente surdo.
+        with self.lock:
+            self.lines.clear()
+        t_end = time.time() + 5
         while time.time() < t_end:
-            hb = self._wait("hb", 1.2)
+            t_ask = time.time()
+            hb = self._wait("hb", 1.5, since=t_ask)
             if hb and hb.get("listening") == 1:
                 break
+        time.sleep(0.2)  # margem: o VAD reaprende o piso de ruído
         with self.lock:
             self.lines.clear()
         data = stream.astype("<i2").tobytes()
@@ -233,7 +239,7 @@ def main():
     if not args.offline and not args.port:
         sys.exit("use --offline ou --port /dev/ttyUSB0")
 
-    clips = [c for c in load_manifest(args.root) if c["speaker"] != "bg"]
+    clips = [c for c in load_manifest(args.root) if c["speaker"] not in ("bg", "teste")]
     if args.speakers:
         clips = [c for c in clips if c["speaker"] in args.speakers]
     random.Random(args.seed).shuffle(clips)
