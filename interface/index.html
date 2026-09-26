@@ -82,7 +82,10 @@
 // Esta página NÃO processa áudio. Ela só:
 //   1) envia a palavra-alvo ao ESP32 ("TARGET cat\n");
 //   2) recebe o resultado já decidido pelo ESP32 (JSON por linha) e mostra.
-// Comunicação: Web Serial API (Chrome/Edge), 921600 baud, uma linha por mensagem.
+// Comunicação (uma linha JSON por mensagem, 921600 baud no ESP32):
+//   - aberta via http://localhost:8000 (interface/server.py): ponte em Python
+//     (Server-Sent Events para receber, POST /send para enviar) — qualquer navegador;
+//   - aberta como arquivo no Chrome/Edge: Web Serial API direto.
 // ---------------------------------------------------------------------------
 const WORDS = ["cat", "ball", "dog"];
 const HB_TIMEOUT_MS = 3000;
@@ -91,9 +94,35 @@ let port = null, writer = null, target = "", lastHb = 0, score = 0, total = 0;
 const $ = (id) => document.getElementById(id);
 const log = (s) => { const el = $("log"); el.textContent = (s + "\n" + el.textContent).slice(0, 6000); };
 
-if (!("serial" in navigator)) {
-  $("warn").textContent = "Este navegador não tem Web Serial. Use o Google Chrome ou o Microsoft Edge.";
+const BRIDGE = location.protocol.startsWith("http");  // servida pelo interface/server.py?
+
+if (BRIDGE) {
+  $("btnConnect").style.display = "none";
+  connectBridge();
+} else if (!("serial" in navigator)) {
+  $("warn").textContent = "Este navegador não tem Web Serial. Rode: python3 interface/server.py e abra http://localhost:8000";
   $("btnConnect").disabled = true;
+}
+
+// Modo ponte: o servidor Python lê a USB e repassa cada linha como evento.
+function connectBridge() {
+  const es = new EventSource("/events");
+  es.onmessage = (ev) => {
+    let msg;
+    try { msg = JSON.parse(ev.data); } catch (e) { return; }
+    if (msg.t === "bridge") {
+      if (msg.connected) {
+        const first = !writer;
+        writer = { bridge: true }; lastHb = Date.now(); setConn(true);
+        if (first && !target) pickTarget(); else if (target) send("TARGET " + target);
+      } else {
+        setConn(false); $("prompt").textContent = "ESP32 desconectado da USB…";
+      }
+      return;
+    }
+    handle(msg);
+  };
+  es.onerror = () => { setConn(false); $("prompt").textContent = "Servidor da ponte parado (rode interface/server.py)"; };
 }
 
 async function connect() {
@@ -114,7 +143,11 @@ async function connect() {
 
 async function send(line) {
   if (!writer) return;
-  await writer.write(new TextEncoder().encode(line + "\n"));
+  if (BRIDGE) {
+    await fetch("/send", { method: "POST", body: line }).catch((e) => log("erro ao enviar: " + e));
+  } else {
+    await writer.write(new TextEncoder().encode(line + "\n"));
+  }
   log("> " + line);
 }
 
@@ -208,7 +241,7 @@ function pickTarget() {
 function setConn(on) {
   $("dot").classList.toggle("on", on);
   $("conn").textContent = on ? "conectado" : "desconectado";
-  $("btnConnect").style.display = on ? "none" : "";
+  $("btnConnect").style.display = (on || BRIDGE) ? "none" : "";
   if (!on) { writer = null; $("prompt").textContent = "Conexão perdida — clique em Conectar ESP32"; }
 }
 

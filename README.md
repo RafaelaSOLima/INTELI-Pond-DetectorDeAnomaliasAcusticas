@@ -34,7 +34,9 @@ arduino-cli compile --fqbn esp32:esp32:esp32 --libraries libraries kws_rtos
 arduino-cli upload  --fqbn esp32:esp32:esp32 -p /dev/ttyUSB0 kws_rtos
 cd ..
 
-# 2) jogar: abra interface/index.html no Chrome e clique em "Conectar ESP32"
+# 2) jogar: ponte USB -> navegador (funciona em qualquer navegador)
+python3 interface/server.py --port /dev/ttyUSB0     # depois abra http://localhost:8000
+#    (alternativa: abrir interface/index.html direto no Chrome, via Web Serial)
 
 # 3) medir acurácia e latência no ESP32 (injeta gravações pela USB)
 python3 tests/perf_test.py --port /dev/ttyUSB0 --per-class 10
