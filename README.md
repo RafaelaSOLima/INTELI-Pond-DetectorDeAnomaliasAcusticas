@@ -1,25 +1,56 @@
 # Detector Acústico de Palavras (ball · cat · dog) com ESP32 + FreeRTOS
 
-Ponderada **Detector de Anomalias Acústicas**. Um sistema embarcado reconhece em
-tempo real, **no próprio ESP32 (edge)**, as palavras em inglês *ball*, *cat* e
-*dog* faladas por crianças. Qualquer outra palavra ou ruído é tratado como
-`unknown`. O computador só exibe a interface do jogo.
+Ponderada **Detector de Anomalias Acústicas**. Um ESP32 com microfone INMP441
+reconhece em tempo real, **no próprio chip (edge)**, as palavras em inglês
+*ball*, *cat* e *dog* faladas por crianças. Outras palavras viram `unknown`
+(TRY AGAIN) e ruídos são ignorados. O computador só exibe o jogo.
 
-> 🚧 Em construção. Etapa atual: **1: hardware e coleta do dataset**.
+📄 **Relatório técnico:** [`docs/relatorio.md`](docs/relatorio.md) ·
+🧩 **Diagrama RTOS:** [`docs/rtos_diagram.svg`](docs/rtos_diagram.svg) ·
+🧠 **Modelo:** [`model/kws.onnx`](model/kws.onnx)
 
 ## Estrutura
 
 ```
 firmware/
-  libraries/kws_common/   código compartilhado: pinagem, constantes de áudio, leitura I2S
-  recorder/               ferramenta: teste de hardware + gravação do dataset pelo INMP441
-tools/                    scripts de coleta e verificação do dataset
-tests/                    testes sem hardware (simulador serial)
-docs/                     hardware, guia de coleta, (depois) diagrama RTOS e relatório
-dataset/raw/              áudios (fora do git) + manifest.csv
+  kws_rtos/               FIRMWARE PRINCIPAL: 4 tasks FreeRTOS (captura, features, detecção, comunicação)
+  recorder/               ferramenta: testes de hardware (LEVEL, CHAN, SCAN, WIRE, VOLT) + gravação do dataset
+  libraries/kws_common/   código compartilhado: pinagem, I2S, features (C), inferência da CNN (C), pesos
+training/                 features.py (espelho do C), dataset, treino, export ONNX -> C
+model/                    kws.onnx, metadata.json, report.md (métricas da validação)
+interface/index.html      jogo para a criança (Web Serial, Chrome/Edge)
+tests/                    perf_test.py (acurácia/latência no ESP32), test_features.py, test_model_c.py
+tools/                    gravação e verificação do dataset
+docs/                     relatório, diagrama, hardware, coleta, resultados
+dataset/raw/              manifest.csv (anônimo); os WAVs ficam fora do git
 ```
 
-## Começando
+## Como usar
 
-1. Montagem e testes do hardware: [`docs/hardware.md`](docs/hardware.md)
-2. Coleta do dataset: [`docs/coleta_dataset.md`](docs/coleta_dataset.md)
+```bash
+# 1) compilar e gravar o firmware (arduino-cli + esp32:esp32@2.0.17, ver docs/hardware.md)
+cd firmware
+arduino-cli compile --fqbn esp32:esp32:esp32 --libraries libraries kws_rtos
+arduino-cli upload  --fqbn esp32:esp32:esp32 -p /dev/ttyUSB0 kws_rtos
+cd ..
+
+# 2) jogar: abra interface/index.html no Chrome e clique em "Conectar ESP32"
+
+# 3) medir acurácia e latência no ESP32 (injeta gravações pela USB)
+python3 tests/perf_test.py --port /dev/ttyUSB0 --per-class 10
+
+# 4) testes sem hardware
+python3 tests/test_features.py      # features C == Python
+python3 tests/test_model_c.py       # inferência C == onnxruntime
+python3 tests/perf_test.py --offline
+
+# 5) retreinar (precisa de torch/onnx) e regenerar os pesos em C
+python3 training/train.py --root dataset/raw --out model --ablation
+python3 training/export_c.py
+```
+
+## Documentação
+
+- [Hardware: pinagem, cuidados e testes](docs/hardware.md)
+- [Coleta do dataset](docs/coleta_dataset.md)
+- [Relatório técnico](docs/relatorio.md)
