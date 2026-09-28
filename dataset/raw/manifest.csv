@@ -1,0 +1,551 @@
+file,speaker,label,word,device,env,distance,peak_dbfs,rms_dbfs,warnings,timestamp
+unknown/teste_gato_esp32_001.wav,teste,unknown,gato,esp32,sala,medio,-5.0,-26.6,,2026-09-25T18:39:01
+dog/teste_dog_esp32_001.wav,teste,dog,dog,esp32,sala,perto,-31.8,-45.2,palavra pode estar CORTADA no início/fim,2026-09-25T18:39:03
+noise/teste_silencio_esp32_001.wav,teste,noise,silencio,esp32,sala,medio,-31.7,-39.8,,2026-09-25T18:39:05
+ball/teste_ball_esp32_001.wav,teste,ball,ball,esp32,sala,perto,-9.5,-31.4,palavra pode estar CORTADA no início/fim,2026-09-25T18:39:07
+cat/teste_cat_esp32_001.wav,teste,cat,cat,esp32,sala,longe,-3.7,-27.8,palavra pode estar CORTADA no início/fim,2026-09-25T18:39:09
+noise/bg_ambiente_esp32_001.wav,bg,noise,ambiente,esp32,quarto,medio,-32.4,-46.5,,2026-09-25T19:44:56
+noise/bg_ambiente_esp32_002.wav,bg,noise,ambiente,esp32,quarto,medio,-33.2,-47.6,,2026-09-25T19:45:00
+noise/bg_ambiente_esp32_003.wav,bg,noise,ambiente,esp32,quarto,medio,-33.8,-47.9,,2026-09-25T19:45:03
+noise/bg_ambiente_esp32_004.wav,bg,noise,ambiente,esp32,quarto,medio,-32.9,-46.9,,2026-09-25T19:45:07
+noise/bg_ambiente_esp32_005.wav,bg,noise,ambiente,esp32,quarto,medio,-33.4,-47.2,,2026-09-25T19:45:10
+noise/bg_ambiente_esp32_006.wav,bg,noise,ambiente,esp32,quarto,medio,-32.6,-46.8,,2026-09-25T19:45:14
+noise/bg_ambiente_esp32_007.wav,bg,noise,ambiente,esp32,quarto,medio,-32.1,-46.1,,2026-09-25T19:45:18
+noise/bg_ambiente_esp32_008.wav,bg,noise,ambiente,esp32,quarto,medio,-33.3,-46.4,,2026-09-25T19:45:21
+noise/bg_ambiente_esp32_009.wav,bg,noise,ambiente,esp32,quarto,medio,-34.2,-47.9,,2026-09-25T19:45:24
+noise/bg_ambiente_esp32_010.wav,bg,noise,ambiente,esp32,quarto,medio,-33.4,-47.7,,2026-09-25T19:45:27
+noise/bg_ambiente_esp32_011.wav,bg,noise,ambiente,esp32,quarto,medio,-33.1,-46.8,,2026-09-25T19:45:30
+dog/s01_dog_esp32_001.wav,p1,dog,dog,esp32,p1_normal,perto,-3.5,-23.4,,2026-09-25T19:46:40
+cat/s01_cat_esp32_001.wav,p1,cat,cat,esp32,p1_normal,perto,-0.0,-21.9,palavra pode estar CORTADA no início/fim,2026-09-25T19:46:45
+ball/s01_ball_esp32_001.wav,p1,ball,ball,esp32,p1_normal,longe,-10.0,-30.3,palavra pode estar CORTADA no início/fim,2026-09-25T19:46:52
+unknown/s01_call_esp32_001.wav,p1,unknown,call,esp32,p1_normal,medio,-6.6,-24.1,,2026-09-25T19:46:59
+dog/s01_dog_esp32_002.wav,p1,dog,dog,esp32,p1_normal,perto,-4.8,-24.2,,2026-09-25T19:47:04
+dog/s01_dog_esp32_003.wav,p1,dog,dog,esp32,p1_normal,longe,-12.2,-32.1,palavra pode estar CORTADA no início/fim,2026-09-25T19:47:09
+cat/s01_cat_esp32_002.wav,p1,cat,cat,esp32,p1_normal,longe,-14.4,-34.0,palavra pode estar CORTADA no início/fim,2026-09-25T19:47:15
+dog/s01_dog_esp32_004.wav,p1,dog,dog,esp32,p1_normal,medio,-13.7,-33.1,,2026-09-25T19:47:20
+ball/s01_ball_esp32_002.wav,p1,ball,ball,esp32,p1_normal,perto,-10.8,-29.3,palavra pode estar CORTADA no início/fim,2026-09-25T19:47:24
+unknown/s01_cake_esp32_001.wav,p1,unknown,cake,esp32,p1_normal,longe,-14.3,-32.7,palavra pode estar CORTADA no início/fim,2026-09-25T19:47:31
+dog/s01_dog_esp32_005.wav,p1,dog,dog,esp32,p1_normal,longe,-12.2,-30.4,palavra pode estar CORTADA no início/fim,2026-09-25T19:47:35
+noise/s01_mesa_esp32_001.wav,p1,noise,mesa,esp32,p1_normal,medio,-6.1,-35.7,,2026-09-25T19:47:43
+noise/s01_silencio_esp32_001.wav,p1,noise,silencio,esp32,p1_normal,medio,-36.8,-50.2,,2026-09-25T19:47:47
+dog/s01_dog_esp32_006.wav,p1,dog,dog,esp32,p1_normal,perto,-7.0,-23.4,,2026-09-25T19:47:51
+ball/s01_ball_esp32_003.wav,p1,ball,ball,esp32,p1_normal,perto,-13.0,-29.1,palavra pode estar CORTADA no início/fim,2026-09-25T19:47:55
+dog/s01_dog_esp32_007.wav,p1,dog,dog,esp32,p1_normal,longe,-9.1,-27.7,palavra pode estar CORTADA no início/fim,2026-09-25T19:48:02
+ball/s01_ball_esp32_004.wav,p1,ball,ball,esp32,p1_normal,perto,-12.6,-29.8,,2026-09-25T19:48:05
+dog/s01_dog_esp32_008.wav,p1,dog,dog,esp32,p1_normal,medio,-15.7,-31.4,palavra pode estar CORTADA no início/fim,2026-09-25T19:48:09
+unknown/s01_oi_esp32_001.wav,p1,unknown,oi,esp32,p1_normal,medio,-13.9,-31.6,palavra pode estar CORTADA no início/fim,2026-09-25T19:48:13
+dog/s01_dog_esp32_009.wav,p1,dog,dog,esp32,p1_normal,medio,-14.1,-34.4,palavra pode estar CORTADA no início/fim,2026-09-25T19:48:17
+dog/s01_dog_esp32_010.wav,p1,dog,dog,esp32,p1_normal,perto,-9.1,-28.3,palavra pode estar CORTADA no início/fim,2026-09-25T19:48:20
+cat/s01_cat_esp32_003.wav,p1,cat,cat,esp32,p1_normal,perto,-3.9,-28.3,,2026-09-25T19:48:25
+dog/s01_dog_esp32_011.wav,p1,dog,dog,esp32,p1_normal,perto,-12.7,-31.7,palavra pode estar CORTADA no início/fim,2026-09-25T19:48:28
+dog/s01_dog_esp32_012.wav,p1,dog,dog,esp32,p1_normal,medio,-13.5,-33.3,palavra pode estar CORTADA no início/fim,2026-09-25T19:48:32
+ball/s01_ball_esp32_005.wav,p1,ball,ball,esp32,p1_normal,medio,-16.6,-33.7,palavra pode estar CORTADA no início/fim,2026-09-25T19:48:36
+unknown/s01_hello_esp32_001.wav,p1,unknown,hello,esp32,p1_normal,perto,-15.0,-31.9,palavra pode estar CORTADA no início/fim,2026-09-25T19:48:40
+cat/s01_cat_esp32_004.wav,p1,cat,cat,esp32,p1_normal,longe,-13.6,-32.8,,2026-09-25T19:48:44
+cat/s01_cat_esp32_005.wav,p1,cat,cat,esp32,p1_normal,perto,-4.2,-26.3,,2026-09-25T19:48:48
+unknown/s01_cachorro_esp32_001.wav,p1,unknown,cachorro,esp32,p1_normal,perto,-7.1,-31.5,,2026-09-25T19:48:53
+dog/s01_dog_esp32_013.wav,p1,dog,dog,esp32,p1_normal,longe,-15.6,-33.9,palavra pode estar CORTADA no início/fim,2026-09-25T19:48:58
+ball/s01_ball_esp32_006.wav,p1,ball,ball,esp32,p1_normal,perto,-14.8,-33.4,palavra pode estar CORTADA no início/fim,2026-09-25T19:49:05
+ball/s01_ball_esp32_007.wav,p1,ball,ball,esp32,p1_normal,perto,-18.1,-37.0,palavra pode estar CORTADA no início/fim,2026-09-25T19:49:10
+dog/s01_dog_esp32_014.wav,p1,dog,dog,esp32,p1_normal,medio,-12.4,-32.7,palavra pode estar CORTADA no início/fim,2026-09-25T19:49:14
+unknown/s01_mamae_esp32_001.wav,p1,unknown,mamae,esp32,p1_normal,medio,-18.1,-33.1,,2026-09-25T19:49:19
+ball/s01_ball_esp32_008.wav,p1,ball,ball,esp32,p1_normal,medio,-15.8,-31.1,,2026-09-25T19:49:28
+cat/s01_cat_esp32_006.wav,p1,cat,cat,esp32,p1_normal,perto,-12.8,-38.0,palavra pode estar CORTADA no início/fim,2026-09-25T19:49:33
+cat/s01_cat_esp32_007.wav,p1,cat,cat,esp32,p1_normal,perto,-22.1,-44.0,palavra pode estar CORTADA no início/fim,2026-09-25T19:49:37
+cat/s01_cat_esp32_008.wav,p1,cat,cat,esp32,p1_normal,medio,-13.1,-36.3,palavra pode estar CORTADA no início/fim,2026-09-25T19:49:43
+ball/s01_ball_esp32_009.wav,p1,ball,ball,esp32,p1_normal,perto,-13.6,-33.7,,2026-09-25T19:49:47
+cat/s01_cat_esp32_009.wav,p1,cat,cat,esp32,p1_normal,longe,-9.3,-32.9,palavra pode estar CORTADA no início/fim,2026-09-25T19:49:51
+unknown/s01_tree_esp32_001.wav,p1,unknown,tree,esp32,p1_normal,longe,-14.7,-31.5,palavra pode estar CORTADA no início/fim,2026-09-25T19:49:57
+cat/s01_cat_esp32_010.wav,p1,cat,cat,esp32,p1_normal,longe,-11.7,-34.0,palavra pode estar CORTADA no início/fim,2026-09-25T19:50:01
+unknown/s01_bola_esp32_001.wav,p1,unknown,bola,esp32,p1_normal,medio,-14.9,-32.4,palavra pode estar CORTADA no início/fim,2026-09-25T19:50:07
+unknown/s01_bowl_esp32_001.wav,p1,unknown,bowl,esp32,p1_normal,longe,-12.0,-29.9,,2026-09-25T19:50:11
+unknown/s01_bat_esp32_001.wav,p1,unknown,bat,esp32,p1_normal,medio,-9.7,-33.1,palavra pode estar CORTADA no início/fim,2026-09-25T19:50:13
+unknown/s01_hat_esp32_001.wav,p1,unknown,hat,esp32,p1_normal,longe,-8.5,-33.0,palavra pode estar CORTADA no início/fim,2026-09-25T19:50:16
+unknown/s01_tall_esp32_001.wav,p1,unknown,tall,esp32,p1_normal,medio,-30.3,-48.7,palavra pode estar CORTADA no início/fim,2026-09-25T19:50:18
+dog/s01_dog_esp32_015.wav,p1,dog,dog,esp32,p1_normal,perto,-28.7,-48.5,palavra pode estar CORTADA no início/fim,2026-09-25T19:50:20
+cat/s01_cat_esp32_011.wav,p1,cat,cat,esp32,p1_normal,longe,-12.5,-34.9,palavra pode estar CORTADA no início/fim,2026-09-25T19:50:27
+unknown/s01_book_esp32_001.wav,p1,unknown,book,esp32,p1_normal,longe,-15.7,-32.9,,2026-09-25T19:50:30
+unknown/s01_car_esp32_001.wav,p1,unknown,car,esp32,p1_normal,medio,-15.2,-32.4,palavra pode estar CORTADA no início/fim,2026-09-25T19:50:33
+unknown/s01_log_esp32_001.wav,p1,unknown,log,esp32,p1_normal,longe,-13.1,-29.7,,2026-09-25T19:50:37
+noise/s01_palma_esp32_001.wav,p1,noise,palma,esp32,p1_normal,medio,-0.0,-19.3,SATURADO (fale mais longe/baixo),2026-09-25T19:50:42
+ball/s01_ball_esp32_010.wav,p1,ball,ball,esp32,p1_normal,longe,-10.0,-28.9,palavra pode estar CORTADA no início/fim,2026-09-25T19:50:46
+cat/s01_cat_esp32_012.wav,p1,cat,cat,esp32,p1_normal,longe,-9.6,-30.4,palavra pode estar CORTADA no início/fim,2026-09-25T19:50:50
+unknown/s01_cap_esp32_001.wav,p1,unknown,cap,esp32,p1_normal,medio,-11.5,-34.8,palavra pode estar CORTADA no início/fim,2026-09-25T19:50:54
+cat/s01_cat_esp32_013.wav,p1,cat,cat,esp32,p1_normal,medio,-15.2,-33.8,,2026-09-25T19:50:57
+cat/s01_cat_esp32_014.wav,p1,cat,cat,esp32,p1_normal,longe,-14.9,-35.0,palavra pode estar CORTADA no início/fim,2026-09-25T19:51:01
+unknown/s01_gato_esp32_001.wav,p1,unknown,gato,esp32,p1_normal,perto,-10.7,-31.7,,2026-09-25T19:51:38
+unknown/s01_fall_esp32_001.wav,p1,unknown,fall,esp32,p1_normal,medio,-12.7,-31.5,palavra pode estar CORTADA no início/fim,2026-09-25T19:51:42
+unknown/s01_nao_esp32_001.wav,p1,unknown,nao,esp32,p1_normal,medio,-14.7,-31.9,,2026-09-25T19:51:47
+noise/s01_palma_esp32_002.wav,p1,noise,palma,esp32,p1_normal,medio,-1.1,-31.3,,2026-09-25T19:51:51
+unknown/s01_sim_esp32_001.wav,p1,unknown,sim,esp32,p1_normal,perto,-13.0,-33.8,,2026-09-25T19:51:55
+ball/s01_ball_esp32_011.wav,p1,ball,ball,esp32,p1_normal,perto,-9.6,-26.5,,2026-09-25T19:52:00
+ball/s01_ball_esp32_012.wav,p1,ball,ball,esp32,p1_normal,longe,-11.8,-30.1,,2026-09-25T19:52:08
+cat/s01_cat_esp32_015.wav,p1,cat,cat,esp32,p1_normal,perto,-10.0,-32.0,,2026-09-25T19:52:14
+unknown/s01_dug_esp32_001.wav,p1,unknown,dug,esp32,p1_normal,perto,-10.5,-29.3,,2026-09-25T19:52:18
+unknown/s01_bell_esp32_001.wav,p1,unknown,bell,esp32,p1_normal,perto,-10.3,-29.2,,2026-09-25T19:52:22
+ball/s01_ball_esp32_013.wav,p1,ball,ball,esp32,p1_normal,perto,-8.5,-29.1,,2026-09-25T19:52:26
+unknown/s01_apple_esp32_001.wav,p1,unknown,apple,esp32,p1_normal,longe,-41.4,-52.1,palavra pode estar CORTADA no início/fim,2026-09-25T19:52:29
+unknown/s01_apple_esp32_001.wav,p1,unknown,apple,esp32,p1_normal,medio,-10.7,-30.7,,2026-09-25T19:52:39
+ball/s01_ball_esp32_014.wav,p1,ball,ball,esp32,p1_normal,medio,-6.9,-26.3,,2026-09-25T19:52:43
+unknown/s01_casa_esp32_001.wav,p1,unknown,casa,esp32,p1_normal,medio,-9.3,-30.0,,2026-09-25T19:52:48
+noise/s01_frase_esp32_001.wav,p1,noise,frase,esp32,p1_normal,perto,-15.5,-31.2,,2026-09-25T19:52:53
+noise/s01_silencio_esp32_002.wav,p1,noise,silencio,esp32,p1_normal,medio,-43.4,-52.8,,2026-09-25T19:52:57
+dog/s01_dog_esp32_016.wav,p1,dog,dog,esp32,p1_normal,perto,-10.0,-27.5,,2026-09-25T19:53:22
+ball/s01_ball_esp32_015.wav,p1,ball,ball,esp32,p1_normal,perto,-12.3,-29.6,,2026-09-25T19:53:26
+cat/s01_cat_esp32_016.wav,p1,cat,cat,esp32,p1_normal,longe,-10.4,-31.7,,2026-09-25T19:53:30
+ball/s01_ball_esp32_016.wav,p1,ball,ball,esp32,p1_normal,perto,-8.5,-27.3,palavra pode estar CORTADA no início/fim,2026-09-25T19:53:33
+ball/s01_ball_esp32_017.wav,p1,ball,ball,esp32,p1_normal,longe,-15.3,-33.0,palavra pode estar CORTADA no início/fim,2026-09-25T19:53:37
+dog/s01_dog_esp32_017.wav,p1,dog,dog,esp32,p1_normal,perto,-17.0,-33.9,palavra pode estar CORTADA no início/fim,2026-09-25T19:54:00
+ball/s01_ball_esp32_018.wav,p1,ball,ball,esp32,p1_normal,longe,-15.1,-32.4,,2026-09-25T19:54:03
+unknown/s01_sun_esp32_001.wav,p1,unknown,sun,esp32,p1_normal,medio,-14.9,-32.3,,2026-09-25T19:54:07
+ball/s01_ball_esp32_019.wav,p1,ball,ball,esp32,p1_normal,perto,-12.4,-33.3,,2026-09-25T19:54:11
+unknown/s01_doll_esp32_001.wav,p1,unknown,doll,esp32,p1_normal,longe,-9.1,-25.9,,2026-09-25T19:54:15
+unknown/s01_wall_esp32_001.wav,p1,unknown,wall,esp32,p1_normal,perto,-8.5,-27.9,,2026-09-25T19:54:17
+noise/s01_tosse_esp32_001.wav,p1,noise,tosse,esp32,p1_normal,medio,-0.0,-15.0,,2026-09-25T19:54:21
+noise/s01_silencio_esp32_003.wav,p1,noise,silencio,esp32,p1_normal,medio,-38.0,-51.4,,2026-09-25T19:54:25
+dog/s01_dog_esp32_018.wav,p1,dog,dog,esp32,p1_normal,medio,-14.3,-36.0,,2026-09-25T19:54:29
+dog/s01_dog_esp32_019.wav,p1,dog,dog,esp32,p1_normal,perto,-6.6,-27.4,,2026-09-25T19:54:32
+unknown/s01_mom_esp32_001.wav,p1,unknown,mom,esp32,p1_normal,medio,-14.2,-29.0,,2026-09-25T19:54:36
+noise/s01_silencio_esp32_004.wav,p1,noise,silencio,esp32,p1_normal,medio,-37.7,-51.7,,2026-09-25T19:54:39
+ball/s01_ball_esp32_020.wav,p1,ball,ball,esp32,p1_normal,medio,-8.8,-28.0,,2026-09-25T19:54:42
+cat/s01_cat_esp32_017.wav,p1,cat,cat,esp32,p1_normal,medio,-12.0,-31.5,,2026-09-25T19:54:45
+dog/s01_dog_esp32_020.wav,p1,dog,dog,esp32,p1_normal,medio,-11.2,-27.7,,2026-09-25T19:54:48
+cat/s01_cat_esp32_018.wav,p1,cat,cat,esp32,p1_normal,medio,-9.5,-31.8,,2026-09-25T19:54:51
+noise/s01_respiro_esp32_001.wav,p1,noise,respiro,esp32,p1_normal,medio,0.0,-13.2,SATURADO (fale mais longe/baixo),2026-09-25T19:54:54
+cat/s01_cat_esp32_019.wav,p1,cat,cat,esp32,p1_normal,medio,-10.5,-31.7,palavra pode estar CORTADA no início/fim,2026-09-25T19:55:03
+cat/s01_cat_esp32_020.wav,p1,cat,cat,esp32,p1_normal,perto,-4.3,-27.2,,2026-09-25T19:55:06
+unknown/s01_dot_esp32_001.wav,p1,unknown,dot,esp32,p1_normal,perto,-6.1,-27.8,palavra pode estar CORTADA no início/fim,2026-09-25T19:55:10
+unknown/s01_door_esp32_001.wav,p1,unknown,door,esp32,p1_normal,perto,-7.9,-24.7,,2026-09-25T19:55:14
+dog/s01_dog_esp32_021.wav,p1,dog,dog,esp32,p1_fino,perto,-5.1,-23.2,,2026-09-25T19:55:36
+cat/s01_cat_esp32_021.wav,p1,cat,cat,esp32,p1_fino,perto,-6.4,-27.9,,2026-09-25T19:55:39
+ball/s01_ball_esp32_021.wav,p1,ball,ball,esp32,p1_fino,longe,-7.5,-27.0,,2026-09-25T19:55:43
+unknown/s01_call_esp32_002.wav,p1,unknown,call,esp32,p1_fino,medio,-10.8,-27.9,palavra pode estar CORTADA no início/fim,2026-09-25T19:55:47
+dog/s01_dog_esp32_022.wav,p1,dog,dog,esp32,p1_fino,perto,-0.0,-22.2,,2026-09-25T19:55:50
+dog/s01_dog_esp32_023.wav,p1,dog,dog,esp32,p1_fino,longe,-7.8,-30.0,palavra pode estar CORTADA no início/fim,2026-09-25T19:55:54
+cat/s01_cat_esp32_022.wav,p1,cat,cat,esp32,p1_fino,longe,-13.2,-31.0,palavra pode estar CORTADA no início/fim,2026-09-25T19:55:57
+dog/s01_dog_esp32_024.wav,p1,dog,dog,esp32,p1_fino,medio,-11.0,-28.2,,2026-09-25T19:56:00
+ball/s01_ball_esp32_022.wav,p1,ball,ball,esp32,p1_fino,perto,-4.0,-20.0,,2026-09-25T19:56:03
+unknown/s01_cake_esp32_002.wav,p1,unknown,cake,esp32,p1_fino,longe,-15.3,-30.5,,2026-09-25T19:56:06
+dog/s01_dog_esp32_025.wav,p1,dog,dog,esp32,p1_fino,longe,-4.5,-22.7,,2026-09-25T19:56:09
+noise/s01_mesa_esp32_002.wav,p1,noise,mesa,esp32,p1_fino,medio,-0.0,-24.7,,2026-09-25T19:56:12
+noise/s01_silencio_esp32_005.wav,p1,noise,silencio,esp32,p1_fino,medio,-34.3,-48.9,,2026-09-25T19:56:16
+dog/s01_dog_esp32_026.wav,p1,dog,dog,esp32,p1_fino,perto,-7.3,-23.6,palavra pode estar CORTADA no início/fim,2026-09-25T19:56:19
+ball/s01_ball_esp32_023.wav,p1,ball,ball,esp32,p1_fino,perto,-3.5,-23.6,,2026-09-25T19:56:23
+dog/s01_dog_esp32_027.wav,p1,dog,dog,esp32,p1_fino,longe,-12.3,-30.5,palavra pode estar CORTADA no início/fim,2026-09-25T19:56:27
+ball/s01_ball_esp32_024.wav,p1,ball,ball,esp32,p1_fino,perto,-8.0,-25.1,,2026-09-25T19:56:31
+dog/s01_dog_esp32_028.wav,p1,dog,dog,esp32,p1_fino,medio,-11.0,-28.0,,2026-09-25T19:56:35
+unknown/s01_oi_esp32_002.wav,p1,unknown,oi,esp32,p1_fino,medio,-11.2,-28.6,,2026-09-25T19:56:38
+dog/s01_dog_esp32_029.wav,p1,dog,dog,esp32,p1_fino,medio,-13.7,-30.4,,2026-09-25T19:56:42
+dog/s01_dog_esp32_030.wav,p1,dog,dog,esp32,p1_fino,perto,-4.9,-23.9,,2026-09-25T19:56:46
+cat/s01_cat_esp32_023.wav,p1,cat,cat,esp32,p1_fino,perto,-8.3,-27.9,,2026-09-25T19:56:50
+dog/s01_dog_esp32_031.wav,p1,dog,dog,esp32,p1_fino,perto,-3.5,-24.8,,2026-09-25T19:56:55
+dog/s01_dog_esp32_032.wav,p1,dog,dog,esp32,p1_fino,medio,-6.4,-26.9,,2026-09-25T19:56:58
+ball/s01_ball_esp32_025.wav,p1,ball,ball,esp32,p1_fino,medio,-6.6,-26.1,palavra pode estar CORTADA no início/fim,2026-09-25T19:57:01
+unknown/s01_hello_esp32_002.wav,p1,unknown,hello,esp32,p1_fino,perto,-0.1,-18.5,palavra pode estar CORTADA no início/fim,2026-09-25T19:57:04
+cat/s01_cat_esp32_024.wav,p1,cat,cat,esp32,p1_fino,longe,-11.7,-33.3,palavra pode estar CORTADA no início/fim,2026-09-25T19:57:08
+cat/s01_cat_esp32_025.wav,p1,cat,cat,esp32,p1_fino,perto,-4.8,-25.8,,2026-09-25T19:57:11
+unknown/s01_cachorro_esp32_002.wav,p1,unknown,cachorro,esp32,p1_fino,perto,-9.2,-32.6,palavra pode estar CORTADA no início/fim,2026-09-25T19:57:14
+dog/s01_dog_esp32_033.wav,p1,dog,dog,esp32,p1_fino,longe,-10.5,-28.2,,2026-09-25T19:57:18
+ball/s01_ball_esp32_026.wav,p1,ball,ball,esp32,p1_fino,perto,-5.6,-23.1,palavra pode estar CORTADA no início/fim,2026-09-25T19:57:21
+ball/s01_ball_esp32_027.wav,p1,ball,ball,esp32,p1_fino,perto,-2.1,-19.2,palavra pode estar CORTADA no início/fim,2026-09-25T19:57:25
+dog/s01_dog_esp32_034.wav,p1,dog,dog,esp32,p1_fino,medio,-9.2,-26.8,,2026-09-25T19:57:27
+unknown/s01_mamae_esp32_002.wav,p1,unknown,mamae,esp32,p1_fino,medio,-2.1,-20.1,,2026-09-25T19:57:31
+ball/s01_ball_esp32_028.wav,p1,ball,ball,esp32,p1_fino,medio,-5.5,-24.2,,2026-09-25T19:57:33
+cat/s01_cat_esp32_026.wav,p1,cat,cat,esp32,p1_fino,perto,-1.5,-22.0,,2026-09-25T19:57:37
+cat/s01_cat_esp32_027.wav,p1,cat,cat,esp32,p1_fino,perto,-4.5,-23.4,palavra pode estar CORTADA no início/fim,2026-09-25T19:57:40
+cat/s01_cat_esp32_028.wav,p1,cat,cat,esp32,p1_fino,medio,-8.3,-26.6,,2026-09-25T19:57:43
+ball/s01_ball_esp32_029.wav,p1,ball,ball,esp32,p1_fino,perto,-36.7,-48.8,palavra pode estar CORTADA no início/fim,2026-09-25T19:57:45
+ball/s01_ball_esp32_029.wav,p1,ball,ball,esp32,p1_fino,longe,-0.0,-18.1,,2026-09-25T19:57:53
+cat/s01_cat_esp32_029.wav,p1,cat,cat,esp32,p1_fino,longe,-3.9,-24.7,,2026-09-25T19:57:56
+cat/s01_cat_esp32_029.wav,p1,cat,cat,esp32,p1_fino,longe,-10.8,-27.3,,2026-09-25T19:58:01
+unknown/s01_tree_esp32_002.wav,p1,unknown,tree,esp32,p1_fino,medio,-13.1,-31.3,palavra pode estar CORTADA no início/fim,2026-09-25T19:58:06
+cat/s01_cat_esp32_030.wav,p1,cat,cat,esp32,p1_fino,longe,-10.4,-29.9,,2026-09-25T19:58:09
+unknown/s01_bola_esp32_002.wav,p1,unknown,bola,esp32,p1_fino,medio,-12.0,-28.8,palavra pode estar CORTADA no início/fim,2026-09-25T19:58:12
+unknown/s01_bowl_esp32_002.wav,p1,unknown,bowl,esp32,p1_fino,perto,-11.9,-26.8,,2026-09-25T19:58:16
+unknown/s01_bat_esp32_002.wav,p1,unknown,bat,esp32,p1_fino,longe,-12.2,-30.7,,2026-09-25T19:58:20
+unknown/s01_hat_esp32_002.wav,p1,unknown,hat,esp32,p1_fino,longe,-10.2,-28.4,,2026-09-25T19:58:23
+unknown/s01_tall_esp32_002.wav,p1,unknown,tall,esp32,p1_fino,medio,-12.9,-30.1,palavra pode estar CORTADA no início/fim,2026-09-25T19:58:26
+dog/s01_dog_esp32_035.wav,p1,dog,dog,esp32,p1_fino,longe,-9.3,-28.9,,2026-09-25T19:58:29
+cat/s01_cat_esp32_031.wav,p1,cat,cat,esp32,p1_fino,longe,-13.9,-35.2,palavra pode estar CORTADA no início/fim,2026-09-25T19:58:32
+unknown/s01_book_esp32_002.wav,p1,unknown,book,esp32,p1_fino,longe,-16.9,-33.5,palavra pode estar CORTADA no início/fim,2026-09-25T19:58:36
+unknown/s01_car_esp32_002.wav,p1,unknown,car,esp32,p1_fino,medio,-9.6,-27.1,palavra pode estar CORTADA no início/fim,2026-09-25T19:58:39
+unknown/s01_log_esp32_002.wav,p1,unknown,log,esp32,p1_fino,medio,-11.1,-30.5,palavra pode estar CORTADA no início/fim,2026-09-25T19:58:43
+noise/s01_palma_esp32_003.wav,p1,noise,palma,esp32,p1_fino,medio,-0.0,-18.9,SATURADO (fale mais longe/baixo),2026-09-25T19:58:46
+ball/s01_ball_esp32_030.wav,p1,ball,ball,esp32,p1_fino,longe,-8.4,-30.6,,2026-09-25T19:58:50
+cat/s01_cat_esp32_032.wav,p1,cat,cat,esp32,p1_fino,perto,-14.4,-33.8,palavra pode estar CORTADA no início/fim,2026-09-25T19:58:53
+unknown/s01_cap_esp32_002.wav,p1,unknown,cap,esp32,p1_fino,medio,-17.5,-34.9,palavra pode estar CORTADA no início/fim,2026-09-25T19:58:56
+cat/s01_cat_esp32_033.wav,p1,cat,cat,esp32,p1_fino,medio,-7.2,-30.0,,2026-09-25T19:59:00
+cat/s01_cat_esp32_034.wav,p1,cat,cat,esp32,p1_fino,perto,-10.6,-30.5,palavra pode estar CORTADA no início/fim,2026-09-25T19:59:04
+unknown/s01_gato_esp32_002.wav,p1,unknown,gato,esp32,p1_fino,perto,-1.8,-25.3,,2026-09-25T19:59:07
+unknown/s01_fall_esp32_002.wav,p1,unknown,fall,esp32,p1_fino,longe,-5.1,-25.4,,2026-09-25T19:59:10
+unknown/s01_nao_esp32_002.wav,p1,unknown,nao,esp32,p1_fino,perto,-5.7,-21.9,,2026-09-25T19:59:14
+noise/s01_palma_esp32_004.wav,p1,noise,palma,esp32,p1_fino,medio,0.0,-27.4,,2026-09-25T19:59:17
+unknown/s01_sim_esp32_002.wav,p1,unknown,sim,esp32,p1_fino,perto,-11.2,-30.7,,2026-09-25T19:59:22
+ball/s01_ball_esp32_031.wav,p1,ball,ball,esp32,p1_fino,perto,-2.7,-19.2,,2026-09-25T19:59:27
+ball/s01_ball_esp32_032.wav,p1,ball,ball,esp32,p1_fino,perto,-4.9,-23.7,,2026-09-25T19:59:30
+cat/s01_cat_esp32_035.wav,p1,cat,cat,esp32,p1_fino,longe,-11.0,-30.5,palavra pode estar CORTADA no início/fim,2026-09-25T19:59:33
+unknown/s01_dug_esp32_002.wav,p1,unknown,dug,esp32,p1_fino,longe,-12.2,-29.6,palavra pode estar CORTADA no início/fim,2026-09-25T19:59:37
+unknown/s01_bell_esp32_002.wav,p1,unknown,bell,esp32,p1_fino,medio,-13.2,-32.3,,2026-09-25T19:59:41
+ball/s01_ball_esp32_033.wav,p1,ball,ball,esp32,p1_fino,medio,-12.1,-29.5,,2026-09-25T19:59:45
+unknown/s01_apple_esp32_002.wav,p1,unknown,apple,esp32,p1_fino,medio,-12.0,-28.3,palavra pode estar CORTADA no início/fim,2026-09-25T19:59:49
+ball/s01_ball_esp32_034.wav,p1,ball,ball,esp32,p1_fino,perto,-9.2,-24.7,,2026-09-25T19:59:52
+unknown/s01_casa_esp32_002.wav,p1,unknown,casa,esp32,p1_fino,perto,-8.4,-31.3,,2026-09-25T19:59:55
+noise/s01_frase_esp32_002.wav,p1,noise,frase,esp32,p1_fino,perto,-15.2,-27.8,,2026-09-25T19:59:59
+noise/s01_silencio_esp32_006.wav,p1,noise,silencio,esp32,p1_fino,medio,-38.4,-50.6,,2026-09-25T20:00:02
+dog/s01_dog_esp32_036.wav,p1,dog,dog,esp32,p1_fino,longe,-11.5,-29.7,palavra pode estar CORTADA no início/fim,2026-09-25T20:00:09
+ball/s01_ball_esp32_035.wav,p1,ball,ball,esp32,p1_fino,perto,-13.4,-31.4,,2026-09-25T20:00:13
+cat/s01_cat_esp32_036.wav,p1,cat,cat,esp32,p1_fino,longe,-9.8,-31.3,,2026-09-25T20:00:16
+ball/s01_ball_esp32_036.wav,p1,ball,ball,esp32,p1_fino,perto,-12.4,-28.0,,2026-09-25T20:00:20
+ball/s01_ball_esp32_037.wav,p1,ball,ball,esp32,p1_fino,longe,-13.2,-30.4,,2026-09-25T20:00:23
+dog/s01_dog_esp32_037.wav,p1,dog,dog,esp32,p1_fino,medio,-9.2,-27.5,,2026-09-25T20:00:27
+ball/s01_ball_esp32_038.wav,p1,ball,ball,esp32,p1_fino,perto,-12.0,-31.9,palavra pode estar CORTADA no início/fim,2026-09-25T20:00:30
+unknown/s01_sun_esp32_002.wav,p1,unknown,sun,esp32,p1_fino,longe,-11.9,-31.9,,2026-09-25T20:00:33
+ball/s01_ball_esp32_039.wav,p1,ball,ball,esp32,p1_fino,perto,-11.2,-29.9,palavra pode estar CORTADA no início/fim,2026-09-25T20:00:36
+unknown/s01_doll_esp32_002.wav,p1,unknown,doll,esp32,p1_fino,medio,-13.5,-30.4,palavra pode estar CORTADA no início/fim,2026-09-25T20:00:40
+unknown/s01_wall_esp32_002.wav,p1,unknown,wall,esp32,p1_fino,perto,-5.8,-24.1,,2026-09-25T20:00:43
+noise/s01_tosse_esp32_002.wav,p1,noise,tosse,esp32,p1_fino,medio,-4.3,-27.3,,2026-09-25T20:00:46
+noise/s01_silencio_esp32_007.wav,p1,noise,silencio,esp32,p1_fino,medio,-37.4,-47.8,,2026-09-25T20:00:49
+dog/s01_dog_esp32_038.wav,p1,dog,dog,esp32,p1_fino,medio,-15.7,-31.4,,2026-09-25T20:00:52
+dog/s01_dog_esp32_039.wav,p1,dog,dog,esp32,p1_fino,medio,-14.5,-30.5,,2026-09-25T20:00:55
+unknown/s01_mom_esp32_002.wav,p1,unknown,mom,esp32,p1_fino,medio,-15.3,-32.4,,2026-09-25T20:00:58
+noise/s01_silencio_esp32_008.wav,p1,noise,silencio,esp32,p1_fino,medio,-35.5,-48.5,,2026-09-25T20:01:01
+ball/s01_ball_esp32_040.wav,p1,ball,ball,esp32,p1_fino,medio,-13.4,-32.1,palavra pode estar CORTADA no início/fim,2026-09-25T20:01:05
+cat/s01_cat_esp32_037.wav,p1,cat,cat,esp32,p1_fino,medio,-15.0,-33.7,palavra pode estar CORTADA no início/fim,2026-09-25T20:01:08
+dog/s01_dog_esp32_040.wav,p1,dog,dog,esp32,p1_fino,medio,-34.5,-48.6,palavra pode estar CORTADA no início/fim,2026-09-25T20:01:10
+dog/s01_dog_esp32_040.wav,p1,dog,dog,esp32,p1_fino,perto,-35.3,-47.6,palavra pode estar CORTADA no início/fim,2026-09-25T20:01:17
+cat/s01_cat_esp32_038.wav,p1,cat,cat,esp32,p1_fino,perto,-12.4,-33.0,palavra pode estar CORTADA no início/fim,2026-09-25T20:01:20
+noise/s01_respiro_esp32_002.wav,p1,noise,respiro,esp32,p1_fino,medio,-5.9,-25.0,,2026-09-25T20:01:23
+cat/s01_cat_esp32_039.wav,p1,cat,cat,esp32,p1_fino,longe,-35.5,-49.1,palavra pode estar CORTADA no início/fim,2026-09-25T20:01:27
+cat/s01_cat_esp32_039.wav,p1,cat,cat,esp32,p1_fino,medio,-12.1,-29.5,,2026-09-25T20:01:34
+cat/s01_cat_esp32_040.wav,p1,cat,cat,esp32,p1_fino,perto,-10.0,-28.0,,2026-09-25T20:01:39
+unknown/s01_dot_esp32_002.wav,p1,unknown,dot,esp32,p1_fino,perto,-7.9,-30.1,palavra pode estar CORTADA no início/fim,2026-09-25T20:01:43
+unknown/s01_door_esp32_002.wav,p1,unknown,door,esp32,p1_fino,perto,-9.6,-25.8,,2026-09-25T20:01:47
+dog/s01_dog_esp32_041.wav,p1,dog,dog,esp32,p1_grave,perto,-7.4,-25.8,palavra pode estar CORTADA no início/fim,2026-09-25T20:02:38
+cat/s01_cat_esp32_041.wav,p1,cat,cat,esp32,p1_grave,perto,-5.3,-26.7,palavra pode estar CORTADA no início/fim,2026-09-25T20:02:41
+ball/s01_ball_esp32_041.wav,p1,ball,ball,esp32,p1_grave,longe,-10.5,-29.1,palavra pode estar CORTADA no início/fim,2026-09-25T20:02:44
+unknown/s01_call_esp32_003.wav,p1,unknown,call,esp32,p1_grave,medio,-11.1,-29.7,palavra pode estar CORTADA no início/fim,2026-09-25T20:02:48
+dog/s01_dog_esp32_042.wav,p1,dog,dog,esp32,p1_grave,perto,-9.2,-28.9,palavra pode estar CORTADA no início/fim,2026-09-25T20:02:51
+dog/s01_dog_esp32_043.wav,p1,dog,dog,esp32,p1_grave,longe,-19.0,-36.7,palavra pode estar CORTADA no início/fim,2026-09-25T20:02:54
+cat/s01_cat_esp32_042.wav,p1,cat,cat,esp32,p1_grave,longe,-21.8,-39.2,palavra pode estar CORTADA no início/fim,2026-09-25T20:02:58
+dog/s01_dog_esp32_044.wav,p1,dog,dog,esp32,p1_grave,medio,-20.6,-38.7,palavra pode estar CORTADA no início/fim,2026-09-25T20:03:01
+ball/s01_ball_esp32_042.wav,p1,ball,ball,esp32,p1_grave,perto,-11.8,-29.4,palavra pode estar CORTADA no início/fim,2026-09-25T20:03:04
+unknown/s01_cake_esp32_003.wav,p1,unknown,cake,esp32,p1_grave,longe,-18.2,-38.0,palavra pode estar CORTADA no início/fim,2026-09-25T20:03:07
+dog/s01_dog_esp32_045.wav,p1,dog,dog,esp32,p1_grave,longe,-22.4,-39.6,palavra pode estar CORTADA no início/fim,2026-09-25T20:03:10
+noise/s01_mesa_esp32_003.wav,p1,noise,mesa,esp32,p1_grave,medio,-4.0,-31.9,,2026-09-25T20:03:14
+noise/s01_silencio_esp32_009.wav,p1,noise,silencio,esp32,p1_grave,medio,-33.3,-47.4,,2026-09-25T20:03:17
+dog/s01_dog_esp32_046.wav,p1,dog,dog,esp32,p1_grave,perto,-12.7,-32.7,palavra pode estar CORTADA no início/fim,2026-09-25T20:03:21
+ball/s01_ball_esp32_043.wav,p1,ball,ball,esp32,p1_grave,perto,-12.3,-33.0,palavra pode estar CORTADA no início/fim,2026-09-25T20:03:24
+dog/s01_dog_esp32_047.wav,p1,dog,dog,esp32,p1_grave,longe,-17.8,-38.0,palavra pode estar CORTADA no início/fim,2026-09-25T20:03:28
+ball/s01_ball_esp32_044.wav,p1,ball,ball,esp32,p1_grave,perto,-15.9,-32.2,palavra pode estar CORTADA no início/fim,2026-09-25T20:03:31
+dog/s01_dog_esp32_048.wav,p1,dog,dog,esp32,p1_grave,medio,-14.3,-34.5,palavra pode estar CORTADA no início/fim,2026-09-25T20:03:35
+unknown/s01_oi_esp32_003.wav,p1,unknown,oi,esp32,p1_grave,medio,-14.2,-32.6,palavra pode estar CORTADA no início/fim,2026-09-25T20:03:38
+dog/s01_dog_esp32_049.wav,p1,dog,dog,esp32,p1_grave,medio,-12.5,-31.0,palavra pode estar CORTADA no início/fim,2026-09-25T20:03:41
+dog/s01_dog_esp32_050.wav,p1,dog,dog,esp32,p1_grave,perto,-2.7,-22.7,palavra pode estar CORTADA no início/fim,2026-09-25T20:03:44
+cat/s01_cat_esp32_043.wav,p1,cat,cat,esp32,p1_grave,perto,-2.5,-27.5,palavra pode estar CORTADA no início/fim,2026-09-25T20:03:47
+dog/s01_dog_esp32_051.wav,p1,dog,dog,esp32,p1_grave,perto,-11.2,-32.1,,2026-09-25T20:03:51
+dog/s01_dog_esp32_052.wav,p1,dog,dog,esp32,p1_grave,medio,-15.2,-32.6,palavra pode estar CORTADA no início/fim,2026-09-25T20:03:54
+ball/s01_ball_esp32_045.wav,p1,ball,ball,esp32,p1_grave,medio,-11.0,-28.3,,2026-09-25T20:03:57
+unknown/s01_hello_esp32_003.wav,p1,unknown,hello,esp32,p1_grave,perto,-18.3,-34.1,palavra pode estar CORTADA no início/fim,2026-09-25T20:04:00
+cat/s01_cat_esp32_044.wav,p1,cat,cat,esp32,p1_grave,longe,-12.1,-33.4,palavra pode estar CORTADA no início/fim,2026-09-25T20:04:03
+cat/s01_cat_esp32_045.wav,p1,cat,cat,esp32,p1_grave,perto,-15.2,-35.2,palavra pode estar CORTADA no início/fim,2026-09-25T20:04:06
+unknown/s01_cachorro_esp32_003.wav,p1,unknown,cachorro,esp32,p1_grave,perto,-6.8,-27.4,palavra pode estar CORTADA no início/fim,2026-09-25T20:04:10
+dog/s01_dog_esp32_053.wav,p1,dog,dog,esp32,p1_grave,longe,-11.7,-31.0,palavra pode estar CORTADA no início/fim,2026-09-25T20:04:13
+ball/s01_ball_esp32_046.wav,p1,ball,ball,esp32,p1_grave,perto,-8.5,-28.6,palavra pode estar CORTADA no início/fim,2026-09-25T20:04:16
+ball/s01_ball_esp32_047.wav,p1,ball,ball,esp32,p1_grave,perto,-11.2,-29.8,,2026-09-25T20:04:18
+dog/s01_dog_esp32_054.wav,p1,dog,dog,esp32,p1_grave,medio,-11.3,-29.1,,2026-09-25T20:04:22
+unknown/s01_mamae_esp32_003.wav,p1,unknown,mamae,esp32,p1_grave,medio,-16.7,-33.4,palavra pode estar CORTADA no início/fim,2026-09-25T20:04:25
+ball/s01_ball_esp32_048.wav,p1,ball,ball,esp32,p1_grave,medio,-11.1,-28.5,palavra pode estar CORTADA no início/fim,2026-09-25T20:04:28
+ball/s01_ball_esp32_048.wav,p1,ball,ball,esp32,p1_grave,perto,-11.9,-29.9,,2026-09-25T20:04:34
+cat/s01_cat_esp32_046.wav,p1,cat,cat,esp32,p1_grave,medio,-13.9,-32.6,palavra pode estar CORTADA no início/fim,2026-09-25T20:04:42
+cat/s01_cat_esp32_047.wav,p1,cat,cat,esp32,p1_grave,perto,-5.7,-26.8,palavra pode estar CORTADA no início/fim,2026-09-25T20:04:46
+cat/s01_cat_esp32_048.wav,p1,cat,cat,esp32,p1_grave,longe,-14.3,-34.2,palavra pode estar CORTADA no início/fim,2026-09-25T20:04:50
+ball/s01_ball_esp32_049.wav,p1,ball,ball,esp32,p1_grave,longe,-14.9,-33.3,palavra pode estar CORTADA no início/fim,2026-09-25T20:04:55
+cat/s01_cat_esp32_049.wav,p1,cat,cat,esp32,p1_grave,longe,-14.2,-32.0,,2026-09-25T20:07:01
+unknown/s01_tree_esp32_003.wav,p1,unknown,tree,esp32,p1_grave,medio,-22.6,-40.0,palavra pode estar CORTADA no início/fim,2026-09-25T20:07:09
+cat/s01_cat_esp32_050.wav,p1,cat,cat,esp32,p1_grave,longe,-11.7,-31.1,,2026-09-25T20:07:13
+unknown/s01_bola_esp32_003.wav,p1,unknown,bola,esp32,p1_grave,medio,-17.1,-33.2,,2026-09-25T20:07:17
+unknown/s01_bowl_esp32_003.wav,p1,unknown,bowl,esp32,p1_grave,longe,-10.9,-29.4,,2026-09-25T20:09:15
+unknown/s01_bat_esp32_003.wav,p1,unknown,bat,esp32,p1_grave,medio,-10.0,-31.2,,2026-09-25T20:09:18
+unknown/s01_hat_esp32_003.wav,p1,unknown,hat,esp32,p1_grave,perto,-0.0,-18.5,SATURADO (fale mais longe/baixo)|palavra pode estar CORTADA no início/fim,2026-09-25T20:09:21
+unknown/s01_tall_esp32_003.wav,p1,unknown,tall,esp32,p1_grave,longe,-8.8,-29.2,,2026-09-25T20:09:24
+dog/s01_dog_esp32_055.wav,p1,dog,dog,esp32,p1_grave,longe,-12.5,-31.2,,2026-09-25T20:12:58
+cat/s01_cat_esp32_051.wav,p1,cat,cat,esp32,p1_grave,medio,-8.4,-31.5,,2026-09-25T20:13:01
+unknown/s01_book_esp32_003.wav,p1,unknown,book,esp32,p1_grave,longe,-20.4,-39.5,,2026-09-25T20:13:04
+unknown/s01_car_esp32_003.wav,p1,unknown,car,esp32,p1_grave,longe,-3.5,-23.2,,2026-09-25T20:13:07
+unknown/s01_log_esp32_003.wav,p1,unknown,log,esp32,p1_grave,longe,-13.9,-33.2,,2026-09-25T20:13:10
+noise/s01_palma_esp32_005.wav,p1,noise,palma,esp32,p1_grave,medio,0.0,-22.7,,2026-09-25T20:13:15
+ball/s01_ball_esp32_050.wav,p1,ball,ball,esp32,p1_grave,medio,-9.9,-27.1,,2026-09-25T20:13:22
+cat/s01_cat_esp32_052.wav,p1,cat,cat,esp32,p1_grave,medio,-6.4,-28.4,,2026-09-25T20:13:24
+unknown/s01_cap_esp32_003.wav,p1,unknown,cap,esp32,p1_grave,longe,-13.8,-31.5,,2026-09-25T20:13:27
+cat/s01_cat_esp32_053.wav,p1,cat,cat,esp32,p1_grave,perto,-15.4,-35.8,,2026-09-25T20:13:31
+cat/s01_cat_esp32_054.wav,p1,cat,cat,esp32,p1_grave,medio,-11.8,-34.2,,2026-09-25T20:13:34
+unknown/s01_gato_esp32_003.wav,p1,unknown,gato,esp32,p1_grave,medio,-9.3,-29.7,,2026-09-25T20:13:37
+unknown/s01_fall_esp32_003.wav,p1,unknown,fall,esp32,p1_grave,perto,-6.2,-21.5,palavra pode estar CORTADA no início/fim,2026-09-25T20:13:41
+unknown/s01_nao_esp32_003.wav,p1,unknown,nao,esp32,p1_grave,perto,-0.0,-17.0,,2026-09-25T20:13:44
+noise/s01_palma_esp32_006.wav,p1,noise,palma,esp32,p1_grave,medio,-4.4,-36.2,,2026-09-25T20:13:47
+unknown/s01_sim_esp32_003.wav,p1,unknown,sim,esp32,p1_grave,longe,-12.6,-32.9,,2026-09-25T20:13:51
+ball/s01_ball_esp32_051.wav,p1,ball,ball,esp32,p1_grave,perto,-7.2,-24.3,,2026-09-25T20:13:57
+ball/s01_ball_esp32_052.wav,p1,ball,ball,esp32,p1_grave,perto,-3.8,-22.9,,2026-09-25T20:14:01
+cat/s01_cat_esp32_055.wav,p1,cat,cat,esp32,p1_grave,perto,-7.7,-26.6,,2026-09-25T20:14:04
+unknown/s01_dug_esp32_003.wav,p1,unknown,dug,esp32,p1_grave,perto,-12.4,-28.2,palavra pode estar CORTADA no início/fim,2026-09-25T20:14:07
+unknown/s01_bell_esp32_003.wav,p1,unknown,bell,esp32,p1_grave,longe,-13.4,-30.2,palavra pode estar CORTADA no início/fim,2026-09-25T20:14:11
+ball/s01_ball_esp32_053.wav,p1,ball,ball,esp32,p1_grave,longe,-10.1,-24.3,,2026-09-25T20:14:18
+unknown/s01_apple_esp32_003.wav,p1,unknown,apple,esp32,p1_grave,medio,-9.0,-27.2,,2026-09-25T20:14:22
+ball/s01_ball_esp32_054.wav,p1,ball,ball,esp32,p1_grave,medio,-11.9,-27.9,,2026-09-25T20:14:42
+unknown/s01_casa_esp32_003.wav,p1,unknown,casa,esp32,p1_grave,medio,-13.3,-29.7,,2026-09-25T20:14:47
+noise/s01_frase_esp32_003.wav,p1,noise,frase,esp32,p1_grave,perto,-8.9,-24.7,,2026-09-25T20:14:51
+noise/s01_silencio_esp32_010.wav,p1,noise,silencio,esp32,p1_grave,medio,-40.2,-49.2,,2026-09-25T20:14:56
+dog/s01_dog_esp32_056.wav,p1,dog,dog,esp32,p1_grave,perto,-1.7,-20.5,,2026-09-25T20:15:02
+ball/s01_ball_esp32_055.wav,p1,ball,ball,esp32,p1_grave,perto,-4.4,-25.5,,2026-09-25T20:15:05
+cat/s01_cat_esp32_056.wav,p1,cat,cat,esp32,p1_grave,longe,-11.6,-29.3,,2026-09-25T20:15:08
+ball/s01_ball_esp32_056.wav,p1,ball,ball,esp32,p1_grave,perto,-10.2,-27.2,,2026-09-25T20:15:25
+ball/s01_ball_esp32_057.wav,p1,ball,ball,esp32,p1_grave,longe,-14.4,-32.1,palavra pode estar CORTADA no início/fim,2026-09-25T20:15:28
+dog/s01_dog_esp32_057.wav,p1,dog,dog,esp32,p1_grave,perto,-7.4,-28.0,,2026-09-25T20:15:32
+ball/s01_ball_esp32_058.wav,p1,ball,ball,esp32,p1_grave,longe,-10.6,-25.2,,2026-09-25T20:15:35
+unknown/s01_sun_esp32_003.wav,p1,unknown,sun,esp32,p1_grave,medio,-15.1,-34.8,,2026-09-25T20:15:38
+ball/s01_ball_esp32_059.wav,p1,ball,ball,esp32,p1_grave,perto,-4.8,-21.3,,2026-09-25T20:15:41
+unknown/s01_doll_esp32_003.wav,p1,unknown,doll,esp32,p1_grave,longe,-13.7,-29.7,,2026-09-25T20:15:45
+unknown/s01_wall_esp32_003.wav,p1,unknown,wall,esp32,p1_grave,perto,-7.9,-28.1,palavra pode estar CORTADA no início/fim,2026-09-25T20:15:48
+noise/s01_tosse_esp32_003.wav,p1,noise,tosse,esp32,p1_grave,medio,0.0,-11.2,SATURADO (fale mais longe/baixo),2026-09-25T20:15:52
+noise/s01_silencio_esp32_011.wav,p1,noise,silencio,esp32,p1_grave,medio,-39.6,-50.5,,2026-09-25T20:15:55
+dog/s01_dog_esp32_058.wav,p1,dog,dog,esp32,p1_grave,medio,-8.3,-25.7,,2026-09-25T20:15:58
+dog/s01_dog_esp32_059.wav,p1,dog,dog,esp32,p1_grave,perto,-4.6,-20.9,,2026-09-25T20:16:01
+unknown/s01_mom_esp32_003.wav,p1,unknown,mom,esp32,p1_grave,medio,-11.3,-29.8,,2026-09-25T20:16:05
+noise/s01_silencio_esp32_012.wav,p1,noise,silencio,esp32,p1_grave,medio,-40.0,-51.6,,2026-09-25T20:16:08
+ball/s01_ball_esp32_060.wav,p1,ball,ball,esp32,p1_grave,medio,-5.5,-24.5,,2026-09-25T20:16:11
+cat/s01_cat_esp32_057.wav,p1,cat,cat,esp32,p1_grave,medio,-4.4,-22.8,,2026-09-25T20:16:14
+dog/s01_dog_esp32_060.wav,p1,dog,dog,esp32,p1_grave,medio,-10.2,-29.0,,2026-09-25T20:16:19
+cat/s01_cat_esp32_058.wav,p1,cat,cat,esp32,p1_grave,medio,-8.4,-27.4,,2026-09-25T20:16:22
+noise/s01_respiro_esp32_003.wav,p1,noise,respiro,esp32,p1_grave,medio,-7.7,-28.6,,2026-09-25T20:16:26
+cat/s01_cat_esp32_059.wav,p1,cat,cat,esp32,p1_grave,medio,-9.9,-26.3,,2026-09-25T20:16:35
+cat/s01_cat_esp32_060.wav,p1,cat,cat,esp32,p1_grave,perto,-1.6,-18.5,palavra pode estar CORTADA no início/fim,2026-09-25T20:16:38
+unknown/s01_dot_esp32_003.wav,p1,unknown,dot,esp32,p1_grave,perto,-0.0,-20.3,,2026-09-25T20:16:41
+unknown/s01_door_esp32_003.wav,p1,unknown,door,esp32,p1_grave,perto,-0.7,-16.6,,2026-09-25T20:16:44
+noise/bg_ambiente_esp32_012.wav,bg,noise,ambiente,esp32,sala,medio,-39.5,-52.7,,2026-09-26T08:18:54
+noise/bg_ambiente_esp32_013.wav,bg,noise,ambiente,esp32,sala,medio,-44.8,-55.2,,2026-09-26T08:19:02
+noise/bg_ambiente_esp32_014.wav,bg,noise,ambiente,esp32,sala,medio,-44.4,-54.7,,2026-09-26T08:19:05
+noise/bg_ambiente_esp32_015.wav,bg,noise,ambiente,esp32,sala,medio,-43.7,-54.3,,2026-09-26T08:19:09
+noise/bg_ambiente_esp32_016.wav,bg,noise,ambiente,esp32,sala,medio,-40.5,-51.2,,2026-09-26T08:19:12
+noise/bg_ambiente_esp32_017.wav,bg,noise,ambiente,esp32,sala,medio,-37.6,-49.3,,2026-09-26T08:19:20
+noise/bg_ambiente_esp32_018.wav,bg,noise,ambiente,esp32,sala,medio,-43.6,-53.6,,2026-09-26T08:19:25
+noise/bg_ambiente_esp32_019.wav,bg,noise,ambiente,esp32,sala,medio,-41.5,-53.2,,2026-09-26T08:19:28
+noise/bg_ambiente_esp32_020.wav,bg,noise,ambiente,esp32,sala,medio,-42.9,-52.8,,2026-09-26T08:19:32
+noise/bg_ambiente_esp32_021.wav,bg,noise,ambiente,esp32,sala,medio,-40.5,-51.7,,2026-09-26T08:19:36
+noise/bg_ambiente_esp32_022.wav,bg,noise,ambiente,esp32,sala,medio,-42.4,-53.4,,2026-09-26T08:19:39
+noise/bg_ambiente_esp32_023.wav,bg,noise,ambiente,esp32,sala,medio,-46.8,-56.7,,2026-09-26T08:19:42
+noise/bg_ambiente_esp32_024.wav,bg,noise,ambiente,esp32,sala_sussurros,medio,-40.7,-52.8,,2026-09-26T08:21:06
+noise/bg_ambiente_esp32_025.wav,bg,noise,ambiente,esp32,sala_sussurros,medio,-40.6,-51.6,,2026-09-26T08:21:11
+noise/bg_ambiente_esp32_026.wav,bg,noise,ambiente,esp32,sala_sussurros,medio,-40.6,-50.8,,2026-09-26T08:21:16
+noise/bg_ambiente_esp32_027.wav,bg,noise,ambiente,esp32,sala_sussurros,medio,-42.7,-53.2,,2026-09-26T08:21:20
+noise/bg_ambiente_esp32_028.wav,bg,noise,ambiente,esp32,sala_sussurros,medio,-40.0,-52.1,,2026-09-26T08:21:23
+noise/bg_ambiente_esp32_029.wav,bg,noise,ambiente,esp32,sala_sussurros,medio,-38.4,-51.1,,2026-09-26T08:21:33
+noise/bg_ambiente_esp32_030.wav,bg,noise,ambiente,esp32,sala_sussurros,medio,-38.0,-51.2,,2026-09-26T08:21:37
+noise/bg_ambiente_esp32_031.wav,bg,noise,ambiente,esp32,sala_sussurros,medio,-33.8,-46.4,,2026-09-26T08:21:42
+noise/bg_ambiente_esp32_032.wav,bg,noise,ambiente,esp32,sala_sussurros,medio,-35.9,-50.2,,2026-09-26T08:21:48
+noise/bg_ambiente_esp32_033.wav,bg,noise,ambiente,esp32,sala_sussurros,medio,-36.4,-48.9,,2026-09-26T08:21:51
+noise/bg_ambiente_esp32_034.wav,bg,noise,ambiente,esp32,sala_sussurros,medio,-33.1,-48.5,,2026-09-26T08:21:55
+noise/bg_ambiente_esp32_035.wav,bg,noise,ambiente,esp32,sala_sussurros,medio,-34.9,-48.1,,2026-09-26T08:21:58
+dog/s01_dog_esp32_061.wav,p2,dog,dog,esp32,p2,perto,-19.6,-37.0,,2026-09-26T08:23:34
+cat/s01_cat_esp32_061.wav,p2,cat,cat,esp32,p2,perto,-19.1,-41.8,,2026-09-26T08:23:46
+ball/s01_ball_esp32_061.wav,p2,ball,ball,esp32,p2,longe,-26.4,-42.2,,2026-09-26T08:23:55
+unknown/s01_call_esp32_004.wav,p2,unknown,call,esp32,p2,medio,-21.6,-40.9,palavra pode estar CORTADA no início/fim,2026-09-26T08:23:59
+dog/s01_dog_esp32_062.wav,p2,dog,dog,esp32,p2,perto,-22.8,-42.8,palavra pode estar CORTADA no início/fim,2026-09-26T08:24:04
+dog/s01_dog_esp32_063.wav,p2,dog,dog,esp32,p2,longe,-25.1,-42.7,palavra pode estar CORTADA no início/fim,2026-09-26T08:24:35
+dog/s01_dog_esp32_063.wav,p2,dog,dog,esp32,p2,medio,-27.3,-43.7,palavra pode estar CORTADA no início/fim,2026-09-26T08:24:47
+cat/s01_cat_esp32_062.wav,p2,cat,cat,esp32,p2,perto,-25.8,-45.4,palavra pode estar CORTADA no início/fim,2026-09-26T08:24:51
+dog/s01_dog_esp32_064.wav,p2,dog,dog,esp32,p2,longe,-30.7,-45.8,palavra pode estar CORTADA no início/fim,2026-09-26T08:24:55
+ball/s01_ball_esp32_062.wav,p2,ball,ball,esp32,p2,longe,-27.9,-44.8,palavra pode estar CORTADA no início/fim,2026-09-26T08:24:59
+unknown/s01_cake_esp32_004.wav,p2,unknown,cake,esp32,p2,perto,-20.9,-39.9,palavra pode estar CORTADA no início/fim,2026-09-26T08:25:04
+dog/s01_dog_esp32_065.wav,p2,dog,dog,esp32,p2,perto,-24.0,-41.5,,2026-09-26T08:25:08
+noise/s01_mesa_esp32_004.wav,p2,noise,mesa,esp32,p2,medio,-14.1,-41.0,,2026-09-26T08:25:19
+noise/s01_silencio_esp32_013.wav,p2,noise,silencio,esp32,p2,medio,-37.9,-49.9,,2026-09-26T08:25:25
+dog/s01_dog_esp32_066.wav,p2,dog,dog,esp32,p2,longe,-26.6,-43.2,palavra pode estar CORTADA no início/fim,2026-09-26T08:27:51
+ball/s01_ball_esp32_063.wav,p2,ball,ball,esp32,p2,perto,-21.3,-37.8,palavra pode estar CORTADA no início/fim,2026-09-26T08:28:01
+dog/s01_dog_esp32_067.wav,p2,dog,dog,esp32,p2,medio,-28.2,-43.5,palavra pode estar CORTADA no início/fim,2026-09-26T08:28:06
+ball/s01_ball_esp32_064.wav,p2,ball,ball,esp32,p2,medio,-39.9,-50.3,palavra pode estar CORTADA no início/fim,2026-09-26T08:29:14
+ball/s01_ball_esp32_064.wav,p2,ball,ball,esp32,p2,perto,-20.2,-39.4,,2026-09-26T08:29:31
+dog/s01_dog_esp32_068.wav,p2,dog,dog,esp32,p2,perto,-17.1,-37.2,,2026-09-26T08:29:42
+unknown/s01_oi_esp32_004.wav,p2,unknown,oi,esp32,p2,perto,-20.3,-37.8,,2026-09-26T08:29:50
+dog/s01_dog_esp32_069.wav,p2,dog,dog,esp32,p2,medio,-20.2,-39.4,,2026-09-26T08:29:56
+dog/s01_dog_esp32_070.wav,p2,dog,dog,esp32,p2,medio,-18.5,-37.7,,2026-09-26T08:30:04
+cat/s01_cat_esp32_063.wav,p2,cat,cat,esp32,p2,perto,-19.4,-42.1,,2026-09-26T08:30:10
+dog/s01_dog_esp32_071.wav,p2,dog,dog,esp32,p2,longe,-25.8,-43.4,palavra pode estar CORTADA no início/fim,2026-09-26T08:30:16
+dog/s01_dog_esp32_072.wav,p2,dog,dog,esp32,p2,perto,-18.1,-37.9,,2026-09-26T08:30:21
+ball/s01_ball_esp32_065.wav,p2,ball,ball,esp32,p2,perto,-17.3,-36.1,palavra pode estar CORTADA no início/fim,2026-09-26T08:30:25
+unknown/s01_hello_esp32_004.wav,p2,unknown,hello,esp32,p2,longe,-20.3,-38.3,palavra pode estar CORTADA no início/fim,2026-09-26T08:30:31
+cat/s01_cat_esp32_064.wav,p2,cat,cat,esp32,p2,perto,-18.7,-41.1,,2026-09-26T08:30:36
+cat/s01_cat_esp32_065.wav,p2,cat,cat,esp32,p2,perto,-23.3,-44.4,,2026-09-26T08:30:41
+unknown/s01_cachorro_esp32_004.wav,p2,unknown,cachorro,esp32,p2,medio,-23.5,-42.8,,2026-09-26T08:30:47
+dog/s01_dog_esp32_073.wav,p2,dog,dog,esp32,p2,medio,-23.0,-42.1,palavra pode estar CORTADA no início/fim,2026-09-26T08:30:51
+ball/s01_ball_esp32_066.wav,p2,ball,ball,esp32,p2,medio,-20.4,-39.5,,2026-09-26T08:30:55
+ball/s01_ball_esp32_067.wav,p2,ball,ball,esp32,p2,perto,-21.4,-42.3,palavra pode estar CORTADA no início/fim,2026-09-26T08:30:59
+dog/s01_dog_esp32_074.wav,p2,dog,dog,esp32,p2,perto,-21.6,-41.3,palavra pode estar CORTADA no início/fim,2026-09-26T08:31:04
+unknown/s01_mamae_esp32_004.wav,p2,unknown,mamae,esp32,p2,medio,-26.5,-42.3,palavra pode estar CORTADA no início/fim,2026-09-26T08:31:10
+ball/s01_ball_esp32_068.wav,p2,ball,ball,esp32,p2,perto,-20.9,-41.2,,2026-09-26T08:31:14
+cat/s01_cat_esp32_066.wav,p2,cat,cat,esp32,p2,longe,-25.3,-45.3,,2026-09-26T08:31:20
+cat/s01_cat_esp32_067.wav,p2,cat,cat,esp32,p2,longe,-25.9,-46.2,,2026-09-26T08:31:24
+cat/s01_cat_esp32_068.wav,p2,cat,cat,esp32,p2,longe,-25.5,-46.6,palavra pode estar CORTADA no início/fim,2026-09-26T08:31:28
+ball/s01_ball_esp32_069.wav,p2,ball,ball,esp32,p2,medio,-25.1,-43.4,,2026-09-26T08:31:33
+cat/s01_cat_esp32_069.wav,p2,cat,cat,esp32,p2,longe,-24.4,-45.5,palavra pode estar CORTADA no início/fim,2026-09-26T08:31:39
+unknown/s01_tree_esp32_004.wav,p2,unknown,tree,esp32,p2,medio,-22.4,-40.4,palavra pode estar CORTADA no início/fim,2026-09-26T08:31:45
+cat/s01_cat_esp32_070.wav,p2,cat,cat,esp32,p2,longe,-23.2,-44.8,palavra pode estar CORTADA no início/fim,2026-09-26T08:31:51
+unknown/s01_bola_esp32_004.wav,p2,unknown,bola,esp32,p2,medio,-21.6,-40.6,,2026-09-26T08:31:57
+unknown/s01_bowl_esp32_004.wav,p2,unknown,bowl,esp32,p2,perto,-17.6,-35.5,,2026-09-26T08:32:09
+unknown/s01_bat_esp32_004.wav,p2,unknown,bat,esp32,p2,longe,-18.8,-41.1,palavra pode estar CORTADA no início/fim,2026-09-26T08:32:18
+unknown/s01_hat_esp32_004.wav,p2,unknown,hat,esp32,p2,longe,-20.8,-40.6,,2026-09-26T08:32:26
+unknown/s01_tall_esp32_004.wav,p2,unknown,tall,esp32,p2,medio,-17.8,-38.4,palavra pode estar CORTADA no início/fim,2026-09-26T08:32:33
+dog/s01_dog_esp32_075.wav,p2,dog,dog,esp32,p2,longe,-21.9,-39.3,,2026-09-26T08:32:52
+cat/s01_cat_esp32_071.wav,p2,cat,cat,esp32,p2,longe,-23.5,-42.5,palavra pode estar CORTADA no início/fim,2026-09-26T08:32:55
+unknown/s01_book_esp32_004.wav,p2,unknown,book,esp32,p2,longe,-23.1,-40.8,palavra pode estar CORTADA no início/fim,2026-09-26T08:33:00
+unknown/s01_car_esp32_004.wav,p2,unknown,car,esp32,p2,medio,-16.2,-39.8,,2026-09-26T08:33:06
+unknown/s01_log_esp32_004.wav,p2,unknown,log,esp32,p2,medio,-21.1,-37.7,,2026-09-26T08:33:10
+noise/s01_palma_esp32_007.wav,p2,noise,palma,esp32,p2,medio,-17.8,-44.5,,2026-09-26T08:33:23
+ball/s01_ball_esp32_070.wav,p2,ball,ball,esp32,p2,longe,-21.9,-39.1,,2026-09-26T08:33:30
+cat/s01_cat_esp32_072.wav,p2,cat,cat,esp32,p2,perto,-18.6,-40.8,palavra pode estar CORTADA no início/fim,2026-09-26T08:33:35
+unknown/s01_cap_esp32_004.wav,p2,unknown,cap,esp32,p2,medio,-19.7,-43.7,,2026-09-26T08:33:40
+cat/s01_cat_esp32_073.wav,p2,cat,cat,esp32,p2,medio,-20.6,-43.3,,2026-09-26T08:33:45
+cat/s01_cat_esp32_074.wav,p2,cat,cat,esp32,p2,perto,-25.7,-45.2,palavra pode estar CORTADA no início/fim,2026-09-26T08:33:49
+unknown/s01_gato_esp32_004.wav,p2,unknown,gato,esp32,p2,perto,-18.9,-40.4,,2026-09-26T08:33:53
+unknown/s01_fall_esp32_004.wav,p2,unknown,fall,esp32,p2,longe,-20.9,-42.2,,2026-09-26T08:33:59
+unknown/s01_nao_esp32_004.wav,p2,unknown,nao,esp32,p2,perto,-25.6,-38.8,palavra pode estar CORTADA no início/fim,2026-09-26T08:34:05
+noise/s01_palma_esp32_008.wav,p2,noise,palma,esp32,p2,medio,0.0,-18.9,SATURADO (fale mais longe/baixo),2026-09-26T08:34:11
+unknown/s01_sim_esp32_004.wav,p2,unknown,sim,esp32,p2,perto,-23.2,-43.7,,2026-09-26T08:34:16
+ball/s01_ball_esp32_071.wav,p2,ball,ball,esp32,p2,perto,-21.6,-41.5,,2026-09-26T08:34:20
+ball/s01_ball_esp32_072.wav,p2,ball,ball,esp32,p2,perto,-24.9,-42.2,palavra pode estar CORTADA no início/fim,2026-09-26T08:34:25
+cat/s01_cat_esp32_075.wav,p2,cat,cat,esp32,p2,longe,-24.2,-44.9,,2026-09-26T08:34:29
+unknown/s01_dug_esp32_004.wav,p2,unknown,dug,esp32,p2,longe,-28.2,-44.2,,2026-09-26T08:34:34
+unknown/s01_bell_esp32_004.wav,p2,unknown,bell,esp32,p2,medio,-21.8,-38.5,palavra pode estar CORTADA no início/fim,2026-09-26T08:34:39
+unknown/s01_bell_esp32_004.wav,p2,unknown,bell,esp32,p2,medio,-22.3,-41.3,palavra pode estar CORTADA no início/fim,2026-09-26T08:35:00
+ball/s01_ball_esp32_073.wav,p2,ball,ball,esp32,p2,perto,-24.0,-42.0,palavra pode estar CORTADA no início/fim,2026-09-26T08:35:08
+unknown/s01_apple_esp32_004.wav,p2,unknown,apple,esp32,p2,perto,-24.9,-44.4,,2026-09-26T08:35:14
+ball/s01_ball_esp32_074.wav,p2,ball,ball,esp32,p2,perto,-24.6,-42.2,,2026-09-26T08:35:18
+unknown/s01_casa_esp32_004.wav,p2,unknown,casa,esp32,p2,longe,-27.2,-44.6,palavra pode estar CORTADA no início/fim,2026-09-26T08:35:23
+noise/s01_frase_esp32_004.wav,p2,noise,frase,esp32,p2,perto,-19.4,-35.3,,2026-09-26T08:35:34
+noise/s01_silencio_esp32_014.wav,p2,noise,silencio,esp32,p2,medio,-41.7,-52.6,,2026-09-26T08:35:43
+dog/s01_dog_esp32_076.wav,p2,dog,dog,esp32,p2,longe,-24.8,-42.7,,2026-09-26T08:35:48
+ball/s01_ball_esp32_075.wav,p2,ball,ball,esp32,p2,perto,-20.6,-37.1,,2026-09-26T08:35:55
+cat/s01_cat_esp32_076.wav,p2,cat,cat,esp32,p2,longe,-23.0,-42.4,,2026-09-26T08:36:00
+ball/s01_ball_esp32_076.wav,p2,ball,ball,esp32,p2,medio,-21.6,-39.6,,2026-09-26T08:36:08
+ball/s01_ball_esp32_077.wav,p2,ball,ball,esp32,p2,perto,-20.5,-39.5,,2026-09-26T08:36:13
+dog/s01_dog_esp32_077.wav,p2,dog,dog,esp32,p2,longe,-25.8,-41.6,palavra pode estar CORTADA no início/fim,2026-09-26T08:36:18
+ball/s01_ball_esp32_078.wav,p2,ball,ball,esp32,p2,perto,-22.3,-41.6,palavra pode estar CORTADA no início/fim,2026-09-26T08:36:23
+unknown/s01_sun_esp32_004.wav,p2,unknown,sun,esp32,p2,medio,-26.8,-45.9,,2026-09-26T08:36:29
+ball/s01_ball_esp32_079.wav,p2,ball,ball,esp32,p2,perto,-19.6,-40.8,,2026-09-26T08:36:35
+unknown/s01_doll_esp32_004.wav,p2,unknown,doll,esp32,p2,medio,-24.6,-42.0,palavra pode estar CORTADA no início/fim,2026-09-26T08:36:41
+unknown/s01_wall_esp32_004.wav,p2,unknown,wall,esp32,p2,medio,-24.6,-43.4,palavra pode estar CORTADA no início/fim,2026-09-26T08:36:45
+noise/s01_tosse_esp32_004.wav,p2,noise,tosse,esp32,p2,medio,-8.3,-28.0,,2026-09-26T08:36:51
+noise/s01_silencio_esp32_015.wav,p2,noise,silencio,esp32,p2,medio,-39.5,-50.6,,2026-09-26T08:37:22
+dog/s01_dog_esp32_078.wav,p2,dog,dog,esp32,p2,medio,-22.8,-41.2,,2026-09-26T08:37:26
+dog/s01_dog_esp32_079.wav,p2,dog,dog,esp32,p2,medio,-26.7,-43.5,palavra pode estar CORTADA no início/fim,2026-09-26T08:37:31
+unknown/s01_mom_esp32_004.wav,p2,unknown,mom,esp32,p2,medio,-28.3,-43.7,,2026-09-26T08:37:36
+noise/s01_silencio_esp32_016.wav,p2,noise,silencio,esp32,p2,medio,-40.5,-51.5,,2026-09-26T08:37:43
+ball/s01_ball_esp32_080.wav,p2,ball,ball,esp32,p2,medio,-25.9,-42.3,,2026-09-26T08:37:47
+cat/s01_cat_esp32_077.wav,p2,cat,cat,esp32,p2,perto,-17.0,-31.3,,2026-09-26T08:37:51
+dog/s01_dog_esp32_080.wav,p2,dog,dog,esp32,p2,perto,-23.5,-42.7,palavra pode estar CORTADA no início/fim,2026-09-26T08:37:54
+cat/s01_cat_esp32_078.wav,p2,cat,cat,esp32,p2,perto,-24.9,-44.1,palavra pode estar CORTADA no início/fim,2026-09-26T08:37:58
+noise/s01_respiro_esp32_004.wav,p2,noise,respiro,esp32,p2,medio,-37.4,-50.2,,2026-09-26T08:38:09
+cat/s01_cat_esp32_079.wav,p2,cat,cat,esp32,p2,longe,-25.2,-43.0,,2026-09-26T08:38:16
+cat/s01_cat_esp32_080.wav,p2,cat,cat,esp32,p2,longe,-31.4,-46.0,palavra pode estar CORTADA no início/fim,2026-09-26T08:38:20
+unknown/s01_dot_esp32_004.wav,p2,unknown,dot,esp32,p2,medio,-25.1,-43.9,palavra pode estar CORTADA no início/fim,2026-09-26T08:38:25
+unknown/s01_door_esp32_004.wav,p2,unknown,door,esp32,p2,perto,-23.3,-40.9,,2026-09-26T08:38:30
+dog/s01_dog_esp32_081.wav,p3,dog,dog,esp32,p3,perto,-38.4,-49.1,palavra pode estar CORTADA no início/fim,2026-09-26T08:44:05
+dog/s01_dog_esp32_081.wav,p3,dog,dog,esp32,p3,longe,-18.1,-36.4,,2026-09-26T08:44:38
+cat/s01_cat_esp32_081.wav,p3,cat,cat,esp32,p3,medio,-18.6,-36.9,palavra pode estar CORTADA no início/fim,2026-09-26T08:44:43
+ball/s01_ball_esp32_081.wav,p3,ball,ball,esp32,p3,perto,-12.6,-28.6,palavra pode estar CORTADA no início/fim,2026-09-26T08:44:49
+unknown/s01_call_esp32_005.wav,p3,unknown,call,esp32,p3,longe,-18.2,-38.5,,2026-09-26T08:44:54
+dog/s01_dog_esp32_082.wav,p3,dog,dog,esp32,p3,longe,-20.7,-39.0,,2026-09-26T08:44:59
+dog/s01_dog_esp32_083.wav,p3,dog,dog,esp32,p3,medio,-19.6,-37.8,,2026-09-26T08:45:07
+cat/s01_cat_esp32_082.wav,p3,cat,cat,esp32,p3,perto,-14.4,-31.1,palavra pode estar CORTADA no início/fim,2026-09-26T08:45:12
+dog/s01_dog_esp32_084.wav,p3,dog,dog,esp32,p3,longe,-22.0,-40.8,palavra pode estar CORTADA no início/fim,2026-09-26T08:45:17
+ball/s01_ball_esp32_082.wav,p3,ball,ball,esp32,p3,longe,-20.2,-38.8,,2026-09-26T08:45:21
+unknown/s01_cake_esp32_005.wav,p3,unknown,cake,esp32,p3,perto,-15.6,-33.1,,2026-09-26T08:45:26
+dog/s01_dog_esp32_085.wav,p3,dog,dog,esp32,p3,perto,-17.5,-31.8,,2026-09-26T08:45:31
+noise/s01_mesa_esp32_005.wav,p3,noise,mesa,esp32,p3,medio,-30.1,-45.6,,2026-09-26T08:45:54
+noise/s01_silencio_esp32_017.wav,p3,noise,silencio,esp32,p3,medio,-42.1,-52.1,,2026-09-26T08:45:58
+dog/s01_dog_esp32_086.wav,p3,dog,dog,esp32,p3,longe,-17.2,-38.7,,2026-09-26T08:46:03
+ball/s01_ball_esp32_083.wav,p3,ball,ball,esp32,p3,perto,-16.9,-36.1,palavra pode estar CORTADA no início/fim,2026-09-26T08:46:08
+dog/s01_dog_esp32_087.wav,p3,dog,dog,esp32,p3,medio,-22.2,-41.0,palavra pode estar CORTADA no início/fim,2026-09-26T08:46:12
+ball/s01_ball_esp32_084.wav,p3,ball,ball,esp32,p3,medio,-22.2,-38.7,palavra pode estar CORTADA no início/fim,2026-09-26T08:46:16
+dog/s01_dog_esp32_088.wav,p3,dog,dog,esp32,p3,medio,-22.9,-40.2,palavra pode estar CORTADA no início/fim,2026-09-26T08:46:22
+unknown/s01_oi_esp32_005.wav,p3,unknown,oi,esp32,p3,perto,-17.4,-34.4,,2026-09-26T08:46:30
+dog/s01_dog_esp32_089.wav,p3,dog,dog,esp32,p3,perto,-15.5,-33.5,,2026-09-26T08:46:35
+dog/s01_dog_esp32_090.wav,p3,dog,dog,esp32,p3,perto,-17.2,-35.3,,2026-09-26T08:46:38
+cat/s01_cat_esp32_083.wav,p3,cat,cat,esp32,p3,medio,-23.0,-42.0,palavra pode estar CORTADA no início/fim,2026-09-26T08:46:43
+dog/s01_dog_esp32_091.wav,p3,dog,dog,esp32,p3,medio,-23.7,-41.2,,2026-09-26T08:46:47
+dog/s01_dog_esp32_092.wav,p3,dog,dog,esp32,p3,perto,-20.8,-33.7,,2026-09-26T08:46:51
+ball/s01_ball_esp32_085.wav,p3,ball,ball,esp32,p3,longe,-22.3,-39.6,palavra pode estar CORTADA no início/fim,2026-09-26T08:46:57
+unknown/s01_hello_esp32_005.wav,p3,unknown,hello,esp32,p3,perto,-13.8,-26.7,,2026-09-26T08:47:01
+cat/s01_cat_esp32_084.wav,p3,cat,cat,esp32,p3,perto,-13.7,-29.2,palavra pode estar CORTADA no início/fim,2026-09-26T08:47:05
+cat/s01_cat_esp32_085.wav,p3,cat,cat,esp32,p3,longe,-24.7,-43.0,palavra pode estar CORTADA no início/fim,2026-09-26T08:47:10
+unknown/s01_cachorro_esp32_005.wav,p3,unknown,cachorro,esp32,p3,perto,-14.0,-28.8,palavra pode estar CORTADA no início/fim,2026-09-26T08:47:16
+dog/s01_dog_esp32_093.wav,p3,dog,dog,esp32,p3,perto,-11.0,-25.6,,2026-09-26T08:47:19
+ball/s01_ball_esp32_086.wav,p3,ball,ball,esp32,p3,medio,-18.9,-37.2,palavra pode estar CORTADA no início/fim,2026-09-26T08:47:23
+ball/s01_ball_esp32_087.wav,p3,ball,ball,esp32,p3,medio,-23.7,-41.7,,2026-09-26T08:47:28
+dog/s01_dog_esp32_094.wav,p3,dog,dog,esp32,p3,medio,-24.3,-41.0,palavra pode estar CORTADA no início/fim,2026-09-26T08:47:32
+unknown/s01_mamae_esp32_005.wav,p3,unknown,mamae,esp32,p3,perto,-18.5,-33.5,palavra pode estar CORTADA no início/fim,2026-09-26T08:47:37
+ball/s01_ball_esp32_088.wav,p3,ball,ball,esp32,p3,perto,-17.3,-36.4,,2026-09-26T08:47:41
+cat/s01_cat_esp32_086.wav,p3,cat,cat,esp32,p3,medio,-22.7,-40.9,palavra pode estar CORTADA no início/fim,2026-09-26T08:47:44
+cat/s01_cat_esp32_087.wav,p3,cat,cat,esp32,p3,perto,-15.7,-35.2,,2026-09-26T08:47:49
+cat/s01_cat_esp32_088.wav,p3,cat,cat,esp32,p3,longe,-24.0,-42.2,palavra pode estar CORTADA no início/fim,2026-09-26T08:47:52
+ball/s01_ball_esp32_089.wav,p3,ball,ball,esp32,p3,longe,-21.7,-39.0,,2026-09-26T08:47:56
+cat/s01_cat_esp32_089.wav,p3,cat,cat,esp32,p3,longe,-25.9,-43.4,palavra pode estar CORTADA no início/fim,2026-09-26T08:47:59
+unknown/s01_tree_esp32_005.wav,p3,unknown,tree,esp32,p3,medio,-20.5,-36.8,,2026-09-26T08:48:04
+cat/s01_cat_esp32_090.wav,p3,cat,cat,esp32,p3,longe,-24.4,-42.3,palavra pode estar CORTADA no início/fim,2026-09-26T08:48:08
+unknown/s01_bola_esp32_005.wav,p3,unknown,bola,esp32,p3,medio,-16.2,-29.4,palavra pode estar CORTADA no início/fim,2026-09-26T08:48:13
+unknown/s01_bowl_esp32_005.wav,p3,unknown,bowl,esp32,p3,longe,-22.5,-39.5,palavra pode estar CORTADA no início/fim,2026-09-26T08:48:21
+unknown/s01_bat_esp32_005.wav,p3,unknown,bat,esp32,p3,medio,-22.0,-33.7,palavra pode estar CORTADA no início/fim,2026-09-26T08:48:26
+unknown/s01_hat_esp32_005.wav,p3,unknown,hat,esp32,p3,perto,-20.4,-39.0,,2026-09-26T08:48:31
+unknown/s01_tall_esp32_005.wav,p3,unknown,tall,esp32,p3,longe,-24.0,-41.8,palavra pode estar CORTADA no início/fim,2026-09-26T08:48:36
+dog/s01_dog_esp32_095.wav,p3,dog,dog,esp32,p3,longe,-22.2,-40.1,palavra pode estar CORTADA no início/fim,2026-09-26T08:48:39
+cat/s01_cat_esp32_091.wav,p3,cat,cat,esp32,p3,medio,-17.3,-38.4,,2026-09-26T08:48:43
+unknown/s01_book_esp32_005.wav,p3,unknown,book,esp32,p3,longe,-20.2,-38.2,,2026-09-26T08:48:47
+unknown/s01_car_esp32_005.wav,p3,unknown,car,esp32,p3,longe,-22.0,-40.9,palavra pode estar CORTADA no início/fim,2026-09-26T08:48:51
+unknown/s01_log_esp32_005.wav,p3,unknown,log,esp32,p3,longe,-21.3,-38.1,palavra pode estar CORTADA no início/fim,2026-09-26T08:48:55
+noise/s01_palma_esp32_009.wav,p3,noise,palma,esp32,p3,medio,-0.0,-33.7,,2026-09-26T08:49:02
+ball/s01_ball_esp32_090.wav,p3,ball,ball,esp32,p3,medio,-20.5,-37.1,palavra pode estar CORTADA no início/fim,2026-09-26T08:49:07
+cat/s01_cat_esp32_092.wav,p3,cat,cat,esp32,p3,medio,-22.1,-38.6,palavra pode estar CORTADA no início/fim,2026-09-26T08:49:11
+unknown/s01_cap_esp32_005.wav,p3,unknown,cap,esp32,p3,longe,-19.2,-37.8,palavra pode estar CORTADA no início/fim,2026-09-26T08:49:15
+cat/s01_cat_esp32_093.wav,p3,cat,cat,esp32,p3,perto,-19.8,-35.9,palavra pode estar CORTADA no início/fim,2026-09-26T08:49:20
+cat/s01_cat_esp32_094.wav,p3,cat,cat,esp32,p3,medio,-19.0,-34.4,palavra pode estar CORTADA no início/fim,2026-09-26T08:49:24
+unknown/s01_gato_esp32_005.wav,p3,unknown,gato,esp32,p3,medio,-19.4,-37.9,palavra pode estar CORTADA no início/fim,2026-09-26T08:49:28
+unknown/s01_fall_esp32_005.wav,p3,unknown,fall,esp32,p3,perto,-14.7,-33.9,palavra pode estar CORTADA no início/fim,2026-09-26T08:49:36
+unknown/s01_nao_esp32_005.wav,p3,unknown,nao,esp32,p3,perto,-16.4,-33.8,palavra pode estar CORTADA no início/fim,2026-09-26T08:49:39
+noise/s01_palma_esp32_010.wav,p3,noise,palma,esp32,p3,medio,-0.0,-30.6,,2026-09-26T08:49:46
+unknown/s01_sim_esp32_005.wav,p3,unknown,sim,esp32,p3,longe,-24.7,-40.7,palavra pode estar CORTADA no início/fim,2026-09-26T08:49:52
+ball/s01_ball_esp32_091.wav,p3,ball,ball,esp32,p3,perto,-17.9,-35.4,palavra pode estar CORTADA no início/fim,2026-09-26T08:49:56
+ball/s01_ball_esp32_092.wav,p3,ball,ball,esp32,p3,perto,-20.7,-37.7,palavra pode estar CORTADA no início/fim,2026-09-26T08:50:00
+cat/s01_cat_esp32_095.wav,p3,cat,cat,esp32,p3,perto,-18.4,-34.4,palavra pode estar CORTADA no início/fim,2026-09-26T08:50:04
+unknown/s01_dug_esp32_005.wav,p3,unknown,dug,esp32,p3,perto,-17.5,-30.2,palavra pode estar CORTADA no início/fim,2026-09-26T08:50:08
+unknown/s01_bell_esp32_005.wav,p3,unknown,bell,esp32,p3,longe,-21.6,-37.0,palavra pode estar CORTADA no início/fim,2026-09-26T08:50:13
+ball/s01_ball_esp32_093.wav,p3,ball,ball,esp32,p3,longe,-21.4,-37.1,palavra pode estar CORTADA no início/fim,2026-09-26T08:50:17
+unknown/s01_apple_esp32_005.wav,p3,unknown,apple,esp32,p3,medio,-18.1,-34.9,palavra pode estar CORTADA no início/fim,2026-09-26T08:50:22
+ball/s01_ball_esp32_094.wav,p3,ball,ball,esp32,p3,medio,-16.9,-35.4,palavra pode estar CORTADA no início/fim,2026-09-26T08:50:26
+unknown/s01_casa_esp32_005.wav,p3,unknown,casa,esp32,p3,medio,-19.0,-36.9,palavra pode estar CORTADA no início/fim,2026-09-26T08:50:31
+noise/s01_frase_esp32_005.wav,p3,noise,frase,esp32,p3,perto,-19.3,-31.8,,2026-09-26T08:50:38
+noise/s01_silencio_esp32_018.wav,p3,noise,silencio,esp32,p3,medio,-30.2,-44.6,,2026-09-26T08:50:44
+dog/s01_dog_esp32_096.wav,p3,dog,dog,esp32,p3,perto,-19.0,-35.4,palavra pode estar CORTADA no início/fim,2026-09-26T08:50:49
+ball/s01_ball_esp32_095.wav,p3,ball,ball,esp32,p3,perto,-18.1,-31.3,palavra pode estar CORTADA no início/fim,2026-09-26T08:50:54
+cat/s01_cat_esp32_096.wav,p3,cat,cat,esp32,p3,longe,-25.2,-40.7,palavra pode estar CORTADA no início/fim,2026-09-26T08:51:01
+ball/s01_ball_esp32_096.wav,p3,ball,ball,esp32,p3,perto,-14.2,-32.4,palavra pode estar CORTADA no início/fim,2026-09-26T08:51:06
+ball/s01_ball_esp32_097.wav,p3,ball,ball,esp32,p3,longe,-14.8,-32.1,palavra pode estar CORTADA no início/fim,2026-09-26T08:51:12
+dog/s01_dog_esp32_097.wav,p3,dog,dog,esp32,p3,perto,-15.6,-27.9,palavra pode estar CORTADA no início/fim,2026-09-26T08:51:16
+ball/s01_ball_esp32_098.wav,p3,ball,ball,esp32,p3,longe,-20.4,-34.4,palavra pode estar CORTADA no início/fim,2026-09-26T08:51:25
+unknown/s01_sun_esp32_005.wav,p3,unknown,sun,esp32,p3,medio,-19.1,-37.0,palavra pode estar CORTADA no início/fim,2026-09-26T08:51:31
+ball/s01_ball_esp32_099.wav,p3,ball,ball,esp32,p3,perto,-16.2,-29.0,,2026-09-26T08:51:36
+unknown/s01_doll_esp32_005.wav,p3,unknown,doll,esp32,p3,longe,-22.0,-39.7,palavra pode estar CORTADA no início/fim,2026-09-26T08:51:41
+unknown/s01_wall_esp32_005.wav,p3,unknown,wall,esp32,p3,perto,-16.6,-28.4,palavra pode estar CORTADA no início/fim,2026-09-26T08:51:46
+noise/s01_tosse_esp32_005.wav,p3,noise,tosse,esp32,p3,medio,-16.7,-35.7,,2026-09-26T08:51:51
+noise/s01_silencio_esp32_019.wav,p3,noise,silencio,esp32,p3,medio,-35.5,-46.4,,2026-09-26T08:51:55
+dog/s01_dog_esp32_098.wav,p3,dog,dog,esp32,p3,medio,-19.7,-37.8,palavra pode estar CORTADA no início/fim,2026-09-26T08:52:00
+dog/s01_dog_esp32_099.wav,p3,dog,dog,esp32,p3,perto,-12.1,-25.7,,2026-09-26T08:52:04
+unknown/s01_mom_esp32_005.wav,p3,unknown,mom,esp32,p3,medio,-19.6,-36.6,palavra pode estar CORTADA no início/fim,2026-09-26T08:52:10
+noise/s01_silencio_esp32_020.wav,p3,noise,silencio,esp32,p3,medio,-31.7,-45.2,,2026-09-26T08:52:14
+ball/s01_ball_esp32_100.wav,p3,ball,ball,esp32,p3,medio,-22.0,-38.7,palavra pode estar CORTADA no início/fim,2026-09-26T08:52:19
+cat/s01_cat_esp32_097.wav,p3,cat,cat,esp32,p3,medio,-23.2,-40.8,palavra pode estar CORTADA no início/fim,2026-09-26T08:52:23
+dog/s01_dog_esp32_100.wav,p3,dog,dog,esp32,p3,medio,-20.3,-37.7,palavra pode estar CORTADA no início/fim,2026-09-26T08:52:27
+cat/s01_cat_esp32_098.wav,p3,cat,cat,esp32,p3,medio,-20.2,-38.9,palavra pode estar CORTADA no início/fim,2026-09-26T08:52:30
+noise/s01_respiro_esp32_005.wav,p3,noise,respiro,esp32,p3,medio,-25.8,-39.9,,2026-09-26T08:52:38
+cat/s01_cat_esp32_099.wav,p3,cat,cat,esp32,p3,medio,-21.1,-38.7,palavra pode estar CORTADA no início/fim,2026-09-26T08:52:43
+cat/s01_cat_esp32_100.wav,p3,cat,cat,esp32,p3,perto,-9.1,-25.1,palavra pode estar CORTADA no início/fim,2026-09-26T08:52:47
+unknown/s01_dot_esp32_005.wav,p3,unknown,dot,esp32,p3,perto,-14.7,-33.6,palavra pode estar CORTADA no início/fim,2026-09-26T08:52:52
+unknown/s01_door_esp32_005.wav,p3,unknown,door,esp32,p3,perto,-16.4,-33.8,palavra pode estar CORTADA no início/fim,2026-09-26T08:52:57

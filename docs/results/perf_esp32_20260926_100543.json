@@ -1,0 +1,892 @@
+{
+ "rows": [
+  {
+   "file": "unknown/s01_mamae_esp32_004.wav",
+   "label": "unknown",
+   "truth": "unknown",
+   "pred": "unknown",
+   "conf": 0.986,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 135,
+    "queue": 26,
+    "features": 710,
+    "to_detect": 43,
+    "inference": 32317,
+    "end_to_led": 33145,
+    "onset_to_led": 833115,
+    "prev_tx": 0
+   }
+  },
+  {
+   "file": "dog/s01_dog_esp32_001.wav",
+   "label": "dog",
+   "truth": "dog",
+   "pred": "dog",
+   "conf": 0.939,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 133,
+    "queue": 26,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 32199,
+    "end_to_led": 33027,
+    "onset_to_led": 896996,
+    "prev_tx": 2686
+   }
+  },
+  {
+   "file": "cat/s01_cat_esp32_030.wav",
+   "label": "cat",
+   "truth": "cat",
+   "pred": "cat",
+   "conf": 1.0,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 134,
+    "queue": 26,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 32212,
+    "end_to_led": 33041,
+    "onset_to_led": 1041010,
+    "prev_tx": 2666
+   }
+  },
+  {
+   "file": "unknown/s01_car_esp32_001.wav",
+   "label": "unknown",
+   "truth": "unknown",
+   "pred": "unknown",
+   "conf": 0.965,
+   "no_detection": false,
+   "ignored": true,
+   "lat_us": {
+    "inference": 32802,
+    "end_to_decision": 33641
+   }
+  },
+  {
+   "file": "unknown/s01_dot_esp32_002.wav",
+   "label": "unknown",
+   "truth": "unknown",
+   "pred": "unknown",
+   "conf": 0.998,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 133,
+    "queue": 27,
+    "features": 728,
+    "to_detect": 43,
+    "inference": 32385,
+    "end_to_led": 33234,
+    "onset_to_led": 993205,
+    "prev_tx": 2675
+   }
+  },
+  {
+   "file": "ball/s01_ball_esp32_027.wav",
+   "label": "ball",
+   "truth": "ball",
+   "pred": "unknown",
+   "conf": 1.0,
+   "no_detection": false,
+   "ignored": true,
+   "lat_us": {
+    "inference": 32167,
+    "end_to_decision": 32988
+   }
+  },
+  {
+   "file": "cat/s01_cat_esp32_080.wav",
+   "label": "cat",
+   "truth": "cat",
+   "pred": "unknown",
+   "conf": 0.536,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 133,
+    "queue": 26,
+    "features": 710,
+    "to_detect": 43,
+    "inference": 32184,
+    "end_to_led": 33012,
+    "onset_to_led": 1152983,
+    "prev_tx": 2666
+   }
+  },
+  {
+   "file": "ball/s01_ball_esp32_057.wav",
+   "label": "ball",
+   "truth": "ball",
+   "pred": "unknown",
+   "conf": 1.0,
+   "no_detection": false,
+   "ignored": true,
+   "lat_us": {
+    "inference": 32175,
+    "end_to_decision": 32996
+   }
+  },
+  {
+   "file": "dog/s01_dog_esp32_076.wav",
+   "label": "dog",
+   "truth": "dog",
+   "pred": "dog",
+   "conf": 0.996,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 136,
+    "queue": 26,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 30828,
+    "end_to_led": 31659,
+    "onset_to_led": 1295632,
+    "prev_tx": 2668
+   }
+  },
+  {
+   "file": "cat/s01_cat_esp32_008.wav",
+   "label": "cat",
+   "truth": "cat",
+   "pred": "cat",
+   "conf": 0.978,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 136,
+    "queue": 26,
+    "features": 728,
+    "to_detect": 43,
+    "inference": 32399,
+    "end_to_led": 33246,
+    "onset_to_led": 1201217,
+    "prev_tx": 2674
+   }
+  },
+  {
+   "file": "dog/s01_dog_esp32_031.wav",
+   "label": "dog",
+   "truth": "dog",
+   "pred": "dog",
+   "conf": 0.949,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 136,
+    "queue": 26,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 32180,
+    "end_to_led": 33009,
+    "onset_to_led": 1200982,
+    "prev_tx": 2697
+   }
+  },
+  {
+   "file": "noise/s01_silencio_esp32_002.wav",
+   "label": "noise",
+   "truth": "unknown",
+   "pred": "cat",
+   "conf": 0.887,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 133,
+    "queue": 26,
+    "features": 728,
+    "to_detect": 43,
+    "inference": 32797,
+    "end_to_led": 33646,
+    "onset_to_led": 753619,
+    "prev_tx": 2667
+   }
+  },
+  {
+   "file": "cat/s01_cat_esp32_018.wav",
+   "label": "cat",
+   "truth": "cat",
+   "pred": "cat",
+   "conf": 0.998,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 133,
+    "queue": 26,
+    "features": 728,
+    "to_detect": 43,
+    "inference": 32383,
+    "end_to_led": 33230,
+    "onset_to_led": 881200,
+    "prev_tx": 2675
+   }
+  },
+  {
+   "file": "cat/s01_cat_esp32_053.wav",
+   "label": "cat",
+   "truth": "cat",
+   "pred": "cat",
+   "conf": 0.998,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 134,
+    "queue": 26,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 32181,
+    "end_to_led": 33010,
+    "onset_to_led": 960981,
+    "prev_tx": 2666
+   }
+  },
+  {
+   "file": "unknown/s01_tree_esp32_005.wav",
+   "label": "unknown",
+   "truth": "unknown",
+   "pred": "unknown",
+   "conf": 0.994,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 133,
+    "queue": 26,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 32232,
+    "end_to_led": 33080,
+    "onset_to_led": 1137055,
+    "prev_tx": 2666
+   }
+  },
+  {
+   "file": "noise/s01_tosse_esp32_001.wav",
+   "label": "noise",
+   "truth": "unknown",
+   "pred": "cat",
+   "conf": 0.716,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 135,
+    "queue": 26,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 32198,
+    "end_to_led": 33027,
+    "onset_to_led": 1120978,
+    "prev_tx": 2677
+   }
+  },
+  {
+   "file": "dog/s01_dog_esp32_034.wav",
+   "label": "dog",
+   "truth": "dog",
+   "pred": "dog",
+   "conf": 1.0,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 135,
+    "queue": 26,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 30824,
+    "end_to_led": 31655,
+    "onset_to_led": 1087627,
+    "prev_tx": 2667
+   }
+  },
+  {
+   "file": "ball/s01_ball_esp32_025.wav",
+   "label": "ball",
+   "truth": "ball",
+   "pred": "unknown",
+   "conf": 0.975,
+   "no_detection": false,
+   "ignored": true,
+   "lat_us": {
+    "inference": 32177,
+    "end_to_decision": 32996
+   }
+  },
+  {
+   "file": "unknown/s01_bell_esp32_003.wav",
+   "label": "unknown",
+   "truth": "unknown",
+   "pred": "unknown",
+   "conf": 1.0,
+   "no_detection": false,
+   "ignored": true,
+   "lat_us": {
+    "inference": 32182,
+    "end_to_decision": 33002
+   }
+  },
+  {
+   "file": "ball/s01_ball_esp32_018.wav",
+   "label": "ball",
+   "truth": "ball",
+   "pred": "ball",
+   "conf": 0.994,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 133,
+    "queue": 26,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 32179,
+    "end_to_led": 33010,
+    "onset_to_led": 1472980,
+    "prev_tx": 2675
+   }
+  },
+  {
+   "file": "cat/s01_cat_esp32_050.wav",
+   "label": "cat",
+   "truth": "cat",
+   "pred": "cat",
+   "conf": 0.972,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 134,
+    "queue": 26,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 32211,
+    "end_to_led": 33041,
+    "onset_to_led": 929010,
+    "prev_tx": 2667
+   }
+  },
+  {
+   "file": "unknown/s01_apple_esp32_004.wav",
+   "label": "unknown",
+   "truth": "unknown",
+   "pred": "cat",
+   "conf": 0.805,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 133,
+    "queue": 26,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 32172,
+    "end_to_led": 33002,
+    "onset_to_led": 1232976,
+    "prev_tx": 2666
+   }
+  },
+  {
+   "file": "unknown/s01_tree_esp32_002.wav",
+   "label": "unknown",
+   "truth": "unknown",
+   "pred": "unknown",
+   "conf": 0.721,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 134,
+    "queue": 26,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 32168,
+    "end_to_led": 32996,
+    "onset_to_led": 1440966,
+    "prev_tx": 2667
+   }
+  },
+  {
+   "file": "ball/s01_ball_esp32_045.wav",
+   "label": "ball",
+   "truth": "ball",
+   "pred": "ball",
+   "conf": 0.979,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 133,
+    "queue": 26,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 32199,
+    "end_to_led": 33029,
+    "onset_to_led": 1393000,
+    "prev_tx": 2668
+   }
+  },
+  {
+   "file": "cat/s01_cat_esp32_074.wav",
+   "label": "cat",
+   "truth": "cat",
+   "pred": "unknown",
+   "conf": 0.935,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 132,
+    "queue": 26,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 32195,
+    "end_to_led": 33023,
+    "onset_to_led": 1072998,
+    "prev_tx": 2667
+   }
+  },
+  {
+   "file": "cat/teste_cat_esp32_001.wav",
+   "label": "cat",
+   "truth": "cat",
+   "pred": "cat",
+   "conf": 1.0,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 135,
+    "queue": 26,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 32190,
+    "end_to_led": 33019,
+    "onset_to_led": 1008989,
+    "prev_tx": 2667
+   }
+  },
+  {
+   "file": "unknown/s01_mom_esp32_005.wav",
+   "label": "unknown",
+   "truth": "unknown",
+   "pred": "cat",
+   "conf": 0.994,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 133,
+    "queue": 26,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 32194,
+    "end_to_led": 33024,
+    "onset_to_led": 832994,
+    "prev_tx": 2667
+   }
+  },
+  {
+   "file": "dog/s01_dog_esp32_063.wav",
+   "label": "dog",
+   "truth": "dog",
+   "pred": "unknown",
+   "conf": 0.999,
+   "no_detection": false,
+   "ignored": true,
+   "lat_us": {
+    "inference": 32193,
+    "end_to_decision": 33014
+   }
+  },
+  {
+   "file": "cat/s01_cat_esp32_064.wav",
+   "label": "cat",
+   "truth": "cat",
+   "pred": "cat",
+   "conf": 0.997,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 134,
+    "queue": 26,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 32179,
+    "end_to_led": 33008,
+    "onset_to_led": 768977,
+    "prev_tx": 2674
+   }
+  },
+  {
+   "file": "ball/teste_ball_esp32_001.wav",
+   "label": "ball",
+   "truth": "ball",
+   "pred": "unknown",
+   "conf": 0.815,
+   "no_detection": false,
+   "ignored": true,
+   "lat_us": {
+    "inference": 32229,
+    "end_to_decision": 33049
+   }
+  },
+  {
+   "file": "unknown/s01_log_esp32_005.wav",
+   "label": "unknown",
+   "truth": "unknown",
+   "pred": "unknown",
+   "conf": 0.977,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 133,
+    "queue": 26,
+    "features": 728,
+    "to_detect": 43,
+    "inference": 32403,
+    "end_to_led": 33252,
+    "onset_to_led": 929222,
+    "prev_tx": 2667
+   }
+  },
+  {
+   "file": "dog/s01_dog_esp32_009.wav",
+   "label": "dog",
+   "truth": "dog",
+   "pred": "dog",
+   "conf": 0.996,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 134,
+    "queue": 27,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 32163,
+    "end_to_led": 32992,
+    "onset_to_led": 1392963,
+    "prev_tx": 2703
+   }
+  },
+  {
+   "file": "dog/s01_dog_esp32_050.wav",
+   "label": "dog",
+   "truth": "dog",
+   "pred": "unknown",
+   "conf": 0.501,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 133,
+    "queue": 26,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 32190,
+    "end_to_led": 33018,
+    "onset_to_led": 1072993,
+    "prev_tx": 2666
+   }
+  },
+  {
+   "file": "ball/s01_ball_esp32_063.wav",
+   "label": "ball",
+   "truth": "ball",
+   "pred": "ball",
+   "conf": 0.957,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 136,
+    "queue": 26,
+    "features": 728,
+    "to_detect": 43,
+    "inference": 32311,
+    "end_to_led": 33162,
+    "onset_to_led": 849115,
+    "prev_tx": 2669
+   }
+  },
+  {
+   "file": "unknown/s01_hello_esp32_004.wav",
+   "label": "unknown",
+   "truth": "unknown",
+   "pred": "unknown",
+   "conf": 1.0,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 134,
+    "queue": 26,
+    "features": 710,
+    "to_detect": 62,
+    "inference": 32324,
+    "end_to_led": 33172,
+    "onset_to_led": 1057143,
+    "prev_tx": 2667
+   }
+  },
+  {
+   "file": "ball/s01_ball_esp32_059.wav",
+   "label": "ball",
+   "truth": "ball",
+   "pred": "ball",
+   "conf": 0.963,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 135,
+    "queue": 26,
+    "features": 728,
+    "to_detect": 43,
+    "inference": 32397,
+    "end_to_led": 33245,
+    "onset_to_led": 1473215,
+    "prev_tx": 2665
+   }
+  },
+  {
+   "file": "dog/s01_dog_esp32_080.wav",
+   "label": "dog",
+   "truth": "dog",
+   "pred": "dog",
+   "conf": 0.999,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 154,
+    "queue": 26,
+    "features": 728,
+    "to_detect": 43,
+    "inference": 32375,
+    "end_to_led": 33223,
+    "onset_to_led": 1265214,
+    "prev_tx": 2665
+   }
+  },
+  {
+   "file": "ball/s01_ball_esp32_065.wav",
+   "label": "ball",
+   "truth": "ball",
+   "pred": "ball",
+   "conf": 0.929,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 135,
+    "queue": 26,
+    "features": 710,
+    "to_detect": 43,
+    "inference": 32176,
+    "end_to_led": 33007,
+    "onset_to_led": 1456981,
+    "prev_tx": 2664
+   }
+  },
+  {
+   "file": "dog/s01_dog_esp32_061.wav",
+   "label": "dog",
+   "truth": "dog",
+   "pred": "unknown",
+   "conf": 0.999,
+   "no_detection": false,
+   "ignored": true,
+   "lat_us": {
+    "inference": 32370,
+    "end_to_decision": 33230
+   }
+  },
+  {
+   "file": "ball/s01_ball_esp32_099.wav",
+   "label": "ball",
+   "truth": "ball",
+   "pred": "unknown",
+   "conf": 0.999,
+   "no_detection": false,
+   "ignored": true,
+   "lat_us": {
+    "inference": 32200,
+    "end_to_decision": 33020
+   }
+  },
+  {
+   "file": "noise/s01_palma_esp32_002.wav",
+   "label": "noise",
+   "truth": "unknown",
+   "pred": "dog",
+   "conf": 0.584,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 134,
+    "queue": 26,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 32232,
+    "end_to_led": 33061,
+    "onset_to_led": 785031,
+    "prev_tx": 2667
+   }
+  },
+  {
+   "file": "noise/s01_respiro_esp32_004.wav",
+   "label": "noise",
+   "truth": "unknown",
+   "pred": "unknown",
+   "conf": 0.999,
+   "no_detection": false,
+   "ignored": true,
+   "lat_us": {
+    "inference": 30825,
+    "end_to_decision": 31648
+   }
+  },
+  {
+   "file": "cat/s01_cat_esp32_027.wav",
+   "label": "cat",
+   "truth": "cat",
+   "pred": "cat",
+   "conf": 1.0,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 136,
+    "queue": 26,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 30828,
+    "end_to_led": 31659,
+    "onset_to_led": 1471630,
+    "prev_tx": 2674
+   }
+  },
+  {
+   "file": "dog/s01_dog_esp32_010.wav",
+   "label": "dog",
+   "truth": "dog",
+   "pred": "dog",
+   "conf": 1.0,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 135,
+    "queue": 26,
+    "features": 728,
+    "to_detect": 43,
+    "inference": 32370,
+    "end_to_led": 33218,
+    "onset_to_led": 1025189,
+    "prev_tx": 2667
+   }
+  },
+  {
+   "file": "noise/s01_frase_esp32_005.wav",
+   "label": "noise",
+   "truth": "unknown",
+   "pred": "unknown",
+   "conf": 0.834,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 133,
+    "queue": 27,
+    "features": 709,
+    "to_detect": 43,
+    "inference": 32174,
+    "end_to_led": 33003,
+    "onset_to_led": 1184953,
+    "prev_tx": 2665
+   }
+  },
+  {
+   "file": "noise/s01_silencio_esp32_008.wav",
+   "label": "noise",
+   "truth": "unknown",
+   "pred": "unknown",
+   "conf": 0.992,
+   "no_detection": false,
+   "ignored": true,
+   "lat_us": {
+    "inference": 32361,
+    "end_to_decision": 33200
+   }
+  },
+  {
+   "file": "noise/s01_respiro_esp32_003.wav",
+   "label": "noise",
+   "truth": "unknown",
+   "pred": "unknown",
+   "conf": 0.913,
+   "no_detection": false,
+   "ignored": true,
+   "lat_us": {
+    "inference": 32227,
+    "end_to_decision": 33048
+   }
+  },
+  {
+   "file": "noise/s01_silencio_esp32_017.wav",
+   "label": "noise",
+   "truth": "unknown",
+   "pred": "unknown",
+   "conf": 0.998,
+   "no_detection": false,
+   "ignored": true,
+   "lat_us": {
+    "inference": 32194,
+    "end_to_decision": 33016
+   }
+  },
+  {
+   "file": "noise/s01_frase_esp32_004.wav",
+   "label": "noise",
+   "truth": "unknown",
+   "pred": "unknown",
+   "conf": 0.95,
+   "no_detection": false,
+   "ignored": false,
+   "lat_us": {
+    "capture": 135,
+    "queue": 26,
+    "features": 728,
+    "to_detect": 43,
+    "inference": 32341,
+    "end_to_led": 33188,
+    "onset_to_led": 1009160,
+    "prev_tx": 2668
+   }
+  },
+  {
+   "file": "noise/s01_silencio_esp32_012.wav",
+   "label": "noise",
+   "truth": "unknown",
+   "pred": "unknown",
+   "conf": 0.997,
+   "no_detection": false,
+   "ignored": true,
+   "lat_us": {
+    "inference": 32171,
+    "end_to_decision": 32990
+   }
+  }
+ ],
+ "usb_rtt_us": [
+  10475.15869140625,
+  51342.72575378418,
+  50800.08506774902,
+  51167.01126098633,
+  40888.309478759766,
+  51190.853118896484,
+  51348.44779968262,
+  51152.46772766113,
+  51418.304443359375,
+  51345.3483581543,
+  51472.42546081543,
+  51172.01805114746,
+  51224.470138549805,
+  51368.71337890625,
+  50964.1170501709,
+  50985.097885131836,
+  40570.49751281738,
+  51412.343978881836,
+  51597.59521484375,
+  51370.38230895996
+ ]
+}
